@@ -1,4 +1,4 @@
 package com.codesquad.todo.repository;
 
-public interface ColumnRepository {
+public interface TableRepository {
 }
