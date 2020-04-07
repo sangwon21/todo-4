@@ -4,7 +4,7 @@ import {
   ButtonType,
   customButton,
   ButtonSize,
-} from "../component/button/index";
+} from "../component/customButton/index";
 
 const clickHandler = (e: MouseEvent) => {
   console.log("hello world");
