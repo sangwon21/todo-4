@@ -67,7 +67,30 @@
                     <view key="view" contentMode="scaleToFill" id="ZlE-7m-K7b">
                         <rect key="frame" x="0.0" y="0.0" width="398" height="764"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vZ5-9X-9Lh">
+                                <rect key="frame" x="0.0" y="0.0" width="398" height="60"/>
+                                <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Kl0-Lf-dQE"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Xkf-LI-jeh">
+                                <rect key="frame" x="0.0" y="60" width="398" height="704"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="vwN-4G-Wmr" firstAttribute="bottom" secondItem="Xkf-LI-jeh" secondAttribute="bottom" id="Ao3-LL-bXB"/>
+                            <constraint firstItem="vZ5-9X-9Lh" firstAttribute="leading" secondItem="vwN-4G-Wmr" secondAttribute="leading" id="JW8-WI-dxI"/>
+                            <constraint firstItem="vwN-4G-Wmr" firstAttribute="trailing" secondItem="Xkf-LI-jeh" secondAttribute="trailing" id="Leh-tl-RqO"/>
+                            <constraint firstItem="vwN-4G-Wmr" firstAttribute="trailing" secondItem="vZ5-9X-9Lh" secondAttribute="trailing" id="Zh2-Gt-Eon"/>
+                            <constraint firstItem="Xkf-LI-jeh" firstAttribute="leading" secondItem="vwN-4G-Wmr" secondAttribute="leading" id="dKm-Hr-Ehf"/>
+                            <constraint firstItem="Xkf-LI-jeh" firstAttribute="top" secondItem="vZ5-9X-9Lh" secondAttribute="bottom" id="l3K-NV-wwe"/>
+                            <constraint firstItem="vZ5-9X-9Lh" firstAttribute="top" secondItem="vwN-4G-Wmr" secondAttribute="top" id="rXd-Br-OCm"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="vwN-4G-Wmr"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mgd-AK-cGu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
