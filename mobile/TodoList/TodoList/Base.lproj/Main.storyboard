@@ -74,7 +74,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ABZ-kz-jR9">
                                         <rect key="frame" x="16" y="16" width="366" height="28"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" horizontalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ctf-9m-fSz">
+                                            <view contentMode="scaleToFill" horizontalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ctf-9m-fSz" customClass="CardCountView" customModule="TodoList" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="28" height="28"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gt4-hM-f8z">
@@ -90,6 +90,11 @@
                                                     <constraint firstItem="Gt4-hM-f8z" firstAttribute="centerX" secondItem="Ctf-9m-fSz" secondAttribute="centerX" id="Lnw-1l-32y"/>
                                                     <constraint firstItem="Gt4-hM-f8z" firstAttribute="centerY" secondItem="Ctf-9m-fSz" secondAttribute="centerY" id="e3r-IK-g3v"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="14"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Column Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ruM-Rf-Ubd">
                                                 <rect key="frame" x="36" y="0.0" width="304" height="28"/>
