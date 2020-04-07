@@ -10,11 +10,21 @@ import UIKit
 
 class TodoListViewController: UIViewController {
 
+    @IBOutlet weak var todoListStackView: UIStackView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        setupTodoLists(for: 2)
     }
-
-
+    
+    private func setupTodoLists(for number: Int) {
+        (0..<number).forEach { [unowned self] _ in
+            if let viewController = storyboard?
+                .instantiateViewController(withIdentifier: CardListViewController.reuseIdentifier) {
+                self.todoListStackView.addArrangedSubview(viewController.view)
+            }
+        }
+    }
 }
 
