@@ -1,4 +1,4 @@
 package com.codesquad.todo.repository;
 
-public class TableRepositoryImpl {
+public interface ColumnRepository {
 }

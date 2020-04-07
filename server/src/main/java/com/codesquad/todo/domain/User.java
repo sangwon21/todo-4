@@ -19,5 +19,5 @@ public class User {
 
     private String password;
 
-    private List<Item> items;
+    private List<Card> items;
 }

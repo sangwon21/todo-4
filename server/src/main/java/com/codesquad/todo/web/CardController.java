@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/tables/items")
-public class ItemController {
+public class CardController {
 
     @PostMapping("")
     private String create() {

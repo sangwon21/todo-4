@@ -1,4 +1,4 @@
 package com.codesquad.todo.repository;
 
-public class ItemRepositoryImpl {
+public class CardRepositoryImpl {
 }
