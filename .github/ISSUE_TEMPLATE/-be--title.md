@@ -2,7 +2,7 @@
 name: "BE 피쳐 개발 이슈 템플릿"
 about: BE 피쳐 개발 이슈 템플릿
 title: '[BE] Title'
-labels: ''
+labels: 'enhancement'
 assignees: 'Hamill210, hsik0225'
 
 ---
