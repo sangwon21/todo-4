@@ -39,7 +39,7 @@ public class MockupApiController {
 
     @PostMapping("/{columnId}")
     public HttpStatus updateColumnName(@PathVariable Long columnId) {
-        return HttpStatus.ACCEPTED;
+        return HttpStatus.NO_CONTENT;
     }
 
     @PostMapping("/{columnId}/cards")
@@ -49,16 +49,16 @@ public class MockupApiController {
 
     @PutMapping("/{columnId}/cards/{id}")
     public HttpStatus updateCardContent(@PathVariable Long columnId, @PathVariable Long id) {
-        return HttpStatus.ACCEPTED;
+        return HttpStatus.NO_CONTENT;
     }
 
     @DeleteMapping("/{columnId}/cards/{id}")
     public HttpStatus delete(@PathVariable Long columnId, @PathVariable Long id) {
-        return HttpStatus.ACCEPTED;
+        return HttpStatus.NO_CONTENT;
     }
 
     @PutMapping("/{columnId}/cards/{id}/2/1")
     public HttpStatus updatePosition(@PathVariable Long columnId, @PathVariable Long id) {
-        return HttpStatus.OK;
+        return HttpStatus.NO_CONTENT;
     }
 }
