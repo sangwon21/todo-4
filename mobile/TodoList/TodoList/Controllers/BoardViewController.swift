@@ -1,5 +1,5 @@
 //
-//  TodoListViewController.swift
+//  BoardViewController.swift
 //  TodoList
 //
 //  Created by Chaewan Park on 2020/04/06.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TodoListViewController: UIViewController {
+class BoardViewController: UIViewController {
 
     @IBOutlet weak var todoListStackView: UIStackView!
     
@@ -40,7 +40,7 @@ class TodoListViewController: UIViewController {
     }
 }
 
-extension TodoListViewController {
+extension BoardViewController {
     private func requestBoard() {
         networkManager?.requestBoard { result in
             switch result {
