@@ -5,6 +5,8 @@ import {
   ISpacingStyleParameter,
 } from "../../styled-component/Spacing";
 
+import "./Header.scss";
+
 const leftMargin: ISpacingStyleParameter = {
   left: 2,
 };
@@ -14,10 +16,16 @@ const rightMargin: ISpacingStyleParameter = {
 };
 
 const service = Spacing(leftMargin)(
-  div({ style: "color: #ffffff; font-size: 2rem;" })(["TODO 서비스"])
+  div({
+    style: "font-size: 2rem;",
+    class: "header-content header-content-todo",
+  })(["TODO 서비스"])
 );
 const menu = Spacing(rightMargin)(
-  div({ style: "color: #ffffff; text-align: right;" })(["menu"])
+  div({
+    style: "text-align: right;",
+    class: "header-content header-content-menu",
+  })(["menu"])
 );
 
 export const Header = header({
