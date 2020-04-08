@@ -19,6 +19,7 @@
 		C26472E0243D9CA8006D87EB /* BoardResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472DF243D9CA8006D87EB /* BoardResponse.swift */; };
 		C26472E2243DEBC7006D87EB /* URLProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472D1243C7F9A006D87EB /* URLProtocolMock.swift */; };
 		C26472E3243DEBE0006D87EB /* MockJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472DD243D70E1006D87EB /* MockJSON.swift */; };
+		C26472E6243DFF6D006D87EB /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472E5243DFF6D006D87EB /* CardCell.swift */; };
 		C27B287B243B5A33005785AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27B287A243B5A33005785AB /* AppDelegate.swift */; };
 		C27B287D243B5A33005785AB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27B287C243B5A33005785AB /* SceneDelegate.swift */; };
 		C27B287F243B5A33005785AB /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27B287E243B5A33005785AB /* BoardViewController.swift */; };
@@ -48,6 +49,7 @@
 		C26472DA243C9020006D87EB /* APIRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRouter.swift; sourceTree = "<group>"; };
 		C26472DD243D70E1006D87EB /* MockJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockJSON.swift; sourceTree = "<group>"; };
 		C26472DF243D9CA8006D87EB /* BoardResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardResponse.swift; sourceTree = "<group>"; };
+		C26472E5243DFF6D006D87EB /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		C27B2877243B5A33005785AB /* TodoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C27B287A243B5A33005785AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C27B287C243B5A33005785AB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				C21C6788243C401B00FA661F /* CardCountView.swift */,
+				C26472E5243DFF6D006D87EB /* CardCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				C27B287D243B5A33005785AB /* SceneDelegate.swift in Sources */,
 				C26472E3243DEBE0006D87EB /* MockJSON.swift in Sources */,
 				C26472D8243C8F57006D87EB /* Endpoints.swift in Sources */,
+				C26472E6243DFF6D006D87EB /* CardCell.swift in Sources */,
 				C26472CC243C7551006D87EB /* CardListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
