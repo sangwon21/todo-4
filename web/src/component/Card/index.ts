@@ -21,7 +21,6 @@ const footer = InlineList({ class: InlineListClass.DEFAULT })([
 ]);
 
 export const Card = InlineList({
-  width: "21rem",
   class: InlineListClass.SPACE_BETWEEN_COLUMN,
   userClassList: ["card"],
 })([header, footer]);

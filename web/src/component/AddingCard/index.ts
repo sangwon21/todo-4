@@ -32,6 +32,7 @@ const buttons = InlineList({
 
 export const AddingCard = InlineList({
   class: InlineListClass.SPACE_BETWEEN_COLUMN,
-  width: "21rem",
+  width: "100%",
   height: "8rem",
+  userClassList: ["adding-card"],
 })([cardTextarea, buttons]);
