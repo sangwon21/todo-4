@@ -1,6 +1,8 @@
 import * as _ from "lodash/fp";
 import { div } from "wonnie-template";
 
+import "./Spacing.scss";
+
 export interface ISpacingStyle {
   [key: string]: number | undefined;
   flex: 1;
@@ -47,19 +49,21 @@ export const computeStyles = (
 };
 
 export const flattenStyles = (styles: ISpacingStyle) => {
-  return Object.keys(styles).reduce(
-    (acc, cur) => (acc += `${cur}: ${styles[cur]}rem;`),
-    ""
-  );
+  return Object.keys(styles).reduce((acc, cur) => {
+    if (cur === "flex") {
+      return (acc += `${cur}: ${styles[cur]};`);
+    }
+    return (acc += `${cur}: ${styles[cur]}rem;`);
+  }, "");
 };
 
 export const makeSpacing = (style: string) => (
   component: Element | Text | (Element | Text)[]
 ) => {
   if (Array.isArray(component)) {
-    return div({ style })(component);
+    return div({ style, class: "spacing" })(component);
   }
-  return div({ style })([component]);
+  return div({ style, class: "spacing" })([component]);
 };
 
 export const Spacing = _.compose(makeSpacing, flattenStyles, computeStyles);
