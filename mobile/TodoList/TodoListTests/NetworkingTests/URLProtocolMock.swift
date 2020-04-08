@@ -9,7 +9,7 @@
 import Foundation
 
 class URLProtocolMock: URLProtocol {
-    static var testURLs = [APIRouter.board.url: Data(boardResponseJSON)]
+    static var testURLs = [APIRouter.board.url: boardResponseJSON]
     
     override class func canInit(with request: URLRequest) -> Bool {
         return true

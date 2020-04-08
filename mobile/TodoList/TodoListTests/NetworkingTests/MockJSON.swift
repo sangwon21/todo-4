@@ -12,7 +12,7 @@ let boardResponseJSON = """
 {
    "board":
     {
-        "list": [
+        "lists": [
         {
             "title": "Todo",
             "cards": [
@@ -21,17 +21,15 @@ let boardResponseJSON = """
                 "title": "GitHub",
                 "detail": "add, commit, push",
                 "author": "author by iOS"
-                
             },
             {
                 "id": "1",
                 "title": "HIG",
                 "detail": "pretty",
                 "author": "author by iOS"
-                
             }]
         }]
         
     }
 }
-""".utf8
+""".data(using: .utf8)!

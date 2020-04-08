@@ -15,7 +15,7 @@ class NetworkManager {
         self.session = session
     }
     
-    func requestAllLists(completion: @escaping (Result<Board, Error>) -> Void) {
+    func requestBoard(completion: @escaping (Result<Board, Error>) -> Void) {
         guard let url = APIRouter.board.url else { return }
         
         session.dataTask(with: url) { data, _, error in

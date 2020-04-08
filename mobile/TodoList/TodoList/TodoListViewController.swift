@@ -12,10 +12,22 @@ class TodoListViewController: UIViewController {
 
     @IBOutlet weak var todoListStackView: UIStackView!
     
+    private var networkManager: NetworkManager?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureSession()
+        
         setupTodoLists(for: 2)
+        
+        requestBoard()
+    }
+    
+    private func configureSession() {
+        let config = URLSessionConfiguration.ephemeral
+        config.protocolClasses = [URLProtocolMock.self]
+        networkManager = NetworkManager(session: URLSession(configuration: config))
     }
     
     private func setupTodoLists(for number: Int) {
@@ -28,3 +40,13 @@ class TodoListViewController: UIViewController {
     }
 }
 
+extension TodoListViewController {
+    private func requestBoard() {
+        networkManager?.requestBoard { result in
+            switch result {
+            case .failure: print("failure")
+            case let .success(board): print(board)
+            }
+        }
+    }
+}
