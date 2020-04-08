@@ -9,7 +9,7 @@
 import Foundation
 
 class Endpoints {
-    static let baseURL = ""
+    static let baseURL = "https://lucas.codesquad.kr"
     
     static let boardRequestURL = "\(baseURL)/columns"
 }

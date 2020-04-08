@@ -34,4 +34,4 @@ let boardResponseJSON = """
         
     }
 }
-"""
+""".utf8

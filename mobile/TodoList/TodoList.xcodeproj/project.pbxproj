@@ -10,14 +10,15 @@
 		C21C6789243C401B00FA661F /* CardCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21C6788243C401B00FA661F /* CardCountView.swift */; };
 		C26472CC243C7551006D87EB /* CardListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472CB243C7551006D87EB /* CardListViewController.swift */; };
 		C26472CF243C7677006D87EB /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472CE243C7677006D87EB /* ReusableView.swift */; };
-		C26472D2243C7F9A006D87EB /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472D1243C7F9A006D87EB /* URLSessionMock.swift */; };
-		C26472D3243C805F006D87EB /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472D1243C7F9A006D87EB /* URLSessionMock.swift */; };
+		C26472D2243C7F9A006D87EB /* URLProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472D1243C7F9A006D87EB /* URLProtocolMock.swift */; };
 		C26472D6243C808C006D87EB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472D5243C808C006D87EB /* NetworkManager.swift */; };
 		C26472D8243C8F57006D87EB /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472D7243C8F57006D87EB /* Endpoints.swift */; };
 		C26472D9243C8F65006D87EB /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472D7243C8F57006D87EB /* Endpoints.swift */; };
 		C26472DB243C9020006D87EB /* APIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472DA243C9020006D87EB /* APIRouter.swift */; };
 		C26472DE243D70E1006D87EB /* MockJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472DD243D70E1006D87EB /* MockJSON.swift */; };
 		C26472E0243D9CA8006D87EB /* BoardResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472DF243D9CA8006D87EB /* BoardResponse.swift */; };
+		C26472E2243DEBC7006D87EB /* URLProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472D1243C7F9A006D87EB /* URLProtocolMock.swift */; };
+		C26472E3243DEBE0006D87EB /* MockJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472DD243D70E1006D87EB /* MockJSON.swift */; };
 		C27B287B243B5A33005785AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27B287A243B5A33005785AB /* AppDelegate.swift */; };
 		C27B287D243B5A33005785AB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27B287C243B5A33005785AB /* SceneDelegate.swift */; };
 		C27B287F243B5A33005785AB /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27B287E243B5A33005785AB /* TodoListViewController.swift */; };
@@ -41,7 +42,7 @@
 		C21C6788243C401B00FA661F /* CardCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCountView.swift; sourceTree = "<group>"; };
 		C26472CB243C7551006D87EB /* CardListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListViewController.swift; sourceTree = "<group>"; };
 		C26472CE243C7677006D87EB /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
-		C26472D1243C7F9A006D87EB /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
+		C26472D1243C7F9A006D87EB /* URLProtocolMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolMock.swift; sourceTree = "<group>"; };
 		C26472D5243C808C006D87EB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C26472D7243C8F57006D87EB /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
 		C26472DA243C9020006D87EB /* APIRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRouter.swift; sourceTree = "<group>"; };
@@ -97,7 +98,7 @@
 		C26472D0243C7F79006D87EB /* NetworkingTests */ = {
 			isa = PBXGroup;
 			children = (
-				C26472D1243C7F9A006D87EB /* URLSessionMock.swift */,
+				C26472D1243C7F9A006D87EB /* URLProtocolMock.swift */,
 				C26472DD243D70E1006D87EB /* MockJSON.swift */,
 			);
 			path = NetworkingTests;
@@ -270,14 +271,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				C26472E0243D9CA8006D87EB /* BoardResponse.swift in Sources */,
-				C26472D3243C805F006D87EB /* URLSessionMock.swift in Sources */,
 				C26472DB243C9020006D87EB /* APIRouter.swift in Sources */,
 				C21C6789243C401B00FA661F /* CardCountView.swift in Sources */,
 				C27B287F243B5A33005785AB /* TodoListViewController.swift in Sources */,
 				C27B287B243B5A33005785AB /* AppDelegate.swift in Sources */,
 				C26472D6243C808C006D87EB /* NetworkManager.swift in Sources */,
 				C26472CF243C7677006D87EB /* ReusableView.swift in Sources */,
+				C26472E2243DEBC7006D87EB /* URLProtocolMock.swift in Sources */,
 				C27B287D243B5A33005785AB /* SceneDelegate.swift in Sources */,
+				C26472E3243DEBE0006D87EB /* MockJSON.swift in Sources */,
 				C26472D8243C8F57006D87EB /* Endpoints.swift in Sources */,
 				C26472CC243C7551006D87EB /* CardListViewController.swift in Sources */,
 			);
@@ -290,7 +292,7 @@
 				C27B2892243B5A39005785AB /* TodoListTests.swift in Sources */,
 				C26472DE243D70E1006D87EB /* MockJSON.swift in Sources */,
 				C26472D9243C8F65006D87EB /* Endpoints.swift in Sources */,
-				C26472D2243C7F9A006D87EB /* URLSessionMock.swift in Sources */,
+				C26472D2243C7F9A006D87EB /* URLProtocolMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
