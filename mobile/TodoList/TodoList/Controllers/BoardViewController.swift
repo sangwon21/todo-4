@@ -19,7 +19,7 @@ class BoardViewController: UIViewController {
         
         configureSession()
         
-        setupTodoLists(for: 2)
+        setupTodoLists(for: 3)
         
         requestBoard()
     }
