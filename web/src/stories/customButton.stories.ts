@@ -15,7 +15,7 @@ const basicSettings: ButtonType = {
   color: COLOR.CONFIRM,
   callback: clickHandler,
   content: "제출",
-  contentColor: COLOR.FONT,
+  contentColor: COLOR.WHITE,
 };
 
 const mediumSettings: ButtonType = {
@@ -23,7 +23,7 @@ const mediumSettings: ButtonType = {
   color: COLOR.PRIMARY,
   callback: clickHandler,
   content: "제출",
-  contentColor: COLOR.FONT,
+  contentColor: COLOR.WHITE,
 };
 
 const largeSettings: ButtonType = {
@@ -34,7 +34,7 @@ const largeSettings: ButtonType = {
   contentColor: COLOR.FONT,
 };
 
-storiesOf("기본 custom button", module)
+storiesOf("Custom Button Storybook", module)
   .add("small button", () => CustomButton(basicSettings))
   .add("medium button", () => CustomButton(mediumSettings))
   .add("large button", () => CustomButton(largeSettings));
