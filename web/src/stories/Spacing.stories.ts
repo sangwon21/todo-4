@@ -22,7 +22,7 @@ const fromBottom: ISpacingStyleParameter = {
   bottom: 6,
 };
 
-storiesOf("Spacing 기본 스타일", module)
+storiesOf("Spacing Storybook", module)
   .add("기본 스타일", () => Spacing()(greenBox))
   .add("top spacing", () => Spacing(fromTop)(greenBox))
   .add("left spacing", () => Spacing(fromLeft)(greenBox))

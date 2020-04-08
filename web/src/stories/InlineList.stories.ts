@@ -17,7 +17,7 @@ const contents = [
   })(["test3"]),
 ];
 
-storiesOf("Inline 기본 스타일", module)
+storiesOf("InlineList Storybook - Row 방향", module)
   .add("기본 스타일", () => InlineList()(contents))
   .add("space between", () =>
     InlineList({ class: InlineListClass.SPACE_BETWEEN })(contents)
@@ -29,7 +29,7 @@ storiesOf("Inline 기본 스타일", module)
     InlineList({ class: InlineListClass.ALIGN_RIGHT })(contents)
   );
 
-storiesOf("column 방향", module)
+storiesOf("InlineList Storybook - Column 방향", module)
   .add("기본 스타일", () =>
     InlineList({ class: InlineListClass.COLUMN_BASE })(contents)
   )
