@@ -1,7 +1,8 @@
 import { configure } from "@storybook/html";
 import interopRequireDefault from "@babel/runtime/helpers/interopRequireDefault";
 
-import "../src/util/semantic-ui/icon.css";
+import "../src/util/style/semantic-ui/icon.css";
+import "../src/util/style/reset.scss";
 
 function loadStories() {
   const context = require.context("../src/stories", true, /Story\.jsx$/);
