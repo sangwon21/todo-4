@@ -38,7 +38,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Pwc-09-rny"/>
                     <connections>
-                        <outlet property="todoListStackView" destination="nkq-nY-urr" id="S9b-1d-v54"/>
+                        <outlet property="boardStackView" destination="nkq-nY-urr" id="S9b-1d-v54"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

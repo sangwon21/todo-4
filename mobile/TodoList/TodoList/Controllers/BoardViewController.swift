@@ -10,7 +10,7 @@ import UIKit
 
 class BoardViewController: UIViewController {
 
-    @IBOutlet weak var todoListStackView: UIStackView!
+    @IBOutlet weak var boardStackView: UIStackView!
     
     private var networkManager: NetworkManager?
     
@@ -34,7 +34,7 @@ class BoardViewController: UIViewController {
         (0..<number).forEach { [unowned self] _ in
             if let viewController = storyboard?
                 .instantiateViewController(withIdentifier: CardListViewController.reuseIdentifier) {
-                self.todoListStackView.addArrangedSubview(viewController.view)
+                self.boardStackView.addArrangedSubview(viewController.view)
             }
         }
     }
