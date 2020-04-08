@@ -20,6 +20,7 @@
 		C26472E2243DEBC7006D87EB /* URLProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472D1243C7F9A006D87EB /* URLProtocolMock.swift */; };
 		C26472E3243DEBE0006D87EB /* MockJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472DD243D70E1006D87EB /* MockJSON.swift */; };
 		C26472E6243DFF6D006D87EB /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472E5243DFF6D006D87EB /* CardCell.swift */; };
+		C26472E9243E05DF006D87EB /* CardListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472E8243E05DF006D87EB /* CardListDataSource.swift */; };
 		C27B287B243B5A33005785AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27B287A243B5A33005785AB /* AppDelegate.swift */; };
 		C27B287D243B5A33005785AB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27B287C243B5A33005785AB /* SceneDelegate.swift */; };
 		C27B287F243B5A33005785AB /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27B287E243B5A33005785AB /* BoardViewController.swift */; };
@@ -50,6 +51,7 @@
 		C26472DD243D70E1006D87EB /* MockJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockJSON.swift; sourceTree = "<group>"; };
 		C26472DF243D9CA8006D87EB /* BoardResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardResponse.swift; sourceTree = "<group>"; };
 		C26472E5243DFF6D006D87EB /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
+		C26472E8243E05DF006D87EB /* CardListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListDataSource.swift; sourceTree = "<group>"; };
 		C27B2877243B5A33005785AB /* TodoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C27B287A243B5A33005785AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C27B287C243B5A33005785AB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -134,6 +136,14 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		C26472E7243E0512006D87EB /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				C26472E8243E05DF006D87EB /* CardListDataSource.swift */,
+			);
+			path = DataSources;
+			sourceTree = "<group>";
+		};
 		C27B286E243B5A32005785AB = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +167,7 @@
 			children = (
 				C26472CD243C7653006D87EB /* Utils */,
 				C21C6785243C3B6A00FA661F /* Views */,
+				C26472E7243E0512006D87EB /* DataSources */,
 				C26472E4243DFE0A006D87EB /* Controllers */,
 				C26472DC243C91EA006D87EB /* Models */,
 				C26472D4243C8079006D87EB /* Networking */,
@@ -287,6 +298,7 @@
 				C27B287F243B5A33005785AB /* BoardViewController.swift in Sources */,
 				C27B287B243B5A33005785AB /* AppDelegate.swift in Sources */,
 				C26472D6243C808C006D87EB /* NetworkManager.swift in Sources */,
+				C26472E9243E05DF006D87EB /* CardListDataSource.swift in Sources */,
 				C26472CF243C7677006D87EB /* ReusableView.swift in Sources */,
 				C26472E2243DEBC7006D87EB /* URLProtocolMock.swift in Sources */,
 				C27B287D243B5A33005785AB /* SceneDelegate.swift in Sources */,

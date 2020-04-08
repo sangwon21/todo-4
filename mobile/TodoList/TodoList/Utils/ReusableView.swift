@@ -19,3 +19,5 @@ extension ReusableView {
 }
 
 extension CardListViewController: ReusableView { }
+
+extension CardCell: ReusableView { }
