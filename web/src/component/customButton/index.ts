@@ -1,40 +1,30 @@
 import { button } from "wonnie-template";
-
-export enum ButtonStatus {
-  primary = "#cce5ff",
-  secondary = "#e2e3e5",
-  success = "#d4edda",
-  danger = "#f8d7da",
-  warning = "#FFF3CD",
-  info = "#d1ecf1",
-  light = "#e8eff2",
-  dark = "#1f2021",
-}
+import COLOR from "../../util/color";
 
 export enum ButtonSize {
-  large = "30rem",
-  medium = "15rem",
-  small = "5rem",
+  large = "10rem",
+  medium = "7rem",
+  small = "4rem",
 }
 
 export interface ButtonType {
   size: ButtonSize;
-  color: ButtonStatus;
-  callback: Function;
+  color: COLOR;
+  callback?: Function;
   content: string;
-  contentColor: ButtonStatus;
+  contentColor: COLOR;
 }
 
-export const customSubmitButton = (submitButton: ButtonType) =>
+export const CustomSubmitButton = (submitButton: ButtonType) =>
   button({
     onSubmit: submitButton.callback,
     type: "submit",
-    style: `background-color: ${submitButton.color}; color: ${submitButton.contentColor}; width: ${submitButton.size}; height: 3rem`,
+    style: `background-color: ${submitButton.color}; color: ${submitButton.contentColor}; width: ${submitButton.size}; height: 2rem`,
   })([submitButton.content]);
 
-export const customButton = (buttonParam: ButtonType) =>
+export const CustomButton = (buttonParam: ButtonType) =>
   button({
     onClick: buttonParam.callback,
     type: "button",
-    style: `background-color: ${buttonParam.color}; color: ${buttonParam.contentColor}; width: ${buttonParam.size}; height: 3rem`,
+    style: `background-color: ${buttonParam.color}; color: ${buttonParam.contentColor}; width: ${buttonParam.size}; height: 2rem`,
   })([buttonParam.content]);
