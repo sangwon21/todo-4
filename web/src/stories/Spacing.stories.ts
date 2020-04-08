@@ -1,8 +1,5 @@
 import { storiesOf } from "@storybook/html";
-import {
-  makeSpacingStyle,
-  ISpacingStyleParameter,
-} from "../styled-component/spacingStyle";
+import { Spacing, ISpacingStyleParameter } from "../styled-component/Spacing";
 import { div } from "wonnie-template";
 
 const greenBox = div({
@@ -26,8 +23,8 @@ const fromBottom: ISpacingStyleParameter = {
 };
 
 storiesOf("Spacing 기본 스타일", module)
-  .add("기본 스타일", () => makeSpacingStyle()(greenBox))
-  .add("top spacing", () => makeSpacingStyle(fromTop)(greenBox))
-  .add("left spacing", () => makeSpacingStyle(fromLeft)(greenBox))
-  .add("bottom spacing", () => makeSpacingStyle(fromBottom)(greenBox))
-  .add("right spacing", () => makeSpacingStyle(fromRight)(greenBox));
+  .add("기본 스타일", () => Spacing()(greenBox))
+  .add("top spacing", () => Spacing(fromTop)(greenBox))
+  .add("left spacing", () => Spacing(fromLeft)(greenBox))
+  .add("bottom spacing", () => Spacing(fromBottom)(greenBox))
+  .add("right spacing", () => Spacing(fromRight)(greenBox));

@@ -1,10 +1,10 @@
 import { storiesOf } from "@storybook/html";
 import {
-  ButtonStatus,
   ButtonType,
-  customButton,
+  CustomButton,
   ButtonSize,
-} from "../component/customButton/index";
+} from "../component/CustomButton/index";
+import COLOR from "../util/color";
 
 const clickHandler = (e: MouseEvent) => {
   console.log("hello world");
@@ -12,29 +12,29 @@ const clickHandler = (e: MouseEvent) => {
 
 const basicSettings: ButtonType = {
   size: ButtonSize.small,
-  color: ButtonStatus.danger,
+  color: COLOR.CONFIRM,
   callback: clickHandler,
   content: "제출",
-  contentColor: ButtonStatus.dark,
+  contentColor: COLOR.FONT,
 };
 
 const mediumSettings: ButtonType = {
   size: ButtonSize.medium,
-  color: ButtonStatus.primary,
+  color: COLOR.PRIMARY,
   callback: clickHandler,
   content: "제출",
-  contentColor: ButtonStatus.light,
+  contentColor: COLOR.FONT,
 };
 
 const largeSettings: ButtonType = {
   size: ButtonSize.large,
-  color: ButtonStatus.success,
+  color: COLOR.BACKGROUND,
   callback: clickHandler,
   content: "제출",
-  contentColor: ButtonStatus.dark,
+  contentColor: COLOR.FONT,
 };
 
 storiesOf("기본 custom button", module)
-  .add("small button", () => customButton(basicSettings))
-  .add("medium button", () => customButton(mediumSettings))
-  .add("large button", () => customButton(largeSettings));
+  .add("small button", () => CustomButton(basicSettings))
+  .add("medium button", () => CustomButton(mediumSettings))
+  .add("large button", () => CustomButton(largeSettings));

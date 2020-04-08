@@ -53,7 +53,7 @@ export const flattenStyles = (styles: ISpacingStyle) => {
   );
 };
 
-export const SpacingStyle = (style: string) => (
+export const makeSpacing = (style: string) => (
   component: Element | Text | (Element | Text)[]
 ) => {
   if (Array.isArray(component)) {
@@ -62,8 +62,4 @@ export const SpacingStyle = (style: string) => (
   return div({ style })([component]);
 };
 
-export const makeSpacingStyle = _.compose(
-  SpacingStyle,
-  flattenStyles,
-  computeStyles
-);
+export const Spacing = _.compose(makeSpacing, flattenStyles, computeStyles);
