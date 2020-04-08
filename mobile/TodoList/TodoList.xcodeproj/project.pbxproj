@@ -28,6 +28,7 @@
 		C27B2884243B5A38005785AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C27B2883243B5A38005785AB /* Assets.xcassets */; };
 		C27B2887243B5A38005785AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C27B2885243B5A38005785AB /* LaunchScreen.storyboard */; };
 		C27B2892243B5A39005785AB /* TodoListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27B2891243B5A39005785AB /* TodoListTests.swift */; };
+		C2884956243E37B900D4B603 /* CardListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2884955243E37B900D4B603 /* CardListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		C27B288D243B5A39005785AB /* TodoListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodoListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C27B2891243B5A39005785AB /* TodoListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListTests.swift; sourceTree = "<group>"; };
 		C27B2893243B5A39005785AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C2884955243E37B900D4B603 /* CardListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 			children = (
 				C26472CD243C7653006D87EB /* Utils */,
 				C21C6785243C3B6A00FA661F /* Views */,
+				C2884954243E379000D4B603 /* ViewModels */,
 				C26472E7243E0512006D87EB /* DataSources */,
 				C26472E4243DFE0A006D87EB /* Controllers */,
 				C26472DC243C91EA006D87EB /* Models */,
@@ -189,6 +192,14 @@
 				C27B2893243B5A39005785AB /* Info.plist */,
 			);
 			path = TodoListTests;
+			sourceTree = "<group>";
+		};
+		C2884954243E379000D4B603 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				C2884955243E37B900D4B603 /* CardListViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,6 +313,7 @@
 				C26472CF243C7677006D87EB /* ReusableView.swift in Sources */,
 				C26472E2243DEBC7006D87EB /* URLProtocolMock.swift in Sources */,
 				C27B287D243B5A33005785AB /* SceneDelegate.swift in Sources */,
+				C2884956243E37B900D4B603 /* CardListViewModel.swift in Sources */,
 				C26472E3243DEBE0006D87EB /* MockJSON.swift in Sources */,
 				C26472D8243C8F57006D87EB /* Endpoints.swift in Sources */,
 				C26472E6243DFF6D006D87EB /* CardCell.swift in Sources */,
