@@ -27,7 +27,7 @@
 		C27B2882243B5A33005785AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C27B2880243B5A33005785AB /* Main.storyboard */; };
 		C27B2884243B5A38005785AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C27B2883243B5A38005785AB /* Assets.xcassets */; };
 		C27B2887243B5A38005785AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C27B2885243B5A38005785AB /* LaunchScreen.storyboard */; };
-		C27B2892243B5A39005785AB /* TodoListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27B2891243B5A39005785AB /* TodoListTests.swift */; };
+		C27B2892243B5A39005785AB /* CardListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27B2891243B5A39005785AB /* CardListViewModelTests.swift */; };
 		C2884956243E37B900D4B603 /* CardListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2884955243E37B900D4B603 /* CardListViewModel.swift */; };
 		C2884958243E41E100D4B603 /* Observers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2884957243E41E100D4B603 /* Observers.swift */; };
 		C288495E243EF88700D4B603 /* UILoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288495D243EF88700D4B603 /* UILoader.swift */; };
@@ -64,7 +64,7 @@
 		C27B2886243B5A38005785AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C27B2888243B5A38005785AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C27B288D243B5A39005785AB /* TodoListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodoListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C27B2891243B5A39005785AB /* TodoListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListTests.swift; sourceTree = "<group>"; };
+		C27B2891243B5A39005785AB /* CardListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListViewModelTests.swift; sourceTree = "<group>"; };
 		C27B2893243B5A39005785AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C2884955243E37B900D4B603 /* CardListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListViewModel.swift; sourceTree = "<group>"; };
 		C2884957243E41E100D4B603 /* Observers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observers.swift; sourceTree = "<group>"; };
@@ -194,7 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				C26472D0243C7F79006D87EB /* NetworkingTests */,
-				C27B2891243B5A39005785AB /* TodoListTests.swift */,
+				C27B2891243B5A39005785AB /* CardListViewModelTests.swift */,
 				C27B2893243B5A39005785AB /* Info.plist */,
 			);
 			path = TodoListTests;
@@ -333,7 +333,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C27B2892243B5A39005785AB /* TodoListTests.swift in Sources */,
+				C27B2892243B5A39005785AB /* CardListViewModelTests.swift in Sources */,
 				C26472DE243D70E1006D87EB /* MockJSON.swift in Sources */,
 				C26472D9243C8F65006D87EB /* Endpoints.swift in Sources */,
 				C26472D2243C7F9A006D87EB /* URLProtocolMock.swift in Sources */,
