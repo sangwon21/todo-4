@@ -38,6 +38,7 @@ class BoardViewController: UIViewController {
             vc.listID = id
             vc.viewModel = CardListViewModel(with: nil)
             vc.dataSource = CardListDataSource()
+            vc.delegate = self
             self.boardStackView.addArrangedSubview(vc.view)
             return vc
         }.compactMap { $0 }
@@ -55,6 +56,13 @@ extension BoardViewController {
                 center.post(name: .boardDidUpdate, object: self, userInfo: userInfo)
             }
         }
+    }
+}
+
+extension BoardViewController: CardListViewControllerDelegate {
+    func addNewCardDidTouched(listID id: Int?) {
+        guard let vc = UILoader.load(viewControllerType: FormViewController.self, from: storyboard) else { return }
+        present(vc, animated: true)
     }
 }
 

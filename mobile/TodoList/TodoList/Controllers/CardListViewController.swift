@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CardListViewControllerDelegate: class {
+    func addNewCardDidTouched(listID: Int?)
+}
+
 class CardListViewController: UIViewController {
 
     @IBOutlet weak var cardCountLabel: UILabel!
@@ -19,6 +23,8 @@ class CardListViewController: UIViewController {
     var viewModel: CardListViewModel?
     var dataSource: CardListDataSource?
     var listID: Int?
+    
+    weak var delegate: CardListViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +63,10 @@ class CardListViewController: UIViewController {
             return self?.viewModel?.card(at: $0) ?? Card()
         }
         tableView.dataSource = dataSource
+    }
+    
+    @IBAction func addNewCard(_ sender: Any) {
+        delegate?.addNewCardDidTouched(listID: listID)
     }
 }
 
