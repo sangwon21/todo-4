@@ -13,10 +13,22 @@ export class Card {
     this.contents = contents;
     this.cardNode = null;
     this.closeButtonHandler = this.closeButtonHandler.bind(this);
+    this.handleDragStart = this.handleDragStart.bind(this);
+    this.handleDragEnd = this.handleDragEnd.bind(this);
   }
 
   closeButtonHandler() {
     this.cardNode && this.cardNode.remove();
+  }
+
+  handleDragStart(e: DragEvent) {
+    const target = e.target! as Element;
+    target.classList.add("dragging");
+  }
+
+  handleDragEnd(e: DragEvent) {
+    const target = e.target! as Element;
+    target.classList.remove("dragging");
   }
 
   render() {
@@ -42,6 +54,11 @@ export class Card {
     this.cardNode = InlineList({
       class: InlineListClass.SPACE_BETWEEN_COLUMN,
       userClassList: ["card"],
+      attributes: {
+        draggable: "true",
+        onDragstart: this.handleDragStart,
+        onDragend: this.handleDragEnd,
+      },
     })([header, footer]);
 
     return this.cardNode;
