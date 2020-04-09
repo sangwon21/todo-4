@@ -17,7 +17,6 @@ module.exports = (env, options) => {
     },
     module: {
       rules: [
-        // we use babel-loader to load our jsx and tsx files
         {
           test: /\.(ts|js)?$/,
           exclude: /node_modules/,
@@ -25,14 +24,40 @@ module.exports = (env, options) => {
             loader: "babel-loader",
           },
         },
-
-        // css-loader to bundle all the css files into one file and style-loader to add all the styles  inside the style tag of the document
         {
           test: /\.css$/,
-          use: ["style-loader", "css-loader"],
+          use: [
+            {
+              loader: "style-loader",
+            },
+            {
+              loader: "css-loader",
+            },
+          ],
+        },
+        {
+          test: /\.scss$/,
+          use: ["style-loader", "css-loader", "sass-loader"],
+        },
+        {
+          test: /\.(ttf|eot|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+          use: [
+            {
+              loader: "file-loader",
+            },
+          ],
+        },
+        {
+          test: /\.(png|jpg|gif)$/,
+          use: [
+            {
+              loader: "file-loader",
+            },
+          ],
         },
       ],
     },
+
     optimization: {
       splitChunks: {
         cacheGroups: {
