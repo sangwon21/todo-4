@@ -20,8 +20,6 @@ public class UserController {
     public User index() {
         String userId = "hamill";
         User user = userRepository.findUserByUserId(userId).get();
-        String name = "다했어";
-        columnRepository.deleteById(2L);
 
         return user;
     }
