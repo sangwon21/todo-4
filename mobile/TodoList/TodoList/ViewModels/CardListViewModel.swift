@@ -10,13 +10,11 @@ import Foundation
 
 protocol ViewModelBinding {
     associatedtype Key
-    associatedtype Data
     func updateNotify(handler: @escaping (Key) -> Void)
 }
 
 class CardListViewModel: ViewModelBinding {
     typealias Key = List?
-    typealias Data = Card?
     
     private var list: Key = nil {
         didSet { changeHandler(list) }
@@ -42,7 +40,7 @@ class CardListViewModel: ViewModelBinding {
         self.changeHandler = handler
     }
     
-    func card(at row: Int) -> Data {
+    func card(at row: Int) -> Card? {
         return list?.cards[row]
     }
 }
