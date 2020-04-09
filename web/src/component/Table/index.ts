@@ -1,35 +1,70 @@
-import { div, i } from "wonnie-template";
-import { InlineList, InlineListClass } from "../../styled-component/InlineList";
-import { Spacing } from "../../styled-component/Spacing";
+import { div, i, textarea } from "wonnie-template";
 import { AddingCard } from "../AddingCard";
+import { TableHeader } from "./TableHeader";
 import { Card } from "../Card";
 
 import "./Table.scss";
 
-export const numberCircle = div({ class: "number-circle" })([3]);
+export class Table {
+  private tableHeader: TableHeader;
+  private addingCard: AddingCard;
+  private headerNode: Element | Text | null;
+  private tableNode: Element | Text | null;
+  private addingCardNode: Element | Text | null;
+  constructor(tableName: string) {
+    this.cancelCardButtonHandler = this.cancelCardButtonHandler.bind(this);
+    this.createAddingCardSection = this.createAddingCardSection.bind(this);
+    this.removeAddingCardSection = this.removeAddingCardSection.bind(this);
+    this.addCardButtonHandler = this.addCardButtonHandler.bind(this);
+    this.tableHeader = new TableHeader(
+      tableName,
+      this.createAddingCardSection,
+      this.removeAddingCardSection
+    );
+    this.headerNode = null;
+    this.tableNode = null;
+    this.addingCard = new AddingCard({
+      userClass: "done",
+      rightButtonCallback: this.cancelCardButtonHandler,
+      leftButtonCallback: this.addCardButtonHandler,
+    });
+    this.addingCardNode = null;
+  }
 
-export const about = Spacing({ left: 0.4 })(
-  div({ class: "table-about" })(["해야할일"])
-);
+  cancelCardButtonHandler() {
+    const textArea = (this.tableNode as Element).querySelector(
+      "textarea"
+    ) as HTMLTextAreaElement;
+    textArea!.value = "";
+  }
 
-export const plusIcon = i({ class: "plus icon" })();
+  addCardButtonHandler() {
+    const textArea = (this.tableNode as Element).querySelector(
+      "textarea"
+    )! as HTMLTextAreaElement;
+    (this.tableNode as Element).appendChild(new Card(textArea.value).render());
+    textArea.value = "";
+  }
 
-export const horizontalIcon = i({ class: "ellipsis horizontal icon" })();
+  createAddingCardSection() {
+    this.addingCardNode = this.addingCard.render();
+    this.tableNode!.insertBefore(
+      this.addingCardNode,
+      this.headerNode!.nextSibling
+    );
+  }
 
-export const leftSide = InlineList({ class: InlineListClass.DEFAULT })([
-  numberCircle,
-  about,
-]);
-export const rightSide = InlineList({ class: InlineListClass.DEFAULT })([
-  plusIcon,
-  horizontalIcon,
-]);
+  removeAddingCardSection() {
+    this.addingCardNode && this.addingCardNode.remove();
+    this.addingCardNode = null;
+  }
 
-export const header = InlineList({ class: InlineListClass.SPACE_BETWEEN })([
-  leftSide,
-  rightSide,
-]);
-
-const card = Card;
-
-export const Table = div({ class: "table" })([header, AddingCard, Card, card]);
+  render() {
+    this.headerNode = this.tableHeader.render();
+    this.tableNode = div({ class: `table done-table` })([
+      this.headerNode,
+      new Card("Hello World").render(),
+    ]);
+    return this.tableNode;
+  }
+}
