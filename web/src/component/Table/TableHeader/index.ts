@@ -1,6 +1,9 @@
 import { div, i } from "wonnie-template";
-import { InlineList, InlineListClass } from "../../styled-component/InlineList";
-import { Spacing } from "../../styled-component/Spacing";
+import {
+  InlineList,
+  InlineListClass,
+} from "../../../styled-component/InlineList";
+import { Spacing } from "../../../styled-component/Spacing";
 
 export class TableHeader {
   private cardCount: number;

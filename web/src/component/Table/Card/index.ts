@@ -1,5 +1,8 @@
 import { div, i, span } from "wonnie-template";
-import { InlineList, InlineListClass } from "../../styled-component/InlineList";
+import {
+  InlineList,
+  InlineListClass,
+} from "../../../styled-component/InlineList";
 
 import "./card.scss";
 

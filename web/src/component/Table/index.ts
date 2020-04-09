@@ -1,7 +1,7 @@
-import { div, i, textarea } from "wonnie-template";
-import { AddingCard } from "../AddingCard";
+import { div } from "wonnie-template";
+import { AddingCard } from "./AddingCard";
 import { TableHeader } from "./TableHeader";
-import { Card } from "../Card";
+import { Card } from "./Card";
 
 import "./Table.scss";
 

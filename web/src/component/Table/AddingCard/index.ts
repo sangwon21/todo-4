@@ -1,7 +1,10 @@
-import { div, i, textarea } from "wonnie-template";
-import { CustomButton, ButtonSize, ButtonType } from "../CustomButton";
-import COLOR from "../../util/color";
-import { InlineList, InlineListClass } from "../../styled-component/InlineList";
+import { div, textarea } from "wonnie-template";
+import { CustomButton, ButtonSize, ButtonType } from "../../CustomButton";
+import COLOR from "../../../util/color";
+import {
+  InlineList,
+  InlineListClass,
+} from "../../../styled-component/InlineList";
 
 import "./AddingCard.scss";
 
