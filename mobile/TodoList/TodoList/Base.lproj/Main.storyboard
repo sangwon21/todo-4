@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -44,14 +45,65 @@
                     <view key="view" contentMode="scaleToFill" id="kzL-gD-xkL">
                         <rect key="frame" x="0.0" y="0.0" width="700" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJX-wX-BXy">
+                                <rect key="frame" x="24" y="32" width="48" height="30"/>
+                                <state key="normal" title="Cancel"/>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="nH7-9e-S35">
+                                <rect key="frame" x="24" y="94" width="652" height="41"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="New Card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="knE-KD-ET5">
+                                        <rect key="frame" x="0.0" y="0.0" width="603" height="41"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="34"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZDh-IN-sXw">
+                                        <rect key="frame" x="611" y="0.0" width="41" height="41"/>
+                                        <state key="normal" image="checkmark.circle.fill" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                            </preferredSymbolConfiguration>
+                                        </state>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="새로운 할 일 카드 만들기" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="t5x-bc-voe">
+                                <rect key="frame" x="24" y="159" width="652" height="271.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author by App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEG-Dq-AcP">
+                                <rect key="frame" x="24" y="454.5" width="110" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="hJX-wX-BXy" firstAttribute="top" secondItem="FRC-hf-SyV" secondAttribute="top" constant="32" id="Ac3-6G-PhJ"/>
+                            <constraint firstItem="nH7-9e-S35" firstAttribute="top" secondItem="hJX-wX-BXy" secondAttribute="bottom" constant="32" id="VFx-7i-cYe"/>
+                            <constraint firstItem="FRC-hf-SyV" firstAttribute="trailing" secondItem="nH7-9e-S35" secondAttribute="trailing" constant="24" id="ZbO-8R-zj8"/>
+                            <constraint firstItem="NEG-Dq-AcP" firstAttribute="leading" secondItem="t5x-bc-voe" secondAttribute="leading" id="Zf5-9K-Tby"/>
+                            <constraint firstItem="NEG-Dq-AcP" firstAttribute="top" secondItem="t5x-bc-voe" secondAttribute="bottom" constant="24" id="hUm-yB-hIj"/>
+                            <constraint firstItem="t5x-bc-voe" firstAttribute="leading" secondItem="nH7-9e-S35" secondAttribute="leading" id="iu9-Ax-8fL"/>
+                            <constraint firstItem="FRC-hf-SyV" firstAttribute="height" secondItem="t5x-bc-voe" secondAttribute="height" multiplier="3" id="lFu-VS-Hq9"/>
+                            <constraint firstItem="t5x-bc-voe" firstAttribute="top" secondItem="nH7-9e-S35" secondAttribute="bottom" constant="24" id="pOl-qj-3MV"/>
+                            <constraint firstItem="hJX-wX-BXy" firstAttribute="leading" secondItem="FRC-hf-SyV" secondAttribute="leading" constant="24" id="syk-yM-si2"/>
+                            <constraint firstItem="t5x-bc-voe" firstAttribute="trailing" secondItem="nH7-9e-S35" secondAttribute="trailing" id="wrF-rR-SPe"/>
+                            <constraint firstItem="nH7-9e-S35" firstAttribute="leading" secondItem="hJX-wX-BXy" secondAttribute="leading" id="zoa-lG-LhZ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="FRC-hf-SyV"/>
                     </view>
                     <size key="freeformSize" width="700" height="834"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ktr-rL-E0T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="833" y="812"/>
+            <point key="canvasLocation" x="832.6633165829146" y="811.51079136690657"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="n9h-g0-VYy">
@@ -222,6 +274,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="checkmark.circle.fill" catalog="system" width="64" height="60"/>
         <image name="plus" catalog="system" width="64" height="56"/>
         <image name="text.justify" catalog="system" width="64" height="50"/>
     </resources>
