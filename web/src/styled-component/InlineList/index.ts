@@ -4,6 +4,7 @@ import "./InlineList.scss";
 
 export enum InlineListClass {
   SPACE_BETWEEN = "space-between",
+  SPACE_AROUND = "space-around",
   ALIGN_CENTER = "align-center",
   ALIGN_RIGHT = "align-right",
   COLUMN_BASE = "column-base",

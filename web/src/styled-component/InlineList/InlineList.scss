@@ -6,6 +6,14 @@
   align-items: center;
 }
 
+.space-around {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .default-inline {
   display: flex;
   flex-direction: row;
