@@ -10,9 +10,10 @@ CREATE TABLE user (
 
 CREATE TABLE column (
     id bigint PRIMARY KEY AUTO_INCREMENT,
-    name varchar(64),
+    title varchar(64),
     user int references user(id),
-    user_key int
+    user_key int,
+    previous_id bigint
 );
 
 CREATE TABLE card (
@@ -21,5 +22,5 @@ CREATE TABLE card (
     column int references column(id),
     column_key int,
     user int references user(id),
-    user_key int
+    previous_id bigint
 );

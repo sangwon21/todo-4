@@ -14,6 +14,7 @@ public class Card {
 
     @Id
     private Long id;
+    private Long previousId;
     private String note;
 
     public Card(String note) {

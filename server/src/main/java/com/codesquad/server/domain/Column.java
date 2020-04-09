@@ -17,12 +17,13 @@ public class Column {
 
     @Id
     private Long id;
-    private String name;
+    private String title;
+    private Long previousId;
 
     private List<Card> cards = new ArrayList<>();
 
-    public Column (String name) {
-        this.name = name;
+    public Column (String title) {
+        this.title = title;
     }
 
     public void addCard(String note) {

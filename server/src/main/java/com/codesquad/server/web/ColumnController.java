@@ -75,7 +75,7 @@ public class ColumnController {
     @PutMapping("/{columnId}")
     public JSONObject update(@PathVariable Long columnId, @RequestBody HashMap<String, String> bodyMap) {
         Column column = columnRepository.findById(columnId).orElseThrow(NoSuchElementException::new);
-        column.setName(bodyMap.get("afterName"));
+        column.setTitle(bodyMap.get("afterName"));
         columnRepository.save(column);
 
         JSONObject jsonObject = new JSONObject();
