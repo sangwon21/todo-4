@@ -24,3 +24,11 @@ struct List: Decodable {
 struct Card: Decodable {
     let id, title, detail, author: String
 }
+
+extension Board {
+    var listPackage: Dictionary<Int, List> {
+        return lists.enumerated().reduce(into: [:]) { package, list in
+            package[list.0] = list.1
+        }
+    }
+}
