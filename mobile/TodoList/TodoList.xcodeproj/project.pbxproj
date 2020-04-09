@@ -29,6 +29,8 @@
 		C27B2887243B5A38005785AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C27B2885243B5A38005785AB /* LaunchScreen.storyboard */; };
 		C27B2892243B5A39005785AB /* TodoListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27B2891243B5A39005785AB /* TodoListTests.swift */; };
 		C2884956243E37B900D4B603 /* CardListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2884955243E37B900D4B603 /* CardListViewModel.swift */; };
+		C2884958243E41E100D4B603 /* Observers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2884957243E41E100D4B603 /* Observers.swift */; };
+		C288495C243E43F600D4B603 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288495B243E43F600D4B603 /* NotificationNames.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,8 @@
 		C27B2891243B5A39005785AB /* TodoListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListTests.swift; sourceTree = "<group>"; };
 		C27B2893243B5A39005785AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C2884955243E37B900D4B603 /* CardListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListViewModel.swift; sourceTree = "<group>"; };
+		C2884957243E41E100D4B603 /* Observers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observers.swift; sourceTree = "<group>"; };
+		C288495B243E43F600D4B603 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				C26472CE243C7677006D87EB /* ReusableView.swift */,
+				C288495B243E43F600D4B603 /* NotificationNames.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -125,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				C26472DF243D9CA8006D87EB /* BoardResponse.swift */,
+				C2884957243E41E100D4B603 /* Observers.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -308,6 +314,7 @@
 				C21C6789243C401B00FA661F /* CardCountView.swift in Sources */,
 				C27B287F243B5A33005785AB /* BoardViewController.swift in Sources */,
 				C27B287B243B5A33005785AB /* AppDelegate.swift in Sources */,
+				C2884958243E41E100D4B603 /* Observers.swift in Sources */,
 				C26472D6243C808C006D87EB /* NetworkManager.swift in Sources */,
 				C26472E9243E05DF006D87EB /* CardListDataSource.swift in Sources */,
 				C26472CF243C7677006D87EB /* ReusableView.swift in Sources */,
@@ -317,6 +324,7 @@
 				C26472E3243DEBE0006D87EB /* MockJSON.swift in Sources */,
 				C26472D8243C8F57006D87EB /* Endpoints.swift in Sources */,
 				C26472E6243DFF6D006D87EB /* CardCell.swift in Sources */,
+				C288495C243E43F600D4B603 /* NotificationNames.swift in Sources */,
 				C26472CC243C7551006D87EB /* CardListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
