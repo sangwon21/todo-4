@@ -10,12 +10,10 @@
 		C21C6789243C401B00FA661F /* CardCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21C6788243C401B00FA661F /* CardCountView.swift */; };
 		C26472CC243C7551006D87EB /* CardListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472CB243C7551006D87EB /* CardListViewController.swift */; };
 		C26472CF243C7677006D87EB /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472CE243C7677006D87EB /* ReusableView.swift */; };
-		C26472D2243C7F9A006D87EB /* URLProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472D1243C7F9A006D87EB /* URLProtocolMock.swift */; };
 		C26472D6243C808C006D87EB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472D5243C808C006D87EB /* NetworkManager.swift */; };
 		C26472D8243C8F57006D87EB /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472D7243C8F57006D87EB /* Endpoints.swift */; };
 		C26472D9243C8F65006D87EB /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472D7243C8F57006D87EB /* Endpoints.swift */; };
 		C26472DB243C9020006D87EB /* APIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472DA243C9020006D87EB /* APIRouter.swift */; };
-		C26472DE243D70E1006D87EB /* MockJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472DD243D70E1006D87EB /* MockJSON.swift */; };
 		C26472E0243D9CA8006D87EB /* BoardResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472DF243D9CA8006D87EB /* BoardResponse.swift */; };
 		C26472E2243DEBC7006D87EB /* URLProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472D1243C7F9A006D87EB /* URLProtocolMock.swift */; };
 		C26472E3243DEBE0006D87EB /* MockJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472DD243D70E1006D87EB /* MockJSON.swift */; };
@@ -180,6 +178,7 @@
 				C26472E4243DFE0A006D87EB /* Controllers */,
 				C26472DC243C91EA006D87EB /* Models */,
 				C26472D4243C8079006D87EB /* Networking */,
+				C26472D0243C7F79006D87EB /* NetworkingTests */,
 				C27B287A243B5A33005785AB /* AppDelegate.swift */,
 				C27B287C243B5A33005785AB /* SceneDelegate.swift */,
 				C27B2880243B5A33005785AB /* Main.storyboard */,
@@ -193,7 +192,6 @@
 		C27B2890243B5A39005785AB /* TodoListTests */ = {
 			isa = PBXGroup;
 			children = (
-				C26472D0243C7F79006D87EB /* NetworkingTests */,
 				C27B2891243B5A39005785AB /* CardListViewModelTests.swift */,
 				C27B2893243B5A39005785AB /* Info.plist */,
 			);
@@ -334,9 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C27B2892243B5A39005785AB /* CardListViewModelTests.swift in Sources */,
-				C26472DE243D70E1006D87EB /* MockJSON.swift in Sources */,
 				C26472D9243C8F65006D87EB /* Endpoints.swift in Sources */,
-				C26472D2243C7F9A006D87EB /* URLProtocolMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
