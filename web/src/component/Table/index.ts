@@ -100,9 +100,9 @@ export class Table {
   render() {
     this.headerNode = this.tableHeader.render();
     this.tableNode = div({
-      class: `table done-table`,
+      class: `table`,
       onDragover: this.handleDragOver,
-    })([this.headerNode, new Card("Hello World").render()]);
+    })([this.headerNode]);
     return this.tableNode;
   }
 }
