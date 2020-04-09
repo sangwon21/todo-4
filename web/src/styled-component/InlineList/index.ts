@@ -9,9 +9,11 @@ export enum InlineListClass {
   ALIGN_RIGHT = "align-right",
   COLUMN_BASE = "column-base",
   DEFAULT = "default-inline",
+  ALIGN_LEFT_COLUMN = "align-left-column-base ",
   ALIGN_CENTER_COLUMN = "align-center-column-base",
   ALIGN_RIGHT_COLUMN = "align-right-column-base",
   SPACE_BETWEEN_COLUMN = "space-between-column-base",
+  CENTER = "center",
 }
 
 export interface IInlineListAttribute {
