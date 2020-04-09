@@ -14,4 +14,11 @@ class CardCell: UITableViewCell {
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
     
+    var card: Card? = nil {
+        didSet {
+            titleLabel.text = card?.title
+            detailLabel.text = card?.detail
+            authorLabel.text = card?.author
+        }
+    }
 }

@@ -14,7 +14,7 @@ class CardListViewController: UIViewController {
     
     private let observers = Observers()
     private let viewModel = CardListViewModel(with: nil)
-    private let cardListDataSource = CardListDataSource()
+    private let dataSource = CardListDataSource()
     
     var listID: Int?
     
@@ -25,7 +25,7 @@ class CardListViewController: UIViewController {
         
         setupViewModel()
         
-        tableView.dataSource = cardListDataSource
+        setupDataSource()
     }
     
     deinit {
@@ -43,6 +43,16 @@ class CardListViewController: UIViewController {
         viewModel.updateNotify { [weak self] _ in
             self?.tableView.reloadData()
         }
+    }
+    
+    private func setupDataSource() {
+        dataSource.rowCount = { [weak self] in
+            return self?.viewModel.cardCount ?? 0
+        }
+        dataSource.cardAtRow = { [weak self] in
+            return self?.viewModel.card(at: $0) ?? Card()
+        }
+        tableView.dataSource = dataSource
     }
 }
 

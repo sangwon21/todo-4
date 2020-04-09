@@ -32,3 +32,12 @@ extension Board {
         }
     }
 }
+
+extension Card {
+    init() {
+        id = ""
+        title = ""
+        detail = ""
+        author = ""
+    }
+}

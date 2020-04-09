@@ -12,6 +12,7 @@ class BoardViewController: UIViewController {
 
     @IBOutlet weak var boardStackView: UIStackView!
     
+    private var listViewControllers = [UIViewController]()
     private var networkManager: NetworkManager?
     
     override func viewDidLoad() {
@@ -31,13 +32,13 @@ class BoardViewController: UIViewController {
     }
     
     private func setupTodoLists(for number: Int) {
-        (0..<number).forEach { [unowned self] id in
-            if let viewController = storyboard?
-                .instantiateViewController(withIdentifier: CardListViewController.reuseIdentifier) as? CardListViewController {
-                viewController.listID = id
-                self.boardStackView.addArrangedSubview(viewController.view)
-            }
-        }
+        listViewControllers = (0..<number).map { [unowned self] id in
+            guard let viewController = storyboard?
+                .instantiateViewController(withIdentifier: CardListViewController.reuseIdentifier) as? CardListViewController else { return nil }
+            viewController.listID = id
+            self.boardStackView.addArrangedSubview(viewController.view)
+            return viewController
+        }.compactMap { $0 }
     }
 }
 

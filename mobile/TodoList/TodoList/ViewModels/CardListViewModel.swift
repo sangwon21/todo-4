@@ -22,6 +22,10 @@ class CardListViewModel: ViewModelBinding {
     
     private var changeHandler: (Key) -> Void
     
+    var cardCount: Int {
+        return list?.cards.count ?? 0
+    }
+    
     init(with list: Key, handler: @escaping (Key) -> Void = { _ in }) {
         self.changeHandler = handler
         self.list = list
@@ -34,5 +38,9 @@ class CardListViewModel: ViewModelBinding {
     
     func updateNotify(handler: @escaping (Key) -> Void) {
         self.changeHandler = handler
+    }
+    
+    func card(at row: Int) -> Card? {
+        return list?.cards[row]
     }
 }

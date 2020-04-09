@@ -10,15 +10,23 @@ import UIKit
 
 class CardListDataSource: NSObject {
     
+    var rowCount: (() -> Int)?
+    
+    var cardAtRow: ((Int) -> Card)?
+    
+    override init() {
+        super.init()
+    }
 }
 
 extension CardListDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return rowCount?() ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CardCell.reuseIdentifier, for: indexPath) as? CardCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CardCell.reuseIdentifier, for: indexPath) as? CardCell, let card = cardAtRow?(indexPath.row) else { return UITableViewCell() }
+        cell.card = card
         return cell
     }
 }
