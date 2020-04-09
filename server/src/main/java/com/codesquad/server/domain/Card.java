@@ -14,8 +14,17 @@ public class Card {
 
     @Id
     private Long id;
-
-    private Long previousId;
-
     private String note;
+
+    public Card(String note) {
+        this.note = note;
+    }
+
+    @Override
+    public String toString() {
+        return "Card{" +
+                "id=" + id +
+                ", note='" + note + '\'' +
+                '}';
+    }
 }
