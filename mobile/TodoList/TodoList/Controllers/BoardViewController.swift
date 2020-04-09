@@ -57,3 +57,7 @@ extension BoardViewController {
         }
     }
 }
+
+extension Notification.Name {
+    static let boardDidUpdate = Notification.Name(rawValue: "boardDidUpdate")
+}
