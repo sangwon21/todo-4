@@ -33,11 +33,13 @@ class BoardViewController: UIViewController {
     
     private func setupTodoLists(for number: Int) {
         listViewControllers = (0..<number).map { [unowned self] id in
-            guard let viewController = storyboard?
-                .instantiateViewController(withIdentifier: CardListViewController.reuseIdentifier) as? CardListViewController else { return nil }
-            viewController.listID = id
-            self.boardStackView.addArrangedSubview(viewController.view)
-            return viewController
+            guard let vc = UILoader.load(viewControllerType: CardListViewController.self,
+                                         from: storyboard) else { return nil }
+            vc.listID = id
+            vc.viewModel = CardListViewModel(with: nil)
+            vc.dataSource = CardListDataSource()
+            self.boardStackView.addArrangedSubview(vc.view)
+            return vc
         }.compactMap { $0 }
     }
 }

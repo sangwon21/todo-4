@@ -13,9 +13,9 @@ class CardListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private let observers = Observers()
-    private let viewModel = CardListViewModel(with: nil)
-    private let dataSource = CardListDataSource()
     
+    var viewModel: CardListViewModel?
+    var dataSource: CardListDataSource?
     var listID: Int?
     
     override func viewDidLoad() {
@@ -34,23 +34,23 @@ class CardListViewController: UIViewController {
     
     private func addViewUpdatingObservers() {
         let listObserver = List.addListObserver(forName: .boardDidUpdate, listID: listID) { [weak self] in
-            self?.viewModel.update(list: $0)
+            self?.viewModel?.update(list: $0)
         }
         observers.addObserver(listObserver)
     }
     
     private func setupViewModel() {
-        viewModel.updateNotify { [weak self] _ in
+        viewModel?.updateNotify { [weak self] _ in
             self?.tableView.reloadData()
         }
     }
     
     private func setupDataSource() {
-        dataSource.rowCount = { [weak self] in
-            return self?.viewModel.cardCount ?? 0
+        dataSource?.rowCount = { [weak self] in
+            return self?.viewModel?.cardCount ?? 0
         }
-        dataSource.cardAtRow = { [weak self] in
-            return self?.viewModel.card(at: $0) ?? Card()
+        dataSource?.cardAtRow = { [weak self] in
+            return self?.viewModel?.card(at: $0) ?? Card()
         }
         tableView.dataSource = dataSource
     }
