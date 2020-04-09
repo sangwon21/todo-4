@@ -21,7 +21,7 @@ struct List: Decodable {
     let cards: [Card]
 }
 
-struct Card: Decodable {
+struct Card: Decodable, Equatable {
     let id, title, detail, author: String
 }
 
@@ -39,5 +39,12 @@ extension Card {
         title = ""
         detail = ""
         author = ""
+    }
+}
+
+extension List {
+    init(with number: Int) {
+        title = ""
+        cards = (0..<number).map { _ in Card() }
     }
 }
