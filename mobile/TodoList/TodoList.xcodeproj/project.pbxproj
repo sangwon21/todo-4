@@ -31,6 +31,7 @@
 		C2884956243E37B900D4B603 /* CardListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2884955243E37B900D4B603 /* CardListViewModel.swift */; };
 		C2884958243E41E100D4B603 /* Observers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2884957243E41E100D4B603 /* Observers.swift */; };
 		C288495C243E43F600D4B603 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288495B243E43F600D4B603 /* NotificationNames.swift */; };
+		C288495E243EF88700D4B603 /* UILoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288495D243EF88700D4B603 /* UILoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		C2884955243E37B900D4B603 /* CardListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListViewModel.swift; sourceTree = "<group>"; };
 		C2884957243E41E100D4B603 /* Observers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observers.swift; sourceTree = "<group>"; };
 		C288495B243E43F600D4B603 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
+		C288495D243EF88700D4B603 /* UILoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 			children = (
 				C26472CE243C7677006D87EB /* ReusableView.swift */,
 				C288495B243E43F600D4B603 /* NotificationNames.swift */,
+				C288495D243EF88700D4B603 /* UILoader.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				C26472E2243DEBC7006D87EB /* URLProtocolMock.swift in Sources */,
 				C27B287D243B5A33005785AB /* SceneDelegate.swift in Sources */,
 				C2884956243E37B900D4B603 /* CardListViewModel.swift in Sources */,
+				C288495E243EF88700D4B603 /* UILoader.swift in Sources */,
 				C26472E3243DEBE0006D87EB /* MockJSON.swift in Sources */,
 				C26472D8243C8F57006D87EB /* Endpoints.swift in Sources */,
 				C26472E6243DFF6D006D87EB /* CardCell.swift in Sources */,
