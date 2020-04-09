@@ -10,15 +10,16 @@ import "./card.scss";
 export class Card {
   private contents: string;
   private cardNode: Element | Text | null;
-  private modalOpen: boolean;
+  private contentNode: Element | Text | null;
   constructor(contents: string) {
     this.contents = contents;
     this.cardNode = null;
+    this.contentNode = null;
     this.closeButtonHandler = this.closeButtonHandler.bind(this);
+    this.editTask = this.editTask.bind(this);
     this.handleDragStart = this.handleDragStart.bind(this);
     this.handleDragEnd = this.handleDragEnd.bind(this);
     this.handleTaskEditClick = this.handleTaskEditClick.bind(this);
-    this.modalOpen = false;
   }
 
   closeButtonHandler() {
@@ -36,13 +37,24 @@ export class Card {
   }
 
   handleTaskEditClick() {
-    this.cardNode?.appendChild(new EditModal().render());
+    this.cardNode!.appendChild(
+      new EditModal({
+        noteContent: this.contents,
+        editContent: this.editTask,
+      }).render()
+    );
+  }
+
+  editTask(task: string) {
+    (this.contentNode! as Element).innerHTML = task;
+    this.contents = task;
   }
 
   render() {
+    this.contentNode = div({ class: "card-title" })([this.contents]);
     const rightHeader = InlineList({ class: InlineListClass.DEFAULT })([
       i({ class: "tasks icon", onClick: this.handleTaskEditClick })(),
-      div({ class: "card-title" })([this.contents]),
+      this.contentNode,
     ]);
 
     const closeButton = div({ onClick: this.closeButtonHandler })([

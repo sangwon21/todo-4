@@ -6,16 +6,43 @@ import {
   InlineList,
   InlineListClass,
 } from "../../../../styled-component/InlineList";
+
 import "./EditModal.scss";
 
+export interface EditModalConstructor {
+  noteContent: string;
+  editContent: Function;
+}
+
 export class EditModal {
-  constructor() {}
+  private noteContent: string;
+  private editContent: Function;
+  private textareaNode: Element | Text | null;
+  private editModalNode: Element | Text | null;
+  constructor(param: EditModalConstructor) {
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.close = this.close.bind(this);
+    this.noteContent = param.noteContent;
+    this.editContent = param.editContent;
+    this.textareaNode = null;
+    this.editModalNode = null;
+  }
+
+  close() {
+    this.editModalNode!.remove();
+  }
+
+  handleSubmit() {
+    const { value } = this.textareaNode! as HTMLTextAreaElement;
+    this.editContent(value);
+    this.close();
+  }
 
   render() {
     const leftHeader = span({ class: "edit-modal-header-title" })([
       "Edit note",
     ]);
-    const rightHeader = i({ class: "close icon" })();
+    const rightHeader = i({ class: "close icon", onClick: this.close })();
 
     const editModalHeader = InlineList({
       class: InlineListClass.SPACE_BETWEEN,
@@ -25,9 +52,10 @@ export class EditModal {
 
     const editModalNoteHeader = span()(["Note"]);
 
-    const editModalNoteTextarea = textarea({
+    this.textareaNode = textarea({
       class: "edit-modal-textarea",
       maxlength: "500",
+      placeholder: `${this.noteContent}`,
     })([]);
 
     const mediumSettings: ButtonType = {
@@ -35,6 +63,7 @@ export class EditModal {
       color: COLOR.PRIMARY,
       content: "제출",
       contentColor: COLOR.WHITE,
+      callback: this.handleSubmit,
     };
 
     const saveNoteButton = CustomButton(mediumSettings);
@@ -43,12 +72,13 @@ export class EditModal {
       class: InlineListClass.SPACE_BETWEEN_COLUMN,
       width: "100%",
       userClassList: ["edit-modal-note"],
-    })([editModalNoteHeader, editModalNoteTextarea, saveNoteButton]);
+    })([editModalNoteHeader, this.textareaNode, saveNoteButton]);
 
     const ModalContent = InlineList({
       class: InlineListClass.ALIGN_LEFT_COLUMN,
       userClassList: ["modal-content"],
     })([editModalHeader, editModalNote]);
-    return Modal(ModalContent);
+    this.editModalNode = Modal(ModalContent);
+    return this.editModalNode;
   }
 }
