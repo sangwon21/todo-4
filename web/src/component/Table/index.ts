@@ -44,7 +44,11 @@ export class Table {
     const textArea = (this.tableNode as Element).querySelector(
       "textarea"
     )! as HTMLTextAreaElement;
-    (this.tableNode as Element).appendChild(new Card(textArea.value).render());
+    const firstCard = (this.tableNode as Element).querySelector(".card");
+    (this.tableNode as Element).insertBefore(
+      new Card(textArea.value).render(),
+      firstCard
+    );
     textArea.value = "";
   }
 
