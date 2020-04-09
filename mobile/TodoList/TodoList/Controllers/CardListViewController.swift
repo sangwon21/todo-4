@@ -10,6 +10,8 @@ import UIKit
 
 class CardListViewController: UIViewController {
 
+    @IBOutlet weak var cardCountLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
     private let observers = Observers()
@@ -40,7 +42,9 @@ class CardListViewController: UIViewController {
     }
     
     private func setupViewModel() {
-        viewModel?.updateNotify { [weak self] _ in
+        viewModel?.updateNotify { [weak self] list in
+            self?.titleLabel.text = "\(list?.title ?? "")"
+            self?.cardCountLabel.text = "\(list?.cards.count ?? 0)"
             self?.tableView.reloadData()
         }
     }

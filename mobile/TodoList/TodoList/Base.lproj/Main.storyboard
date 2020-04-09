@@ -192,7 +192,9 @@
                     </view>
                     <size key="freeformSize" width="500" height="834"/>
                     <connections>
+                        <outlet property="cardCountLabel" destination="Gt4-hM-f8z" id="p7r-yL-gr5"/>
                         <outlet property="tableView" destination="Xkf-LI-jeh" id="qPx-gq-aNI"/>
+                        <outlet property="titleLabel" destination="ruM-Rf-Ubd" id="Yz2-Em-aZu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mgd-AK-cGu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
