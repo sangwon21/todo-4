@@ -60,9 +60,17 @@ extension BoardViewController {
 }
 
 extension BoardViewController: CardListViewControllerDelegate {
-    func addNewCardDidTouched(listID id: Int?) {
+    func addNewCardDidTouch(listID id: Int?) {
         guard let vc = UILoader.load(viewControllerType: FormViewController.self, from: storyboard) else { return }
+        vc.listID = id
+        vc.delegate = self
         present(vc, animated: true)
+    }
+}
+
+extension BoardViewController: FormViewControllerDelegate {
+    func newCardDidSubmit(listID id: Int?, card: Card) {
+        
     }
 }
 

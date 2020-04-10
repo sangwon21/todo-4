@@ -80,6 +80,9 @@
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                                             </preferredSymbolConfiguration>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="submit:" destination="xBd-Yk-fRT" eventType="touchUpInside" id="6GN-HY-X0S"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                             </stackView>

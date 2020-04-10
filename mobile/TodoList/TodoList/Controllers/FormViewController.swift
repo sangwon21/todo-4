@@ -8,11 +8,19 @@
 
 import UIKit
 
+protocol FormViewControllerDelegate: class {
+    func newCardDidSubmit(listID: Int?, card: Card)
+}
+
 class FormViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
     private let observers = Observers()
+    
+    var listID: Int?
+    
+    weak var delegate: FormViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +49,11 @@ class FormViewController: UIViewController {
     }
     
     @IBAction func cancel(_ sender: Any) {
+        dismiss(animated: true)
+    }
+    
+    @IBAction func submit(_ sender: Any) {
+        delegate?.newCardDidSubmit(listID: listID, card: Card())
         dismiss(animated: true)
     }
 }
