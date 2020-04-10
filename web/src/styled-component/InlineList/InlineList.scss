@@ -6,6 +6,21 @@
   align-items: center;
 }
 
+.space-around {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.center {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
 .default-inline {
   display: flex;
   flex-direction: row;
@@ -35,6 +50,14 @@
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: flex-start;
+}
+
+.align-left-column-base {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   align-items: flex-start;
 }
 

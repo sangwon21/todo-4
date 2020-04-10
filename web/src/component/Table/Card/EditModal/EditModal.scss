@@ -1,0 +1,33 @@
+.modal-content {
+  background-color: #fefefe;
+  border: 1px solid #888;
+  width: 50%;
+  height: 50%;
+}
+
+.edit-modal-header {
+  background-color: #f6f8fa;
+  height: 20%;
+  border-bottom: 1px solid #000000;
+}
+
+.edit-modal-header-title {
+  font-weight: 700;
+  display: block;
+  margin-left: 1rem;
+}
+
+.edit-modal-textarea {
+  box-sizing: border-box;
+  height: 60%;
+}
+
+.edit-modal-header i {
+  margin-right: 1rem;
+}
+
+.edit-modal-note {
+  box-sizing: border-box;
+  height: 70%;
+  padding: 1rem;
+}
