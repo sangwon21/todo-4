@@ -46,56 +46,86 @@
                         <rect key="frame" x="0.0" y="0.0" width="700" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJX-wX-BXy">
-                                <rect key="frame" x="24" y="32" width="48" height="30"/>
-                                <state key="normal" title="Cancel"/>
-                            </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="nH7-9e-S35">
-                                <rect key="frame" x="24" y="94" width="652" height="41"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W0g-Tg-4Xk">
+                                <rect key="frame" x="0.0" y="0.0" width="700" height="814"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="New Card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="knE-KD-ET5">
-                                        <rect key="frame" x="0.0" y="0.0" width="603" height="41"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="34"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZDh-IN-sXw">
-                                        <rect key="frame" x="611" y="0.0" width="41" height="41"/>
-                                        <state key="normal" image="checkmark.circle.fill" catalog="system">
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                            </preferredSymbolConfiguration>
-                                        </state>
-                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Qz-L6-r5K" userLabel="Container View">
+                                        <rect key="frame" x="0.0" y="0.0" width="700" height="814"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="8c2-aB-n33">
+                                                <rect key="frame" x="20" y="24" width="660" height="435"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJX-wX-BXy">
+                                                        <rect key="frame" x="0.0" y="0.0" width="48" height="30"/>
+                                                        <state key="normal" title="Cancel"/>
+                                                    </button>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7AF-3j-shM">
+                                                        <rect key="frame" x="0.0" y="62" width="652" height="373"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="nH7-9e-S35">
+                                                                <rect key="frame" x="0.0" y="0.0" width="652" height="41"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="New Card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="knE-KD-ET5">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="603" height="41"/>
+                                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZDh-IN-sXw">
+                                                                        <rect key="frame" x="611" y="0.0" width="41" height="41"/>
+                                                                        <state key="normal" image="checkmark.circle.fill" catalog="system">
+                                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
+                                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                                            </preferredSymbolConfiguration>
+                                                                        </state>
+                                                                    </button>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Write your task details here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="t5x-bc-voe">
+                                                                <rect key="frame" x="0.0" y="61" width="652" height="271.5"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                            </textView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author by App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEG-Dq-AcP">
+                                                                <rect key="frame" x="0.0" y="352.5" width="652" height="20.5"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="8c2-aB-n33" firstAttribute="top" secondItem="5Qz-L6-r5K" secondAttribute="top" constant="24" id="5Jh-rP-y5X"/>
+                                            <constraint firstItem="8c2-aB-n33" firstAttribute="leading" secondItem="5Qz-L6-r5K" secondAttribute="leading" constant="20" id="GcA-iw-e5X"/>
+                                            <constraint firstAttribute="trailing" secondItem="8c2-aB-n33" secondAttribute="trailing" constant="20" id="Id2-g0-cpD"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
-                            </stackView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="새로운 할 일 카드 만들기" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="t5x-bc-voe">
-                                <rect key="frame" x="24" y="159" width="652" height="271.5"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author by App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEG-Dq-AcP">
-                                <rect key="frame" x="24" y="454.5" width="110" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="5Qz-L6-r5K" secondAttribute="trailing" id="6nm-z0-pLC"/>
+                                    <constraint firstItem="5Qz-L6-r5K" firstAttribute="top" secondItem="W0g-Tg-4Xk" secondAttribute="top" id="97h-xN-Yhz"/>
+                                    <constraint firstAttribute="bottom" secondItem="5Qz-L6-r5K" secondAttribute="bottom" id="Bpc-QW-HJv"/>
+                                    <constraint firstItem="5Qz-L6-r5K" firstAttribute="leading" secondItem="W0g-Tg-4Xk" secondAttribute="leading" id="Rza-ge-UAh"/>
+                                    <constraint firstItem="5Qz-L6-r5K" firstAttribute="width" secondItem="W0g-Tg-4Xk" secondAttribute="width" id="bAf-Re-zc4"/>
+                                    <constraint firstItem="5Qz-L6-r5K" firstAttribute="height" secondItem="W0g-Tg-4Xk" secondAttribute="height" priority="999" id="gHa-IY-NSl"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="Eno-pr-UKS"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="PoM-on-vu2"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="hJX-wX-BXy" firstAttribute="top" secondItem="FRC-hf-SyV" secondAttribute="top" constant="32" id="Ac3-6G-PhJ"/>
-                            <constraint firstItem="nH7-9e-S35" firstAttribute="top" secondItem="hJX-wX-BXy" secondAttribute="bottom" constant="32" id="VFx-7i-cYe"/>
-                            <constraint firstItem="FRC-hf-SyV" firstAttribute="trailing" secondItem="nH7-9e-S35" secondAttribute="trailing" constant="24" id="ZbO-8R-zj8"/>
-                            <constraint firstItem="NEG-Dq-AcP" firstAttribute="leading" secondItem="t5x-bc-voe" secondAttribute="leading" id="Zf5-9K-Tby"/>
-                            <constraint firstItem="NEG-Dq-AcP" firstAttribute="top" secondItem="t5x-bc-voe" secondAttribute="bottom" constant="24" id="hUm-yB-hIj"/>
-                            <constraint firstItem="t5x-bc-voe" firstAttribute="leading" secondItem="nH7-9e-S35" secondAttribute="leading" id="iu9-Ax-8fL"/>
-                            <constraint firstItem="FRC-hf-SyV" firstAttribute="height" secondItem="t5x-bc-voe" secondAttribute="height" multiplier="3" id="lFu-VS-Hq9"/>
-                            <constraint firstItem="t5x-bc-voe" firstAttribute="top" secondItem="nH7-9e-S35" secondAttribute="bottom" constant="24" id="pOl-qj-3MV"/>
-                            <constraint firstItem="hJX-wX-BXy" firstAttribute="leading" secondItem="FRC-hf-SyV" secondAttribute="leading" constant="24" id="syk-yM-si2"/>
-                            <constraint firstItem="t5x-bc-voe" firstAttribute="trailing" secondItem="nH7-9e-S35" secondAttribute="trailing" id="wrF-rR-SPe"/>
-                            <constraint firstItem="nH7-9e-S35" firstAttribute="leading" secondItem="hJX-wX-BXy" secondAttribute="leading" id="zoa-lG-LhZ"/>
+                            <constraint firstItem="W0g-Tg-4Xk" firstAttribute="leading" secondItem="kzL-gD-xkL" secondAttribute="leading" id="5JH-1i-Tvq"/>
+                            <constraint firstItem="W0g-Tg-4Xk" firstAttribute="top" secondItem="kzL-gD-xkL" secondAttribute="top" id="EFk-Wf-LK7"/>
+                            <constraint firstItem="FRC-hf-SyV" firstAttribute="bottom" secondItem="W0g-Tg-4Xk" secondAttribute="bottom" id="Ebf-2x-8Gw"/>
+                            <constraint firstItem="FRC-hf-SyV" firstAttribute="height" secondItem="t5x-bc-voe" secondAttribute="height" multiplier="3" id="OOu-si-hOw"/>
+                            <constraint firstAttribute="trailing" secondItem="W0g-Tg-4Xk" secondAttribute="trailing" id="sx0-y2-nzr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FRC-hf-SyV"/>
                     </view>
