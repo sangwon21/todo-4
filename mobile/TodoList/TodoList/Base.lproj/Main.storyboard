@@ -60,18 +60,18 @@
                                                         <state key="normal" title="Cancel"/>
                                                     </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7AF-3j-shM">
-                                                        <rect key="frame" x="0.0" y="62" width="652" height="373"/>
+                                                        <rect key="frame" x="0.0" y="62" width="660" height="373"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="nH7-9e-S35">
-                                                                <rect key="frame" x="0.0" y="0.0" width="652" height="41"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="660" height="41"/>
                                                                 <subviews>
                                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New Card Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LHa-vz-ctM">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="603" height="41"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="611" height="41"/>
                                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
                                                                         <textInputTraits key="textInputTraits"/>
                                                                     </textField>
                                                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZDh-IN-sXw">
-                                                                        <rect key="frame" x="611" y="0.0" width="41" height="41"/>
+                                                                        <rect key="frame" x="619" y="0.0" width="41" height="41"/>
                                                                         <state key="normal" image="checkmark.circle.fill" catalog="system">
                                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
@@ -81,14 +81,14 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Write your task details here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="t5x-bc-voe">
-                                                                <rect key="frame" x="0.0" y="61" width="652" height="271.5"/>
+                                                                <rect key="frame" x="0.0" y="61" width="660" height="271.5"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                             </textView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author by App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEG-Dq-AcP">
-                                                                <rect key="frame" x="0.0" y="352.5" width="652" height="20.5"/>
+                                                                <rect key="frame" x="0.0" y="352.5" width="660" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -96,6 +96,10 @@
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="7AF-3j-shM" firstAttribute="leading" secondItem="8c2-aB-n33" secondAttribute="leading" id="29h-r0-CcB"/>
+                                                    <constraint firstAttribute="trailing" secondItem="7AF-3j-shM" secondAttribute="trailing" id="oyb-9l-3q8"/>
+                                                </constraints>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -129,6 +133,9 @@
                         <viewLayoutGuide key="safeArea" id="FRC-hf-SyV"/>
                     </view>
                     <size key="freeformSize" width="700" height="834"/>
+                    <connections>
+                        <outlet property="scrollView" destination="W0g-Tg-4Xk" id="dRN-dI-B8l"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ktr-rL-E0T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
