@@ -39,4 +39,8 @@ class FormViewController: UIViewController {
             self?.scrollView.scrollIndicatorInsets = contentInset
         }
     }
+    
+    @IBAction func cancel(_ sender: Any) {
+        dismiss(animated: true)
+    }
 }

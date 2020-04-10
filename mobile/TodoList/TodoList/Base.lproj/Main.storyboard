@@ -58,6 +58,9 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJX-wX-BXy">
                                                         <rect key="frame" x="0.0" y="0.0" width="48" height="30"/>
                                                         <state key="normal" title="Cancel"/>
+                                                        <connections>
+                                                            <action selector="cancel:" destination="xBd-Yk-fRT" eventType="touchUpInside" id="fSk-nY-Sa7"/>
+                                                        </connections>
                                                     </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7AF-3j-shM">
                                                         <rect key="frame" x="0.0" y="62" width="660" height="508.5"/>
