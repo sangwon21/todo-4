@@ -65,12 +65,11 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="nH7-9e-S35">
                                                                 <rect key="frame" x="0.0" y="0.0" width="652" height="41"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="New Card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="knE-KD-ET5">
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New Card Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LHa-vz-ctM">
                                                                         <rect key="frame" x="0.0" y="0.0" width="603" height="41"/>
                                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
-                                                                        <nil key="textColor"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                    </textField>
                                                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZDh-IN-sXw">
                                                                         <rect key="frame" x="611" y="0.0" width="41" height="41"/>
                                                                         <state key="normal" image="checkmark.circle.fill" catalog="system">
