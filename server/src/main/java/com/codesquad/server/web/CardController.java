@@ -24,9 +24,6 @@ public class CardController {
     private final Logger logger = LoggerFactory.getLogger(CardController.class);
 
     @Autowired
-    UserRepository userRepository;
-
-    @Autowired
     ColumnRepository columnRepository;
 
     @Autowired
@@ -34,18 +31,10 @@ public class CardController {
 
     @PostMapping("")
     public JSONObject create(@PathVariable Long columnId, @RequestBody Map<String, String> bodyMap) {
-
-
-        User user = userRepository.findById(Long.parseLong(bodyMap.get("userIdx"))).orElseThrow(NoSuchElementException::new);
         Column column = columnRepository.findById(columnId).orElseThrow(NoSuchElementException::new);
         column.addCard(bodyMap.get("note"));
         columnRepository.save(column);
 
-
-//        Card card = cardRepository.findById();
-
-//        user.addColumn(bodyMap.get("columnName"));
-//        userRepository.save(user);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("StatusCode", HttpStatus.CREATED.value());
         return jsonObject;

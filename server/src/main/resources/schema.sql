@@ -21,6 +21,5 @@ CREATE TABLE card (
     note varchar(500),
     column int references column(id),
     column_key int,
-    user int references user(id),
     previous_id bigint
 );
