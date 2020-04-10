@@ -2,10 +2,8 @@ package com.codesquad.server.web;
 
 import com.codesquad.server.domain.Card;
 import com.codesquad.server.domain.Column;
-import com.codesquad.server.domain.User;
 import com.codesquad.server.repository.CardRepository;
 import com.codesquad.server.repository.ColumnRepository;
-import com.codesquad.server.repository.UserRepository;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +27,17 @@ public class CardController {
     @Autowired
     CardRepository cardRepository;
 
+    /**
+     * Card을 생성한다.
+     *
+     * @RequestBody
+     *{
+     * 	"note": "순두부찌개는 맛있어",
+     * }
+     *
+     * @return
+     * Status Code를 반환(CREATED, 201)
+     */
     @PostMapping("")
     public JSONObject create(@PathVariable Long columnId, @RequestBody Map<String, String> bodyMap) {
         Column column = columnRepository.findById(columnId).orElseThrow(NoSuchElementException::new);
@@ -40,12 +49,29 @@ public class CardController {
         return jsonObject;
     }
 
+    /**
+     * 해당하는 Column의 전체 Card 목록 반환
+     *
+     * @return
+     * Column 객체가 json 형태로 반환
+     */
     @GetMapping("")
     public List<Card> list(@PathVariable Long columnId) {
         Column column = columnRepository.findById(columnId).orElseThrow(NoSuchElementException::new);
         return column.getCards();
     }
 
+    /**
+     * Card 이름 수정
+     *
+     * @RequestBody
+     *{
+     * 	"afterNote": "노맛존맛"
+     * }
+     *
+     * @return
+     * Status Code를 반환(NO_CONTENT, 204)
+     */
     @PutMapping("/{cardId}")
     public JSONObject update(@PathVariable Long cardId, @RequestBody HashMap<String, String> bodyMap) {
         Card card = cardRepository.findById(cardId).orElseThrow(NoSuchElementException::new);
@@ -57,6 +83,12 @@ public class CardController {
         return jsonObject;
     }
 
+    /**
+     * Card 삭제
+     *
+     * @return
+     * Status Code를 반환(NO_CONTENT, 204)
+     */
     @DeleteMapping("/{cardId}")
     public JSONObject delete(@PathVariable Long cardId) {
         Card card = cardRepository.findById(cardId).orElseThrow(NoSuchElementException::new);
