@@ -1,6 +1,6 @@
--- DROP TABLE IF EXITS card;
--- DROP TABLE IF EXITS column;
--- DROP TABLE IF EXITS user;
+DROP TABLE IF EXISTS card;
+DROP TABLE IF EXISTS `column`;
+DROP TABLE IF EXISTS user;
 
 CREATE TABLE user (
     id bigint PRIMARY KEY AUTO_INCREMENT,
@@ -8,7 +8,7 @@ CREATE TABLE user (
     password varchar(64)
 );
 
-CREATE TABLE column (
+CREATE TABLE `column` (
     id bigint PRIMARY KEY AUTO_INCREMENT,
     title varchar(64),
     user int references user(id),
@@ -19,7 +19,11 @@ CREATE TABLE column (
 CREATE TABLE card (
     id bigint PRIMARY KEY AUTO_INCREMENT,
     note varchar(500),
-    column int references column(id),
+    `column` int references `column`(id),
     column_key int,
     previous_id bigint
 );
+
+ALTER TABLE user convert to charset utf8;
+ALTER TABLE `column` convert to charset utf8;
+ALTER TABLE card convert to charset utf8;
