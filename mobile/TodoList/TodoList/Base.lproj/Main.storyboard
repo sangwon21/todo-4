@@ -53,14 +53,14 @@
                                         <rect key="frame" x="0.0" y="0.0" width="700" height="814"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="8c2-aB-n33">
-                                                <rect key="frame" x="20" y="24" width="660" height="435"/>
+                                                <rect key="frame" x="20" y="24" width="660" height="570.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJX-wX-BXy">
                                                         <rect key="frame" x="0.0" y="0.0" width="48" height="30"/>
                                                         <state key="normal" title="Cancel"/>
                                                     </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7AF-3j-shM">
-                                                        <rect key="frame" x="0.0" y="62" width="660" height="373"/>
+                                                        <rect key="frame" x="0.0" y="62" width="660" height="508.5"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="nH7-9e-S35">
                                                                 <rect key="frame" x="0.0" y="0.0" width="660" height="41"/>
@@ -81,14 +81,14 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Write your task details here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="t5x-bc-voe">
-                                                                <rect key="frame" x="0.0" y="61" width="660" height="271.5"/>
+                                                                <rect key="frame" x="0.0" y="61" width="660" height="407"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                             </textView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author by App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEG-Dq-AcP">
-                                                                <rect key="frame" x="0.0" y="352.5" width="660" height="20.5"/>
+                                                                <rect key="frame" x="0.0" y="488" width="660" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -127,7 +127,7 @@
                             <constraint firstItem="W0g-Tg-4Xk" firstAttribute="leading" secondItem="kzL-gD-xkL" secondAttribute="leading" id="5JH-1i-Tvq"/>
                             <constraint firstItem="W0g-Tg-4Xk" firstAttribute="top" secondItem="kzL-gD-xkL" secondAttribute="top" id="EFk-Wf-LK7"/>
                             <constraint firstItem="FRC-hf-SyV" firstAttribute="bottom" secondItem="W0g-Tg-4Xk" secondAttribute="bottom" id="Ebf-2x-8Gw"/>
-                            <constraint firstItem="FRC-hf-SyV" firstAttribute="height" secondItem="t5x-bc-voe" secondAttribute="height" multiplier="3" id="OOu-si-hOw"/>
+                            <constraint firstItem="FRC-hf-SyV" firstAttribute="height" secondItem="t5x-bc-voe" secondAttribute="height" multiplier="2" id="OOu-si-hOw"/>
                             <constraint firstAttribute="trailing" secondItem="W0g-Tg-4Xk" secondAttribute="trailing" id="sx0-y2-nzr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FRC-hf-SyV"/>

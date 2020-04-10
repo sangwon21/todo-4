@@ -27,13 +27,13 @@ class Observers {
 }
 
 extension Observers {
-    func addKeyboardShowObserver(using block: @escaping (CGRect) -> Void) {
+    func addKeyboardShowObserver(using block: @escaping (CGFloat) -> Void) {
         let observer = center.addObserver(forName: UIResponder.keyboardWillShowNotification,
                                           object: nil,
                                           queue: .main) {
             guard let userInfo = $0.userInfo,
                 let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
-            block(keyboardFrame)
+            block(keyboardFrame.size.height)
         }
         observers.append(observer)
     }

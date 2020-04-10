@@ -25,14 +25,12 @@ class FormViewController: UIViewController {
     }
     
     private func addKeyboardObservers() {
-        observers.addKeyboardShowObserver { [weak self] keyboardFrame in
-            let contentInset = UIEdgeInsets(
-                top: 0.0,
-                left: 0.0,
-                bottom: keyboardFrame.size.height,
-                right: 0.0)
-            self?.scrollView.contentInset = contentInset
-            self?.scrollView.scrollIndicatorInsets = contentInset
+        observers.addKeyboardShowObserver { [weak self] keyboardHeight in
+            self?.scrollView.contentInset.bottom = keyboardHeight
+            self?.scrollView.verticalScrollIndicatorInsets.bottom = keyboardHeight
+            if let textView = UIResponder.currentFirstResponder as? UITextView {
+                self?.scrollView.scrollRectToVisible(textView.frame, animated: true)
+            }
         }
         
         observers.addKeyboardHideObserver { [weak self] in
