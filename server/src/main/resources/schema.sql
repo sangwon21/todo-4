@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS card;
-DROP TABLE IF EXISTS `column`;
+DROP TABLE IF EXISTS columns;
 DROP TABLE IF EXISTS user;
 
 CREATE TABLE user (
@@ -8,7 +8,7 @@ CREATE TABLE user (
     password varchar(64)
 );
 
-CREATE TABLE `column` (
+CREATE TABLE columns (
     id bigint PRIMARY KEY AUTO_INCREMENT,
     title varchar(64),
     user int references user(id),
@@ -19,11 +19,11 @@ CREATE TABLE `column` (
 CREATE TABLE card (
     id bigint PRIMARY KEY AUTO_INCREMENT,
     note varchar(500),
-    `column` int references `column`(id),
-    column_key int,
+    columns int references columns(id),
+    columns_key int,
     previous_id bigint
 );
 
 ALTER TABLE user convert to charset utf8;
-ALTER TABLE `column` convert to charset utf8;
+ALTER TABLE columns convert to charset utf8;
 ALTER TABLE card convert to charset utf8;

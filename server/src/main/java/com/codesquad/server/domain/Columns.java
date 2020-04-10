@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Column {
+public class Columns {
 
     @Id
     private Long id;
@@ -22,7 +22,7 @@ public class Column {
 
     private List<Card> cards = new ArrayList<>();
 
-    public Column (String title) {
+    public Columns(String title) {
         this.title = title;
     }
 

@@ -1,7 +1,7 @@
 package com.codesquad.server.web;
 
 import com.codesquad.server.domain.Card;
-import com.codesquad.server.domain.Column;
+import com.codesquad.server.domain.Columns;
 import com.codesquad.server.repository.CardRepository;
 import com.codesquad.server.repository.ColumnRepository;
 import org.json.simple.JSONObject;
@@ -40,9 +40,9 @@ public class CardController {
      */
     @PostMapping("")
     public JSONObject create(@PathVariable Long columnId, @RequestBody Map<String, String> bodyMap) {
-        Column column = columnRepository.findById(columnId).orElseThrow(NoSuchElementException::new);
-        column.addCard(bodyMap.get("note"));
-        columnRepository.save(column);
+        Columns columns = columnRepository.findById(columnId).orElseThrow(NoSuchElementException::new);
+        columns.addCard(bodyMap.get("note"));
+        columnRepository.save(columns);
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("StatusCode", HttpStatus.CREATED.value());
@@ -57,8 +57,8 @@ public class CardController {
      */
     @GetMapping("")
     public List<Card> list(@PathVariable Long columnId) {
-        Column column = columnRepository.findById(columnId).orElseThrow(NoSuchElementException::new);
-        return column.getCards();
+        Columns columns = columnRepository.findById(columnId).orElseThrow(NoSuchElementException::new);
+        return columns.getCards();
     }
 
     /**

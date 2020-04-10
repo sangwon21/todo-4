@@ -1,6 +1,6 @@
 package com.codesquad.server.web;
 
-import com.codesquad.server.domain.Column;
+import com.codesquad.server.domain.Columns;
 import com.codesquad.server.domain.User;
 import com.codesquad.server.repository.ColumnRepository;
 import com.codesquad.server.repository.UserRepository;
@@ -58,7 +58,7 @@ public class ColumnController {
      * User 객체가 json 형태로 반환
      */
     @GetMapping("")
-    public List<Column> list() {
+    public List<Columns> list() {
         String userId = "hamill";
         User user = userRepository.findUserByUserId(userId).orElseThrow(NoSuchElementException::new);
         return user.getColumns();
@@ -77,9 +77,9 @@ public class ColumnController {
      */
     @PutMapping("/{columnId}")
     public JSONObject update(@PathVariable Long columnId, @RequestBody HashMap<String, String> bodyMap) {
-        Column column = columnRepository.findById(columnId).orElseThrow(NoSuchElementException::new);
-        column.setTitle(bodyMap.get("afterName"));
-        columnRepository.save(column);
+        Columns columns = columnRepository.findById(columnId).orElseThrow(NoSuchElementException::new);
+        columns.setTitle(bodyMap.get("afterName"));
+        columnRepository.save(columns);
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("StatusCode", HttpStatus.NO_CONTENT.value());
@@ -94,8 +94,8 @@ public class ColumnController {
      */
     @DeleteMapping("/{columnId}")
     public JSONObject delete(@PathVariable Long columnId) {
-        Column column = columnRepository.findById(columnId).orElseThrow(NoSuchElementException::new);
-        columnRepository.delete(column);
+        Columns columns = columnRepository.findById(columnId).orElseThrow(NoSuchElementException::new);
+        columnRepository.delete(columns);
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("StatusCode", HttpStatus.NO_CONTENT.value());

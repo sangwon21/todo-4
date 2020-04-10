@@ -19,10 +19,10 @@ public class User {
     private String userId;
     private String password;
 
-    private List<Column> columns = new ArrayList<>();
+    private List<Columns> columns = new ArrayList<>();
 
     public void addColumn(String name) {
-        columns.add(new Column(name));
+        columns.add(new Columns(name));
     }
 
     @Override

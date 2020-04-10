@@ -1,6 +1,5 @@
 package com.codesquad.server.web.mockup;
 
-import com.codesquad.server.domain.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
