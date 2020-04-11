@@ -1,8 +1,5 @@
 package com.codesquad.server.domain;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
@@ -12,6 +9,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class User {
 
     @Id
@@ -23,14 +21,5 @@ public class User {
 
     public void addColumn(String name) {
         columns.add(new Column(name));
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id='" + id + '\'' +
-                ", userId='" + userId + '\'' +
-                ", password='" + password + '\'' +
-                '}';
     }
 }

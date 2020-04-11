@@ -1,15 +1,13 @@
 package com.codesquad.server.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Card {
 
     @Id
@@ -18,13 +16,5 @@ public class Card {
 
     public Card(String note) {
         this.note = note;
-    }
-
-    @Override
-    public String toString() {
-        return "Card{" +
-                "id=" + id +
-                ", note='" + note + '\'' +
-                '}';
     }
 }
