@@ -21,7 +21,9 @@ public class UserController {
     }
 
     @PostMapping("/signin")
-    public User signIn(User user) {
-        return userService.signIn(user);
+    public User signIn(@RequestBody User user) {
+        User loginUser = userService.signIn(user);
+        System.out.println("Login OK!");
+        return loginUser;
     }
 }
