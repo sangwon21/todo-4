@@ -18,7 +18,7 @@ struct Board: Decodable {
 
 struct List: Decodable {
     let title: String
-    let cards: [Card]
+    var cards: [Card]
 }
 
 struct Card: Codable, Equatable {
@@ -38,6 +38,10 @@ extension List {
     init(with number: Int) {
         title = ""
         cards = (0..<number).map { _ in Card() }
+    }
+    
+    mutating func insert(card: Card) {
+        cards.insert(card, at: 0)
     }
 }
 

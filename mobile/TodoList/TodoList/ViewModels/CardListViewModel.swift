@@ -36,6 +36,10 @@ class CardListViewModel: ViewModelBinding {
         self.list = list
     }
     
+    func insert(card: Card) {
+        list?.insert(card: card)
+    }
+    
     func updateNotify(handler: @escaping (Key) -> Void) {
         self.changeHandler = handler
     }

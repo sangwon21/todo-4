@@ -41,10 +41,15 @@ class CardListViewController: UIViewController {
     }
     
     private func addViewUpdatingObservers() {
-        let listObserver = List.addListObserver(forName: .boardDidUpdate, listID: listID) { [weak self] in
+        var observer = List.addListObserver(forName: .boardDidUpdate, listID: listID) { [weak self] in
             self?.viewModel?.update(list: $0)
         }
-        observers.addObserver(listObserver)
+        observers.addObserver(observer)
+        
+        observer = Card.addCardObserver(forName: .newCardDidUpdate, listID: listID) { [weak self] in
+            self?.viewModel?.insert(card: $0)
+        }
+        observers.addObserver(observer)
     }
     
     private func setupViewModel() {
@@ -76,6 +81,16 @@ private extension List {
                                 using block: @escaping (List) -> Void) -> NSObjectProtocol {
         return NotificationCenter.default.addObserver(forName: name, object: nil, queue: .main) {
             if let list = $0.userInfo?[id] as? List { block(list) }
+        }
+    }
+}
+
+private extension Card {
+    static func addCardObserver(forName name: NSNotification.Name,
+                                listID id: Int?,
+                                using block: @escaping (Card) -> Void) -> NSObjectProtocol {
+        return NotificationCenter.default.addObserver(forName: name, object: nil, queue: .main) {
+            if let card = $0.userInfo?[id] as? Card { block(card) }
         }
     }
 }
