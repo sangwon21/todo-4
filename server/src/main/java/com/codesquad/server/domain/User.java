@@ -17,5 +17,5 @@ public class User {
     private String userId;
     private String password;
     private List<Column> columns;
-    private String Token;
+    private String token;
 }

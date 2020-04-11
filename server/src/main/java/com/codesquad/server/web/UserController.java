@@ -22,6 +22,6 @@ public class UserController {
 
     @PostMapping("/signin")
     public User signIn(User user) {
-        return userService.siginIn(user);
+        return userService.signIn(user);
     }
 }

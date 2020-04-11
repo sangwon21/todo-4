@@ -37,7 +37,7 @@ public class UserService {
         return userRepository.findUserByUserId(userId).orElseThrow(() -> new IllegalArgumentException("없는 유저입니다!"));
     }
 
-    public User siginIn(User requestUser) {
+    public User signIn(User requestUser) {
         User user = findUserByUserId(requestUser.getUserId());
 
         if (!user.getPassword().equals(requestUser.getPassword())) {
