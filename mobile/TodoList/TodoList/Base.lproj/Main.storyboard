@@ -93,7 +93,7 @@
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                             </textView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author by App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEG-Dq-AcP">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author by iOS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEG-Dq-AcP">
                                                                 <rect key="frame" x="0.0" y="488" width="660" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -140,7 +140,10 @@
                     </view>
                     <size key="freeformSize" width="700" height="834"/>
                     <connections>
+                        <outlet property="authorLabel" destination="NEG-Dq-AcP" id="6ef-WU-cUn"/>
+                        <outlet property="detailTextView" destination="t5x-bc-voe" id="IFf-de-428"/>
                         <outlet property="scrollView" destination="W0g-Tg-4Xk" id="dRN-dI-B8l"/>
+                        <outlet property="titleLabel" destination="LHa-vz-ctM" id="uFj-tu-rs7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ktr-rL-E0T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

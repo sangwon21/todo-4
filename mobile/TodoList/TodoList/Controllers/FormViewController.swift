@@ -15,6 +15,9 @@ protocol FormViewControllerDelegate: class {
 class FormViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var titleLabel: UITextField!
+    @IBOutlet weak var detailTextView: UITextView!
+    @IBOutlet weak var authorLabel: UILabel!
     
     private let observers = Observers()
     
@@ -53,7 +56,11 @@ class FormViewController: UIViewController {
     }
     
     @IBAction func submit(_ sender: Any) {
-        delegate?.newCardDidSubmit(listID: listID, card: Card())
+        let card = Card(id: "",
+                        title: titleLabel.text ?? "",
+                        detail: detailTextView.text,
+                        author: authorLabel.text ?? "")
+        delegate?.newCardDidSubmit(listID: listID, card: card)
         dismiss(animated: true)
     }
 }
