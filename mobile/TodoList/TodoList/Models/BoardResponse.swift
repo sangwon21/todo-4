@@ -21,7 +21,7 @@ struct List: Decodable {
     let cards: [Card]
 }
 
-struct Card: Decodable, Equatable {
+struct Card: Codable, Equatable {
     let id, title, detail, author: String
 }
 

@@ -16,9 +16,9 @@ class NetworkManager {
     }
     
     func requestBoard(completion: @escaping (Result<Board, Error>) -> Void) {
-        guard let url = APIRouter.board.url else { return }
+        guard let request = APIRouter.board.urlRequest else { return }
         
-        session.dataTask(with: url) { data, _, error in
+        session.dataTask(with: request) { data, _, error in
             if let error = error {
                 completion(.failure(error))
                 return
