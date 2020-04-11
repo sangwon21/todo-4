@@ -1,6 +1,6 @@
 package com.codesquad.server.application.user;
 
-import com.codesquad.server.application.jwt.JwtUtil;
+import com.codesquad.server.application.jwt.JwtService;
 import com.codesquad.server.domain.user.User;
 import com.codesquad.server.domain.user.UserRepository;
 import lombok.NonNull;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     @NonNull
-    private final JwtUtil jwtUtil;
+    private final JwtService jwtService;
 
     @NonNull
     private final UserRepository userRepository;
@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User signUp(User requestUser) {
         verifyDuplicatedUser(requestUser.getUserId());
-        requestUser.setToken(jwtUtil.createToken());
+        requestUser.setToken(jwtService.createToken());
         return userRepository.save(requestUser);
     }
 

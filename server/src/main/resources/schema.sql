@@ -9,7 +9,7 @@ CREATE TABLE user (
     token varchar(500)
 );
 
-CREATE TABLE column (
+CREATE TABLE columns (
     id bigint PRIMARY KEY AUTO_INCREMENT,
     name varchar(64),
     user int references user(id),
@@ -19,8 +19,8 @@ CREATE TABLE column (
 CREATE TABLE card (
     id bigint PRIMARY KEY AUTO_INCREMENT,
     note varchar(500),
-    column int references column(id),
-    column_key int,
+    columns int references columns(id),
+    columns_key int,
     user int references user(id),
     user_key int
 );

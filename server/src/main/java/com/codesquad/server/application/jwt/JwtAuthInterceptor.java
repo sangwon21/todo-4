@@ -17,7 +17,7 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
     @Autowired
     private UserRepository userRepository;
 
-    private JwtUtilImpl jwtUtilImpl = new JwtUtilImpl();
+    private JwtServiceImpl jwtUtilImpl = new JwtServiceImpl();
 
     private String headerTokenKey = "token";
 
