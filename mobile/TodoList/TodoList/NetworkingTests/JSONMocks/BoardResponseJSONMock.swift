@@ -1,5 +1,5 @@
 //
-//  MockJSON.swift
+//  BoardResponseJSONMock.swift
 //  TodoListTests
 //
 //  Created by Chaewan Park on 2020/04/08.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-let boardResponseJSON = """
+let boardResponseJSONMock = """
 {
    "board":
     {

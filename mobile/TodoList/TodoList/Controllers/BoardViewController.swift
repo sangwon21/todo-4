@@ -65,7 +65,6 @@ extension BoardViewController {
             case .failure: return
             case let .success(response): print(response)
             }
-            
         }
     }
 }
@@ -81,7 +80,7 @@ extension BoardViewController: CardListViewControllerDelegate {
 
 extension BoardViewController: FormViewControllerDelegate {
     func newCardDidSubmit(listID id: Int?, card: Card) {
-        
+        requestNewCard(card: card)
     }
 }
 

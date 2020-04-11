@@ -10,5 +10,5 @@ import Foundation
 
 struct CardIDResponse: Decodable, Response {
     let statusCode: StatusCode
-    let cardID: Int
+    let cardID: String
 }
