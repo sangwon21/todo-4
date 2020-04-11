@@ -32,4 +32,22 @@ class NetworkManager {
             }
         }.resume()
     }
+    
+    func requestNewCard(card: Card, completion: @escaping (Result<Response, Error>) -> Void) {
+        guard let request = APIRouter.newCard(card: card).urlRequest else { return }
+        
+        session.dataTask(with: request) { data, _, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            guard let data = data else { return }
+            do {
+                let response = try JSONDecoder().decode(CardIDResponse.self, from: data)
+                response.validate(statusCode: .ok) { completion($0) }
+            } catch {
+                completion(.failure(error))
+            }
+        }.resume()
+    }
 }

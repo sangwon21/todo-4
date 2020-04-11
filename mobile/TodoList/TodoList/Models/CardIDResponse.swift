@@ -8,7 +8,36 @@
 
 import Foundation
 
-struct CardIDResponse: Decodable {
-    let statusCode: String
+protocol Response {
+    var statusCode: StatusCode { get }
+}
+
+extension Response {
+    func validate(statusCode: StatusCode, block: (Result<Response, Error>) -> Void) {
+        if self.statusCode == statusCode {
+            block(.success(self))
+        } else {
+            block(.failure(HTTPError.badRequest))
+        }
+    }
+}
+
+enum StatusCode: String, Decodable {
+    case ok = "200"
+    case error = "400"
+}
+
+enum HTTPError: Error {
+   case badRequest
+   
+   var localizedDescription: String {
+       switch self {
+       case .badRequest: return "Bad Request"
+       }
+   }
+}
+
+struct CardIDResponse: Decodable, Response {
+    let statusCode: StatusCode
     let cardID: Int
 }

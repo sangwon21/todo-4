@@ -57,6 +57,17 @@ extension BoardViewController {
             }
         }
     }
+    
+    private func requestNewCard(card: Card) {
+        let center = NotificationCenter.default
+        networkManager?.requestNewCard(card: card) { result in
+            switch result {
+            case .failure: return
+            case let .success(response): print(response)
+            }
+            
+        }
+    }
 }
 
 extension BoardViewController: CardListViewControllerDelegate {
