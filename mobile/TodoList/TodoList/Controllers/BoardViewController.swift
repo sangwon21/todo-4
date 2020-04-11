@@ -52,18 +52,21 @@ extension BoardViewController {
             switch result {
             case .failure: return
             case let .success(board):
-                let userInfo = board.listPackage
-                center.post(name: .boardDidUpdate, object: self, userInfo: userInfo)
+                center.post(name: .boardDidUpdate, object: self, userInfo: board.listPackage)
             }
         }
     }
     
-    private func requestNewCard(card: Card) {
+    private func requestNewCard(listID id: Int, card: Card) {
+        var card = card
         let center = NotificationCenter.default
         networkManager?.requestNewCard(card: card) { result in
             switch result {
             case .failure: return
-            case let .success(response): print(response)
+            case let .success(response):
+                guard let response = response as? CardIDResponse else { return }
+                card.id = response.cardID
+                center.post(name: .newCardDidUpdate, object: self, userInfo: card.package(listID: id))
             }
         }
     }
@@ -80,10 +83,12 @@ extension BoardViewController: CardListViewControllerDelegate {
 
 extension BoardViewController: FormViewControllerDelegate {
     func newCardDidSubmit(listID id: Int?, card: Card) {
-        requestNewCard(card: card)
+        guard let id = id else { return }
+        requestNewCard(listID: id, card: card)
     }
 }
 
 extension Notification.Name {
     static let boardDidUpdate = Notification.Name(rawValue: "boardDidUpdate")
+    static let newCardDidUpdate = Notification.Name(rawValue: "newCardDidUpdate")
 }

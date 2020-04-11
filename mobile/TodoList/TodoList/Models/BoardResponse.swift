@@ -22,7 +22,8 @@ struct List: Decodable {
 }
 
 struct Card: Codable, Equatable {
-    let id, title, detail, author: String
+    var id: String
+    let title, detail, author: String
 }
 
 extension Board {
@@ -33,6 +34,13 @@ extension Board {
     }
 }
 
+extension List {
+    init(with number: Int) {
+        title = ""
+        cards = (0..<number).map { _ in Card() }
+    }
+}
+
 extension Card {
     init() {
         id = ""
@@ -40,11 +48,8 @@ extension Card {
         detail = ""
         author = ""
     }
-}
-
-extension List {
-    init(with number: Int) {
-        title = ""
-        cards = (0..<number).map { _ in Card() }
+    
+    func package(listID id: Int) -> Dictionary<Int, Card> {
+        return [id: self]
     }
 }
