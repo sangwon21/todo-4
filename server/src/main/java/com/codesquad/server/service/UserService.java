@@ -28,7 +28,8 @@ public class UserService {
         User user = findUserByUserId(requestUser.getUserId());
 
         if(!user.getPassword().equals(requestUser.getPassword())) {
-            throw new IllegalArgumentException("암호가 일치하지 않습니다.");       }
+            throw new IllegalArgumentException("암호가 일치하지 않습니다.");
+        }
 
         return user;
     }
