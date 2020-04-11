@@ -11,6 +11,7 @@
 		C24C8DC8243F5D0300825031 /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24C8DC7243F5D0300825031 /* FormViewController.swift */; };
 		C24C8DCA2440472C00825031 /* FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24C8DC92440472C00825031 /* FirstResponder.swift */; };
 		C24C8DCC24405CD400825031 /* CardIDResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24C8DCB24405CD400825031 /* CardIDResponse.swift */; };
+		C24C8DD02441DFDE00825031 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24C8DCF2441DFDE00825031 /* Response.swift */; };
 		C26472CC243C7551006D87EB /* CardListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472CB243C7551006D87EB /* CardListViewController.swift */; };
 		C26472CF243C7677006D87EB /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472CE243C7677006D87EB /* ReusableView.swift */; };
 		C26472D6243C808C006D87EB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26472D5243C808C006D87EB /* NetworkManager.swift */; };
@@ -49,6 +50,7 @@
 		C24C8DC7243F5D0300825031 /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
 		C24C8DC92440472C00825031 /* FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstResponder.swift; sourceTree = "<group>"; };
 		C24C8DCB24405CD400825031 /* CardIDResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardIDResponse.swift; sourceTree = "<group>"; };
+		C24C8DCF2441DFDE00825031 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		C26472CB243C7551006D87EB /* CardListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListViewController.swift; sourceTree = "<group>"; };
 		C26472CE243C7677006D87EB /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		C26472D1243C7F9A006D87EB /* URLProtocolMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolMock.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 		C26472DC243C91EA006D87EB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C24C8DCF2441DFDE00825031 /* Response.swift */,
 				C26472DF243D9CA8006D87EB /* BoardResponse.swift */,
 				C24C8DCB24405CD400825031 /* CardIDResponse.swift */,
 				C2884957243E41E100D4B603 /* Observers.swift */,
@@ -329,6 +332,7 @@
 				C26472E2243DEBC7006D87EB /* URLProtocolMock.swift in Sources */,
 				C24C8DCA2440472C00825031 /* FirstResponder.swift in Sources */,
 				C27B287D243B5A33005785AB /* SceneDelegate.swift in Sources */,
+				C24C8DD02441DFDE00825031 /* Response.swift in Sources */,
 				C24C8DCC24405CD400825031 /* CardIDResponse.swift in Sources */,
 				C2884956243E37B900D4B603 /* CardListViewModel.swift in Sources */,
 				C288495E243EF88700D4B603 /* UILoader.swift in Sources */,
