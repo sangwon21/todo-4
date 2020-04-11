@@ -1,5 +1,6 @@
-package com.codesquad.server.config;
+package com.codesquad.server.presentation;
 
+import com.codesquad.server.application.jwt.JwtAuthInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

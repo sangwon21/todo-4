@@ -1,8 +1,7 @@
-package com.codesquad.server.config;
+package com.codesquad.server.application.jwt;
 
-import com.codesquad.server.domain.User;
-import com.codesquad.server.repository.UserRepository;
-import com.codesquad.server.utils.JwtUtils;
+import com.codesquad.server.domain.user.User;
+import com.codesquad.server.domain.user.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,7 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
     @Autowired
     private UserRepository userRepository;
 
-    private JwtUtils jwtUtils = new JwtUtils();
+    private JwtUtilImpl jwtUtilImpl = new JwtUtilImpl();
 
     private String headerTokenKey = "token";
 
@@ -37,6 +36,6 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
         if (!token.equals(userToken)) {
             throw new IllegalArgumentException("사용자의 Token과 일치하지 않습니다!");
         }
-        jwtUtils.verifyToken(token);
+        jwtUtilImpl.verifyToken(token);
     }
 }

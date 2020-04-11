@@ -1,5 +1,6 @@
-package com.codesquad.server.domain;
+package com.codesquad.server.domain.user;
 
+import com.codesquad.server.domain.columns.Columns;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 
@@ -16,6 +17,6 @@ public class User {
     private Long id;
     private String userId;
     private String password;
-    private List<Column> columns;
+    private List<Columns> columns;
     private String token;
 }

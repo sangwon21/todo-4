@@ -1,6 +1,5 @@
-package com.codesquad.server.repository;
+package com.codesquad.server.domain.card;
 
-import com.codesquad.server.domain.Card;
 import org.springframework.data.repository.CrudRepository;
 
 public interface CardRepository extends CrudRepository<Card, Long> {

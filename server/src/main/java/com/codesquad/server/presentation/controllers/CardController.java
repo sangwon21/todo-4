@@ -1,4 +1,4 @@
-package com.codesquad.server.web;
+package com.codesquad.server.presentation.controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,7 +1,7 @@
-package com.codesquad.server.web;
+package com.codesquad.server.presentation.controllers;
 
-import com.codesquad.server.domain.User;
-import com.codesquad.server.service.UserService;
+import com.codesquad.server.domain.user.User;
+import com.codesquad.server.application.user.UserServiceImpl;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @NonNull
-    private final UserService userService;
+    private final UserServiceImpl userServiceImpl;
 
     @PostMapping("/signup")
     public User signUp(@RequestBody User user) {
-        return userService.signUp(user);
+        return userServiceImpl.signUp(user);
     }
 
     @PostMapping("/signin")
     public User signIn(@RequestBody User user) {
-        User loginUser = userService.signIn(user);
+        User loginUser = userServiceImpl.signIn(user);
         System.out.println("Login OK!");
         return loginUser;
     }

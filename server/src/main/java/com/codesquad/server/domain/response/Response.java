@@ -1,4 +1,4 @@
-package com.codesquad.server.domain;
+package com.codesquad.server.domain.response;
 
 import lombok.*;
 

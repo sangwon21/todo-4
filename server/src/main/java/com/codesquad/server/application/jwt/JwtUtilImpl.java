@@ -1,10 +1,10 @@
-package com.codesquad.server.utils;
+package com.codesquad.server.application.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 
-public class JwtUtils {
+public class JwtUtilImpl implements JwtUtil {
     private String signKey = "TEST";
     private String issuer = "EVER";
 

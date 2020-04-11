@@ -1,5 +1,6 @@
-package com.codesquad.server.domain;
+package com.codesquad.server.domain.columns;
 
+import com.codesquad.server.domain.card.Card;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 
@@ -11,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Column {
+public class Columns {
 
     @Id
     private Long id;
@@ -19,7 +20,7 @@ public class Column {
 
     private List<Card> cards = new ArrayList<>();
 
-    public Column (String name) {
+    public Columns(String name) {
         this.name = name;
     }
 
