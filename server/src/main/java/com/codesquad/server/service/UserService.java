@@ -17,7 +17,10 @@ public class UserService {
     }
 
     private void verifyDuplicatedUser(String userId) {
-        userRepository.findUserByUserId(userId).orElseThrow(() -> new IllegalArgumentException("중북된 유저입니다!"));
+        if (userRepository.findUserByUserId(userId).isPresent()) {
+            System.out.println("boolean" + userRepository.findUserByUserId(userId).isPresent());
+            throw new IllegalArgumentException("중복된 유저입니다!");
+        }
     }
 
     private User findUserByUserId(String userId) {
@@ -27,7 +30,7 @@ public class UserService {
     public User siginIn(User requestUser) {
         User user = findUserByUserId(requestUser.getUserId());
 
-        if(!user.getPassword().equals(requestUser.getPassword())) {
+        if (!user.getPassword().equals(requestUser.getPassword())) {
             throw new IllegalArgumentException("암호가 일치하지 않습니다.");
         }
 
