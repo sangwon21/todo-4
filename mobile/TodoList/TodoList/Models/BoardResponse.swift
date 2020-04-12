@@ -35,6 +35,10 @@ extension Board {
 }
 
 extension List {
+    var count: Int {
+        return cards.count
+    }
+    
     init(with number: Int) {
         title = ""
         cards = (0..<number).map { _ in Card() }
@@ -42,6 +46,10 @@ extension List {
     
     mutating func insert(card: Card) {
         cards.insert(card, at: 0)
+    }
+    
+    subscript(index: Int) -> Card {
+        get { return cards[index] }
     }
 }
 

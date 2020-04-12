@@ -53,10 +53,15 @@ class CardListViewController: UIViewController {
     }
     
     private func setupViewModel() {
-        viewModel?.updateNotify { [weak self] list in
-            self?.titleLabel.text = "\(list?.title ?? "")"
-            self?.cardCountLabel.text = "\(list?.cards.count ?? 0)"
-            self?.tableView.reloadData()
+        viewModel?.updateNotify { [weak self] listChange in
+            if let insertedRow = listChange?.insertedRow {
+                let indexPath = IndexPath(row: insertedRow, section: 0)
+                self?.tableView.insertRows(at: [indexPath], with: .automatic)
+            } else {
+                self?.titleLabel.text = listChange?.list.title
+                self?.tableView.reloadData()
+            }
+            self?.cardCountLabel.text = "\(listChange?.list.count ?? 0)"
         }
     }
     
