@@ -29,17 +29,17 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        logger.info("userId : {}", request.getHeader("userId"));
         User user = userRepository.findUserByUserId(request.getHeader("userId"))
                 .orElseThrow(() -> new IllegalArgumentException("없는 유저입니다."));
         String token = request.getHeader(headerTokenKey);
-        logger.info("token : {}", request.getHeader("token"));
         verifyToken(token, user.getToken());
         return true;
     }
 
     private void verifyToken(String token, String userToken) {
         if (!token.equals(userToken)) {
+            logger.info("token : {}", token);
+            logger.info("userToken : {}", userToken);
             throw new IllegalArgumentException("사용자의 Token과 일치하지 않습니다!");
         }
         jwtUtil.verifyToken(token);
