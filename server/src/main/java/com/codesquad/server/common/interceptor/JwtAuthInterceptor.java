@@ -3,9 +3,10 @@ package com.codesquad.server.common.interceptor;
 import com.codesquad.server.domain.entity.User;
 import com.codesquad.server.domain.repository.UserRepository;
 import com.codesquad.server.domain.service.JwtUtil;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -13,12 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Component
+@RequiredArgsConstructor
 public class JwtAuthInterceptor implements HandlerInterceptor {
 
-    @Autowired
-    private UserRepository userRepository;
+    @NonNull
+    private final UserRepository userRepository;
 
-    @Autowired
+    @NonNull
     private JwtUtil jwtUtil;
 
     private Logger logger = LoggerFactory.getLogger(JwtAuthInterceptor.class);

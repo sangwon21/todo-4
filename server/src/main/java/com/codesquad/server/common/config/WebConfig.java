@@ -1,6 +1,8 @@
 package com.codesquad.server.common.config;
 
 import com.codesquad.server.common.interceptor.JwtAuthInterceptor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -8,10 +10,11 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
+@RequiredArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
 
-    @Autowired
-    private JwtAuthInterceptor jwtAuthInterceptor;
+    @NonNull
+    private final JwtAuthInterceptor jwtAuthInterceptor;
 
     private String[] interceptorWhiteList = {
             "/signup/**",

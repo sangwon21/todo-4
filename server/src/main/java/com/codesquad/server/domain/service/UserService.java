@@ -3,16 +3,18 @@ package com.codesquad.server.domain.service;
 import com.codesquad.server.domain.entity.User;
 import com.codesquad.server.domain.repository.UserRepository;
 import com.codesquad.server.domain.value.SignUpRequestUser;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
-    @Autowired
+    @NonNull
     private JwtUtil jwtUtil;
 
-    @Autowired
+    @NonNull
     private UserRepository userRepository;
 
     public User signUp(SignUpRequestUser requestUser) {
