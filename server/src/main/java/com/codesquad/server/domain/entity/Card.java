@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @ToString
 public class Card {
