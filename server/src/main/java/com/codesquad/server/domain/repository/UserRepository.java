@@ -1,5 +1,6 @@
-package com.codesquad.server.domain.user;
+package com.codesquad.server.domain.repository;
 
+import com.codesquad.server.domain.entity.User;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 

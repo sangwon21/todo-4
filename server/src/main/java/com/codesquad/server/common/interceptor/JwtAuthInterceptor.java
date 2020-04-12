@@ -1,7 +1,8 @@
-package com.codesquad.server.application.jwt;
+package com.codesquad.server.common.interceptor;
 
-import com.codesquad.server.domain.user.User;
-import com.codesquad.server.domain.user.UserRepository;
+import com.codesquad.server.domain.entity.User;
+import com.codesquad.server.domain.repository.UserRepository;
+import com.codesquad.server.infrastructure.JwtServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

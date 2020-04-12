@@ -1,4 +1,4 @@
-package com.codesquad.server.domain.card;
+package com.codesquad.server.domain.entity;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;

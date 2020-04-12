@@ -1,6 +1,6 @@
 package com.codesquad.server.presentation.controllers;
 
-import com.codesquad.server.domain.columns.ColumnsRepository;
+import com.codesquad.server.domain.repository.ColumnsRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,7 @@
-package com.codesquad.server.application.user;
+package com.codesquad.server.domain.service;
 
-import com.codesquad.server.application.jwt.JwtService;
-import com.codesquad.server.domain.user.User;
-import com.codesquad.server.domain.user.UserRepository;
+import com.codesquad.server.domain.entity.User;
+import com.codesquad.server.domain.repository.UserRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

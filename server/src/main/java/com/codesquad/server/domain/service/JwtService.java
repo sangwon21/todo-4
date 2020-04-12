@@ -1,4 +1,4 @@
-package com.codesquad.server.application.jwt;
+package com.codesquad.server.domain.service;
 
 public interface JwtService {
     public String createToken();

@@ -1,8 +1,9 @@
-package com.codesquad.server.application.jwt;
+package com.codesquad.server.infrastructure;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.codesquad.server.domain.service.JwtService;
 import org.springframework.stereotype.Service;
 
 @Service

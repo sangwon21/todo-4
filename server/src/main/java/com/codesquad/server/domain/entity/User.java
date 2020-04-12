@@ -1,6 +1,5 @@
-package com.codesquad.server.domain.user;
+package com.codesquad.server.domain.entity;
 
-import com.codesquad.server.domain.columns.Columns;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 

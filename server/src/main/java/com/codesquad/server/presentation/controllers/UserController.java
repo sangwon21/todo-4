@@ -1,7 +1,7 @@
 package com.codesquad.server.presentation.controllers;
 
-import com.codesquad.server.domain.user.User;
-import com.codesquad.server.application.user.UserServiceImpl;
+import com.codesquad.server.domain.entity.User;
+import com.codesquad.server.domain.service.UserServiceImpl;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

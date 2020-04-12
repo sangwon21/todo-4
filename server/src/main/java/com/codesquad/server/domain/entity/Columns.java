@@ -1,6 +1,5 @@
-package com.codesquad.server.domain.columns;
+package com.codesquad.server.domain.entity;
 
-import com.codesquad.server.domain.card.Card;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 
