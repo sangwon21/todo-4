@@ -2,6 +2,7 @@ import { div } from "wonnie-template";
 import { AddingCard } from "./AddingCard";
 import { TableHeader } from "./TableHeader";
 import { Card } from "./Card";
+import axios from "axios";
 
 import "./Table.scss";
 
@@ -40,15 +41,23 @@ export class Table {
     textArea!.value = "";
   }
 
-  addCardButtonHandler() {
+  async addCardButtonHandler() {
     const textArea = (this.tableNode as Element).querySelector(
       "textarea"
     )! as HTMLTextAreaElement;
     const firstCard = (this.tableNode as Element).querySelector(".card");
     (this.tableNode as Element).insertBefore(
-      new Card(textArea.value).render(),
+      new Card({ title: "Hello", contents: textArea.value }).render(),
       firstCard
     );
+    const statusCode = await axios.post(
+      "http://52.207.159.215:8080/columns/1/cards",
+      {
+        columnId: 1,
+        note: textArea.value,
+      }
+    );
+    console.log("statusCode is ", statusCode);
     textArea.value = "";
   }
 

@@ -4,17 +4,30 @@ import {
   InlineListClass,
 } from "../../../styled-component/InlineList";
 import { EditModal } from "./EditModal";
+import { Spinner, SpinnerSize } from "../../Spinner";
+import axios from "axios";
 
 import "./card.scss";
 
+export interface ICard {
+  contents: string;
+  title: string;
+}
+
 export class Card {
-  private contents: string;
   private cardNode: Element | Text | null;
   private contentNode: Element | Text | null;
-  constructor(contents: string) {
-    this.contents = contents;
+  private previousNode: Element | null;
+  private isLoading: boolean;
+  private contents: string;
+  private title: string;
+  constructor(cardParam: ICard) {
+    this.contents = cardParam.contents;
+    this.title = cardParam.title;
     this.cardNode = null;
     this.contentNode = null;
+    this.previousNode = null;
+    this.isLoading = false;
     this.closeButtonHandler = this.closeButtonHandler.bind(this);
     this.editTask = this.editTask.bind(this);
     this.handleDragStart = this.handleDragStart.bind(this);
@@ -22,7 +35,12 @@ export class Card {
     this.handleTaskEditClick = this.handleTaskEditClick.bind(this);
   }
 
-  closeButtonHandler() {
+  async closeButtonHandler() {
+    const statusCode = await axios.delete(
+      "http://52.207.159.215:8080/columns/1/cards/1",
+      {}
+    );
+    console.log(statusCode);
     this.cardNode && this.cardNode.remove();
   }
 
@@ -51,8 +69,17 @@ export class Card {
   }
 
   render() {
-    this.contentNode = div({ class: "card-title" })([this.contents]);
-    const rightHeader = InlineList({ class: InlineListClass.DEFAULT })([
+    const title = InlineList({
+      class: InlineListClass.DEFAULT,
+      userClassList: ["card-title"],
+      width: "80%",
+    })([div()([this.title]), Spinner(SpinnerSize.SMALL)]);
+
+    this.contentNode = title;
+    const rightHeader = InlineList({
+      class: InlineListClass.DEFAULT,
+      width: "80%",
+    })([
       i({ class: "tasks icon", onClick: this.handleTaskEditClick })(),
       this.contentNode,
     ]);
