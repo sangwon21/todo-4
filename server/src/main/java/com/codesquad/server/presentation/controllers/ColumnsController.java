@@ -1,17 +1,14 @@
 package com.codesquad.server.presentation.controllers;
 
-import com.codesquad.server.domain.entity.Columns;
 import com.codesquad.server.domain.repository.ColumnsRepository;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/columns")
@@ -33,10 +30,7 @@ public class ColumnsController {
      */
     @PostMapping("")
     public JSONObject create(@RequestBody Map<String, String> bodyMap) {
-//        user.addColumn(bodyMap.get("columnName"));
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("StatusCode", HttpStatus.CREATED.value());
-        return jsonObject;
+        return null;
     }
 
     /**
@@ -55,13 +49,7 @@ public class ColumnsController {
      */
     @PutMapping("/{columnId}")
     public JSONObject update(@PathVariable Long columnId, @RequestBody HashMap<String, String> bodyMap) {
-        Columns columns = columnsRepository.findById(columnId).orElseThrow(NoSuchElementException::new);
-        columns.setTitle(bodyMap.get("afterName"));
-        columnsRepository.save(columns);
-
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("StatusCode", HttpStatus.NO_CONTENT.value());
-        return jsonObject;
+        return null;
     }
 
     /**
@@ -71,11 +59,6 @@ public class ColumnsController {
      */
     @DeleteMapping("/{columnId}")
     public JSONObject delete(@PathVariable Long columnId) {
-        Columns columns = columnsRepository.findById(columnId).orElseThrow(NoSuchElementException::new);
-        columnsRepository.delete(columns);
-
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("StatusCode", HttpStatus.NO_CONTENT.value());
-        return jsonObject;
+        return null;
     }
 }

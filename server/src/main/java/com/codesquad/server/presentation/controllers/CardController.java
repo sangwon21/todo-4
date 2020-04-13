@@ -8,7 +8,6 @@ import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -37,12 +36,7 @@ public class CardController {
      */
     @PostMapping("")
     public JSONObject create(@PathVariable Long columnId, @RequestBody Map<String, String> bodyMap) {
-        Columns columns = columnsRepository.findById(columnId).orElseThrow(NoSuchElementException::new);
-        columnsRepository.save(columns);
-
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("StatusCode", HttpStatus.CREATED.value());
-        return jsonObject;
+        return null;
     }
 
     /**
@@ -66,13 +60,7 @@ public class CardController {
      */
     @PutMapping("/{cardId}")
     public JSONObject update(@PathVariable Long cardId, @RequestBody HashMap<String, String> bodyMap) {
-        Card card = cardRepository.findById(cardId).orElseThrow(NoSuchElementException::new);
-        card.setNote(bodyMap.get("afterNote"));
-        cardRepository.save(card);
-
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("StatusCode", HttpStatus.NO_CONTENT.value());
-        return jsonObject;
+        return null;
     }
 
     /**
@@ -82,11 +70,12 @@ public class CardController {
      */
     @DeleteMapping("/{cardId}")
     public JSONObject delete(@PathVariable Long cardId) {
-        Card card = cardRepository.findById(cardId).orElseThrow(NoSuchElementException::new);
-        cardRepository.delete(card);
-
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("StatusCode", HttpStatus.NO_CONTENT.value());
-        return jsonObject;
+        return null;
+//        Card card = cardRepository.findById(cardId).orElseThrow(NoSuchElementException::new);
+//        cardRepository.delete(card);
+//
+//        JSONObject jsonObject = new JSONObject();
+//        jsonObject.put("StatusCode", HttpStatus.NO_CONTENT.value());
+//        return jsonObject;
     }
 }
