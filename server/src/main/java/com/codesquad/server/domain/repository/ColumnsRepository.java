@@ -7,11 +7,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+
 @Repository
 public interface ColumnsRepository extends CrudRepository<Columns, Long> {
     @Query("SELECT * FROM column WHERE name = :name")
     Optional<Columns> findColumnByName(String name);
 
-    @Query("SELECT count(*) FROM card WHERE column = :columnName")
+    @Query("SELECT count(*) FROM card WHERE columns = :columnName")
     int countColumnforUser(String columnName);
 }

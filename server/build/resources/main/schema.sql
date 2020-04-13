@@ -11,9 +11,10 @@ CREATE TABLE user (
 
 CREATE TABLE columns (
     id bigint PRIMARY KEY AUTO_INCREMENT,
-    name varchar(64),
+    title varchar(64),
     user int references user(id),
-    user_key int
+    user_key int,
+    previous_id bigint
 );
 
 CREATE TABLE card (
@@ -21,6 +22,9 @@ CREATE TABLE card (
     note varchar(500),
     columns int references columns(id),
     columns_key int,
-    user int references user(id),
-    user_key int
+    previous_id bigint
 );
+
+ALTER TABLE user convert to charset utf8;
+ALTER TABLE columns convert to charset utf8;
+ALTER TABLE card convert to charset utf8;
