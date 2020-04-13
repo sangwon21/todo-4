@@ -4,26 +4,40 @@ import "./InlineList.scss";
 
 export enum InlineListClass {
   SPACE_BETWEEN = "space-between",
+  SPACE_AROUND = "space-around",
   ALIGN_CENTER = "align-center",
   ALIGN_RIGHT = "align-right",
   COLUMN_BASE = "column-base",
   DEFAULT = "default-inline",
+  ALIGN_LEFT_COLUMN = "align-left-column-base ",
   ALIGN_CENTER_COLUMN = "align-center-column-base",
   ALIGN_RIGHT_COLUMN = "align-right-column-base",
   SPACE_BETWEEN_COLUMN = "space-between-column-base",
+  CENTER = "center",
+}
+
+export interface IInlineListAttribute {
+  [key: string]: string | Function;
 }
 
 export interface IInlineStyle {
-  [key: string]: string | string[] | InlineListClass | undefined;
+  [key: string]:
+    | string
+    | string[]
+    | InlineListClass
+    | IInlineListAttribute
+    | undefined;
   class: InlineListClass;
   height?: string;
   width?: string;
   userClassList?: string[];
+  attributes?: IInlineListAttribute;
 }
 
 interface IInlineParam {
   class: string;
   style: string;
+  attributes?: IInlineListAttribute;
 }
 
 const defaultInlineStyle: IInlineParam = {
@@ -37,7 +51,10 @@ const flattenStyles = (styles: IInlineStyle | void): IInlineParam => {
   }
   return {
     style: Object.keys(styles)
-      .filter((key) => key !== "class" && key != "userClassList")
+      .filter(
+        (key) =>
+          key !== "class" && key != "userClassList" && key != "attributes"
+      )
       .reduce((acc, cur) => (acc += `${cur}: ${styles[cur]};`), ""),
     class: Object.keys(styles)
       .filter((key) => key === "userClassList" || key === "class")
@@ -53,16 +70,32 @@ const flattenStyles = (styles: IInlineStyle | void): IInlineParam => {
         }
         return (acc += `${styles[cur]}`);
       }, ""),
+    attributes: styles.attributes,
   };
 };
 
-const makeInlineList = (style: IInlineParam) => (
+const refineParam = (param: IInlineParam) => {
+  let returnObject = { ...param };
+
+  if (returnObject.style === "") {
+    delete returnObject.style;
+  }
+  const { attributes } = returnObject;
+  delete returnObject.attributes;
+
+  if (!attributes) {
+    return returnObject;
+  }
+  return { ...returnObject, ...attributes };
+};
+
+const makeInlineList = (param: object) => (
   component: Element | Text | (Element | Text)[]
 ) => {
   if (Array.isArray(component)) {
-    return div({ ...style })(component);
+    return div({ ...param })(component);
   }
-  return div({ ...style })([component]);
+  return div({ ...param })([component]);
 };
 
-export const InlineList = _.compose(makeInlineList, flattenStyles);
+export const InlineList = _.compose(makeInlineList, refineParam, flattenStyles);

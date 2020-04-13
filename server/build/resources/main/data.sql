@@ -15,3 +15,4 @@ insert into card(note, columns, columns_key, previous_id) values ('히히헤헤'
 insert into card(note, columns, columns_key, previous_id) values ('떡순이', 1, 0,  NULL);
 insert into card(note, columns, columns_key, previous_id) values ('떡돌이', 1, 1,  0);
 insert into card(note, columns, columns_key, previous_id) values ('떡튀순', 1, 2,  1);
+
