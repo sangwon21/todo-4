@@ -3,6 +3,7 @@ package com.codesquad.server.domain.entity;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class Columns {
     @Id
     private Long id;
     private String title;
-    private Long previousId;
+    private LocalDateTime createdTime;
 
     private List<Card> cards = new ArrayList<>();
 
