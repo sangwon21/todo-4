@@ -36,7 +36,8 @@ class BoardViewController: UIViewController {
             guard let vc = UILoader.load(viewControllerType: CardListViewController.self,
                                          from: storyboard) else { return }
             vc.listID = number
-            vc.dataSource = CardListDataSource()
+            vc.tableViewDataSource = CardListDataSource()
+            vc.tableViewDelegate = CardListDelegate()
             vc.delegate = self
             self.boardStackView.addArrangedSubview(vc.view)
             viewControllers[number] = vc

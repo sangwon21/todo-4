@@ -24,7 +24,8 @@ class CardListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var viewModel: CardListViewModel?
-    var dataSource: CardListDataSource?
+    var tableViewDataSource: CardListDataSource?
+    var tableViewDelegate: CardListDelegate?
     var listID: Int?
     
     weak var delegate: CardListViewControllerDelegate?
@@ -33,6 +34,8 @@ class CardListViewController: UIViewController {
         super.viewDidLoad()
         
         setupDataSource()
+        
+        setupDelegate()
     }
     
     private func updateList(with listChange: ListChangeDetails?) {
@@ -47,13 +50,17 @@ class CardListViewController: UIViewController {
     }
     
     private func setupDataSource() {
-        dataSource?.rowCount = { [weak self] in
+        tableViewDataSource?.rowCount = { [weak self] in
             return self?.viewModel?.cardCount ?? 0
         }
-        dataSource?.cardAtRow = { [weak self] in
+        tableViewDataSource?.cardAtRow = { [weak self] in
             return self?.viewModel?.card(at: $0) ?? Card()
         }
-        tableView.dataSource = dataSource
+        tableView.dataSource = tableViewDataSource
+    }
+    
+    private func setupDelegate() {
+        tableView.delegate = tableViewDelegate
     }
     
     @IBAction func addNewCard(_ sender: Any) {

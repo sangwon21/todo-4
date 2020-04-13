@@ -33,6 +33,7 @@
 		C288495E243EF88700D4B603 /* UILoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288495D243EF88700D4B603 /* UILoader.swift */; };
 		C2B8CF202445F4B50076F34D /* BoardResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C2B8CF1E2445F4B40076F34D /* BoardResponse.json */; };
 		C2B8CF212445F4B50076F34D /* NewCardResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C2B8CF1F2445F4B50076F34D /* NewCardResponse.json */; };
+		C2B8CF252446D5F80076F34D /* CardListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B8CF242446D5F70076F34D /* CardListDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		C288495D243EF88700D4B603 /* UILoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILoader.swift; sourceTree = "<group>"; };
 		C2B8CF1E2445F4B40076F34D /* BoardResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BoardResponse.json; sourceTree = "<group>"; };
 		C2B8CF1F2445F4B50076F34D /* NewCardResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NewCardResponse.json; sourceTree = "<group>"; };
+		C2B8CF242446D5F70076F34D /* CardListDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,14 @@
 				C26472E5243DFF6D006D87EB /* CardCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		C2395AC6244426F9009CA61F /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				C2B8CF242446D5F70076F34D /* CardListDelegate.swift */,
+			);
+			path = Delegates;
 			sourceTree = "<group>";
 		};
 		C26472CD243C7653006D87EB /* Utils */ = {
@@ -195,6 +205,7 @@
 				C21C6785243C3B6A00FA661F /* Views */,
 				C2884954243E379000D4B603 /* ViewModels */,
 				C26472E7243E0512006D87EB /* DataSources */,
+				C2395AC6244426F9009CA61F /* Delegates */,
 				C26472E4243DFE0A006D87EB /* Controllers */,
 				C26472DC243C91EA006D87EB /* Models */,
 				C26472D4243C8079006D87EB /* Networking */,
@@ -335,6 +346,7 @@
 				C21C6789243C401B00FA661F /* CardCountView.swift in Sources */,
 				C27B287F243B5A33005785AB /* BoardViewController.swift in Sources */,
 				C27B287B243B5A33005785AB /* AppDelegate.swift in Sources */,
+				C2B8CF252446D5F80076F34D /* CardListDelegate.swift in Sources */,
 				C2884958243E41E100D4B603 /* Observers.swift in Sources */,
 				C26472D6243C808C006D87EB /* NetworkManager.swift in Sources */,
 				C26472E9243E05DF006D87EB /* CardListDataSource.swift in Sources */,
