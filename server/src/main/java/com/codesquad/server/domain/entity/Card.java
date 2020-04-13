@@ -16,9 +16,4 @@ public class Card {
     private Long id;
     private String note;
     private LocalDateTime createdTime;
-
-    public Card(String note, LocalDateTime createdTime) {
-        this.note = note;
-        this.createdTime = createdTime;
-    }
 }
