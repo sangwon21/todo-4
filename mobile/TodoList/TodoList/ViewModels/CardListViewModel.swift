@@ -16,12 +16,14 @@ protocol ViewModelBinding {
 struct ListChangeDetails {
     let list: List
     let insertedRow: Int?
+    let deletedRow: Int?
 }
 
 extension ListChangeDetails {
-    init(with list: List) {
+    init(with list: List, insertedRow: Int? = nil, deletedRow: Int? = nil) {
         self.list = list
-        self.insertedRow = nil
+        self.insertedRow = insertedRow
+        self.deletedRow = deletedRow
     }
 }
 
@@ -55,7 +57,13 @@ class CardListViewModel: ViewModelBinding {
     func insert(card: Card) {
         guard var list = listChangeDetails?.list else { return }
         list.insert(card: card)
-        listChangeDetails = ListChangeDetails(list: list, insertedRow: 0)
+        listChangeDetails = ListChangeDetails(with: list, insertedRow: 0)
+    }
+    
+    func remove(at row: Int) {
+        guard var list = listChangeDetails?.list else { return }
+        list.remove(at: row)
+        listChangeDetails = ListChangeDetails(with: list, deletedRow: row)
     }
     
     func card(at row: Int) -> Card? {

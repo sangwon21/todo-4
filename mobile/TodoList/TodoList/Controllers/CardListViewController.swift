@@ -39,7 +39,10 @@ class CardListViewController: UIViewController {
     }
     
     private func updateList(with listChange: ListChangeDetails?) {
-        if let insertedRow = listChange?.insertedRow {
+        if let deletedRow = listChange?.deletedRow {
+            let indexPath = IndexPath(row: deletedRow, section: 0)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        } else if let insertedRow = listChange?.insertedRow {
             let indexPath = IndexPath(row: insertedRow, section: 0)
             tableView.insertRows(at: [indexPath], with: .automatic)
         } else {
@@ -60,6 +63,9 @@ class CardListViewController: UIViewController {
     }
     
     private func setupDelegate() {
+        tableViewDelegate?.deleteAction = { [weak self] in
+            return self?.viewModel?.remove(at: $0)
+        }
         tableView.delegate = tableViewDelegate
     }
     

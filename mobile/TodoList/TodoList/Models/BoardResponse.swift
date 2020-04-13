@@ -48,6 +48,10 @@ extension List {
         cards.insert(card, at: 0)
     }
     
+    mutating func remove(at row: Int) {
+        cards.remove(at: row)
+    }
+    
     subscript(index: Int) -> Card {
         get { return cards[index] }
     }
