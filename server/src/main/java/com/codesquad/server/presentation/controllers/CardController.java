@@ -30,18 +30,14 @@ public class CardController {
     /**
      * Card을 생성한다.
      *
-     * @RequestBody
-     *{
-     * 	"note": "순두부찌개는 맛있어",
+     * @return Status Code를 반환(CREATED, 201)
+     * @RequestBody {
+     * "note": "순두부찌개는 맛있어",
      * }
-     *
-     * @return
-     * Status Code를 반환(CREATED, 201)
      */
     @PostMapping("")
     public JSONObject create(@PathVariable Long columnId, @RequestBody Map<String, String> bodyMap) {
         Columns columns = columnsRepository.findById(columnId).orElseThrow(NoSuchElementException::new);
-        columns.addCard(bodyMap.get("note"));
         columnsRepository.save(columns);
 
         JSONObject jsonObject = new JSONObject();
@@ -52,8 +48,7 @@ public class CardController {
     /**
      * 해당하는 Column의 전체 Card 목록 반환
      *
-     * @return
-     * Column 객체가 json 형태로 반환
+     * @return Column 객체가 json 형태로 반환
      */
     @GetMapping("")
     public List<Card> list(@PathVariable Long columnId) {
@@ -64,13 +59,10 @@ public class CardController {
     /**
      * Card 이름 수정
      *
-     * @RequestBody
-     *{
-     * 	"afterNote": "노맛존맛"
+     * @return Status Code를 반환(NO_CONTENT, 204)
+     * @RequestBody {
+     * "afterNote": "노맛존맛"
      * }
-     *
-     * @return
-     * Status Code를 반환(NO_CONTENT, 204)
      */
     @PutMapping("/{cardId}")
     public JSONObject update(@PathVariable Long cardId, @RequestBody HashMap<String, String> bodyMap) {
@@ -86,8 +78,7 @@ public class CardController {
     /**
      * Card 삭제
      *
-     * @return
-     * Status Code를 반환(NO_CONTENT, 204)
+     * @return Status Code를 반환(NO_CONTENT, 204)
      */
     @DeleteMapping("/{cardId}")
     public JSONObject delete(@PathVariable Long cardId) {

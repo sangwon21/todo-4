@@ -1,7 +1,5 @@
 package com.codesquad.server.common.interceptor;
 
-import com.codesquad.server.domain.entity.User;
-import com.codesquad.server.domain.repository.UserRepository;
 import com.codesquad.server.domain.service.JwtUtil;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -18,9 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 public class JwtAuthInterceptor implements HandlerInterceptor {
 
     @NonNull
-    private final UserRepository userRepository;
-
-    @NonNull
     private JwtUtil jwtUtil;
 
     private Logger logger = LoggerFactory.getLogger(JwtAuthInterceptor.class);
@@ -29,10 +24,10 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        User user = userRepository.findUserByUserId(request.getHeader("userId"))
-                .orElseThrow(() -> new IllegalArgumentException("없는 유저입니다."));
+//        User user = userRepository.findUserByUserId(request.getHeader("userId"))
+//                .orElseThrow(() -> new IllegalArgumentException("없는 유저입니다."));
         String token = request.getHeader(headerTokenKey);
-        verifyToken(token, user.getToken());
+//        verifyToken(token, user.getToken());
         return true;
     }
 
