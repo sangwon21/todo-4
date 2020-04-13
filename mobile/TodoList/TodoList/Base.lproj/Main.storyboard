@@ -280,9 +280,9 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="O6i-n1-7aj" firstAttribute="leading" secondItem="AgY-Xn-mOj" secondAttribute="leading" constant="16" id="4md-o2-Qlq"/>
-                                                <constraint firstItem="O6i-n1-7aj" firstAttribute="top" secondItem="AgY-Xn-mOj" secondAttribute="top" constant="8" id="Cgq-aH-qPP"/>
+                                                <constraint firstItem="O6i-n1-7aj" firstAttribute="top" secondItem="AgY-Xn-mOj" secondAttribute="top" priority="999" constant="8" id="Cgq-aH-qPP"/>
                                                 <constraint firstAttribute="trailing" secondItem="O6i-n1-7aj" secondAttribute="trailing" constant="16" id="ZUi-1q-Gsk"/>
-                                                <constraint firstAttribute="bottom" secondItem="O6i-n1-7aj" secondAttribute="bottom" constant="8" id="fqn-DP-h9Z"/>
+                                                <constraint firstAttribute="bottom" secondItem="O6i-n1-7aj" secondAttribute="bottom" priority="999" constant="8" id="fqn-DP-h9Z"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
