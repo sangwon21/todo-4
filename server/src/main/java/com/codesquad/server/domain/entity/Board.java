@@ -27,5 +27,4 @@ public class Board {
     public void addColumn(String title, LocalDateTime createdTime) {
         columns.add(new Columns(title, createdTime));
     }
-
 }
