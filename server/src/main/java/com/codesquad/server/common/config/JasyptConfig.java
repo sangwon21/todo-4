@@ -16,7 +16,7 @@ public class JasyptConfig {
 
         PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
         SimpleStringPBEConfig config = new SimpleStringPBEConfig();
-        config.setPassword("spring"); //암호화에 사용할 키 -> 중요
+        config.setPassword("test"); //암호화에 사용할 키 -> 중요
         config.setAlgorithm("PBEWithMD5AndDES"); //사용할 알고리즘
         config.setKeyObtentionIterations("1000");
         config.setPoolSize("1");
