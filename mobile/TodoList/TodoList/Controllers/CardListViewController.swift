@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CardListViewControllerDelegate: class {
-    func addNewCardDidTouch(listID: Int?)
+    func addNewCardDidTouch(viewController: CardListViewController)
 }
 
 class CardListViewController: UIViewController {
@@ -76,7 +76,7 @@ class CardListViewController: UIViewController {
     }
     
     @IBAction func addNewCard(_ sender: Any) {
-        delegate?.addNewCardDidTouch(listID: listID)
+        delegate?.addNewCardDidTouch(viewController: self)
     }
 }
 

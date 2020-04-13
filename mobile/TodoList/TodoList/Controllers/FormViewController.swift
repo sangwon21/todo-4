@@ -9,7 +9,7 @@
 import UIKit
 
 protocol FormViewControllerDelegate: class {
-    func newCardDidSubmit(listID: Int?, card: Card)
+    func newCardDidSubmit(viewController: FormViewController, card: Card)
 }
 
 class FormViewController: UIViewController {
@@ -60,7 +60,7 @@ class FormViewController: UIViewController {
                         title: titleLabel.text ?? "",
                         detail: detailTextView.text,
                         author: authorLabel.text ?? "")
-        delegate?.newCardDidSubmit(listID: listID, card: card)
+        delegate?.newCardDidSubmit(viewController: self, card: card)
         dismiss(animated: true)
     }
 }
