@@ -1,9 +1,6 @@
-package com.codesquad.server.domain;
+package com.codesquad.server.domain.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
@@ -11,9 +8,10 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Column {
+@ToString
+public class Columns {
 
     @Id
     private Long id;
@@ -21,7 +19,7 @@ public class Column {
 
     private List<Card> cards = new ArrayList<>();
 
-    public Column (String name) {
+    public Columns(String name) {
         this.name = name;
     }
 
