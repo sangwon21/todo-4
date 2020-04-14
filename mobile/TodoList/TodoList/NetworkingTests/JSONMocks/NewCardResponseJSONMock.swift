@@ -10,7 +10,6 @@ import Foundation
 
 let newCardResponseJSONMock = """
 {
-   "statusCode": "200",
     "cardID" : "777"
 }
 """.data(using: .utf8)!

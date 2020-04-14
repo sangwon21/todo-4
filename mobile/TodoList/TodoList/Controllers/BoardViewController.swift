@@ -64,7 +64,6 @@ extension BoardViewController {
             switch result {
             case .failure: return
             case let .success(response):
-                guard let response = response as? CardIDResponse else { return }
                 card.id = response.cardID
                 self?.listViewControllers[id]?.insert(card: card)
             }

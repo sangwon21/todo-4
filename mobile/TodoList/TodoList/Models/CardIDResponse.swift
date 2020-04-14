@@ -8,7 +8,6 @@
 
 import Foundation
 
-struct CardIDResponse: Decodable, Response {
-    let statusCode: StatusCode
+struct CardIDResponse: Decodable {
     let cardID: String
 }
