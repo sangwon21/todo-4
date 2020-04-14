@@ -18,28 +18,22 @@ public class JwtUtilImpl implements JwtUtil {
     @Value("${jwt.userId}")
     private String userId;
 
-    @Value("${jwt.password}")
-    private String password;
-
     private String issuer = "code-squad.com";
 
     public String createToken() {
         log.info("userId : {}", userId);
-        log.info("password : {}", password);
         log.info("signKey : {}", signKey);
 
          return JWT.create()
                 .withIssuer(issuer)
-                .withSubject(userId)
-                .withClaim("password", password)
+                 .withClaim("userId", userId)
                 .sign(Algorithm.HMAC256(signKey));
     }
 
     public void verifyToken(String token) {
         JWTVerifier verifier = JWT.require(Algorithm.HMAC256(signKey))
                 .withIssuer(issuer)
-                .withSubject(userId)
-                .withClaim("password", password)
+                .withClaim("userId", userId)
                 .build();
 
         verifier.verify(token);

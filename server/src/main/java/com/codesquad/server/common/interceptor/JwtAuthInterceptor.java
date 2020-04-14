@@ -3,6 +3,7 @@ package com.codesquad.server.common.interceptor;
 import com.codesquad.server.domain.service.JwtUtil;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -13,12 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class JwtAuthInterceptor implements HandlerInterceptor {
 
     @NonNull
     private JwtUtil jwtUtil;
-
-    private Logger logger = LoggerFactory.getLogger(JwtAuthInterceptor.class);
 
     private String token = "123";
 

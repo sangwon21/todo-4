@@ -1,64 +1,35 @@
 package com.codesquad.server.presentation.controllers;
 
+import com.codesquad.server.domain.entity.Columns;
 import com.codesquad.server.domain.repository.ColumnsRepository;
-import org.json.simple.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
-
+@Slf4j
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/columns")
 public class ColumnsController {
 
-    private final Logger logger = LoggerFactory.getLogger(ColumnsController.class);
+    private final ColumnsRepository columnsRepository;
 
-    @Autowired
-    ColumnsRepository columnsRepository;
-
-    /**
-     * Column을 생성한다.
-     *
-     * @return Status Code를 반환(CREATED, 201)
-     * @RequestBody {
-     * "columnName": "practice",
-     * "userIdx": "1",
-     * }
-     */
     @PostMapping("")
-    public JSONObject create(@RequestBody Map<String, String> bodyMap) {
-        return null;
+    public HttpStatus create(@RequestBody Columns columns) {
+        columnsRepository.save(columns);
+        return HttpStatus.CREATED;
     }
 
-    /**
-     * 전체 Column 목록 반환
-     *
-     * @return User 객체가 json 형태로 반환
-     */
-
-    /**
-     * Column 이름 수정
-     *
-     * @return Status Code를 반환(NO_CONTENT, 204)
-     * @RequestBody {
-     * "afterName": "done"
-     * }
-     */
-    @PutMapping("/{columnId}")
-    public JSONObject update(@PathVariable Long columnId, @RequestBody HashMap<String, String> bodyMap) {
-        return null;
+    @PutMapping("")
+    public HttpStatus update(@RequestBody Columns columns) {
+        columnsRepository.update(columns);
+        return HttpStatus.NO_CONTENT;
     }
 
-    /**
-     * Column 삭제
-     *
-     * @return Status Code를 반환(NO_CONTENT, 204)
-     */
-    @DeleteMapping("/{columnId}")
-    public JSONObject delete(@PathVariable Long columnId) {
-        return null;
+    @DeleteMapping("")
+    public HttpStatus delete(@RequestBody Columns columns) {
+        columnsRepository.delete(columns);
+        return HttpStatus.NO_CONTENT;
     }
 }
