@@ -4,44 +4,50 @@ import {
   InlineListClass,
 } from "../../../styled-component/InlineList";
 import { EditModal } from "./EditModal";
+import { FailModal } from "./FailModal";
 import { Spinner, SpinnerSize } from "../../Spinner";
 import axios from "axios";
 
 import "./card.scss";
 
-export interface ICard {
+export interface ICardState {
   contents: string;
-  title: string;
+  isLoading: boolean;
 }
 
 export class Card {
-  private cardNode: Element | Text | null;
-  private contentNode: Element | Text | null;
-  private previousNode: Element | null;
-  private isLoading: boolean;
-  private contents: string;
-  private title: string;
-  constructor(cardParam: ICard) {
-    this.contents = cardParam.contents;
-    this.title = cardParam.title;
-    this.cardNode = null;
-    this.contentNode = null;
-    this.previousNode = null;
-    this.isLoading = false;
+  private cardNode: Element | Text | null = null;
+  private contentNode: Element | Text | null = null;
+  private previousNode: Element | null = null;
+  private spinnerNode: Element | Text | null = null;
+  private state: ICardState = { contents: "", isLoading: false };
+
+  constructor(cardParam: ICardState) {
+    this.state.contents = cardParam.contents;
+    this.spinnerNode = Spinner(SpinnerSize.SMALL);
     this.closeButtonHandler = this.closeButtonHandler.bind(this);
     this.editTask = this.editTask.bind(this);
     this.handleDragStart = this.handleDragStart.bind(this);
     this.handleDragEnd = this.handleDragEnd.bind(this);
+    this.handleLoading = this.handleLoading.bind(this);
     this.handleTaskEditClick = this.handleTaskEditClick.bind(this);
   }
 
   async closeButtonHandler() {
-    const statusCode = await axios.delete(
-      "http://52.207.159.215:8080/columns/1/cards/1",
-      {}
-    );
-    console.log(statusCode);
-    this.cardNode && this.cardNode.remove();
+    this.state.isLoading = true;
+    this.handleLoading();
+    try {
+      const statusCode = await axios.delete(
+        "http://52.207.159.215:8080/columns/1/cards/1",
+        {}
+      );
+      this.cardNode && this.cardNode.remove();
+    } catch (error) {
+      this.cardNode!.appendChild(new FailModal().render());
+    } finally {
+      this.state.isLoading = false;
+      this.handleLoading();
+    }
   }
 
   handleDragStart(e: DragEvent) {
@@ -57,7 +63,7 @@ export class Card {
   handleTaskEditClick() {
     this.cardNode!.appendChild(
       new EditModal({
-        noteContent: this.contents,
+        noteContent: this.state.contents,
         editContent: this.editTask,
       }).render()
     );
@@ -65,17 +71,24 @@ export class Card {
 
   editTask(task: string) {
     (this.contentNode! as Element).innerHTML = task;
-    this.contents = task;
+    this.state.contents = task;
+  }
+
+  handleLoading() {
+    if (this.state.isLoading) {
+      this.contentNode!.appendChild(this.spinnerNode! as Element);
+      return;
+    }
+    this.spinnerNode!.remove();
   }
 
   render() {
-    const title = InlineList({
+    this.contentNode = InlineList({
       class: InlineListClass.DEFAULT,
-      userClassList: ["card-title"],
+      userClassList: ["card-contents"],
       width: "80%",
-    })([div()([this.title]), Spinner(SpinnerSize.SMALL)]);
+    })([div()([this.state.contents])]);
 
-    this.contentNode = title;
     const rightHeader = InlineList({
       class: InlineListClass.DEFAULT,
       width: "80%",
