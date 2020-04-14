@@ -9,8 +9,8 @@
 import Foundation
 
 class URLProtocolMock: URLProtocol {
-    static var testURLs = [APIRouter.board.urlRequest?.url: boardResponseJSONMock,
-                           APIRouter.newCard(card: Card()).urlRequest?.url: newCardResponseJSONMock]
+    static var testURLs = [APIBuilder.board.urlRequest()!.url!: boardResponseJSONMock,
+                           APIBuilder.newCard(card: Card()).urlRequest()!.url!: newCardResponseJSONMock]
     
     override class func canInit(with request: URLRequest) -> Bool {
         return true

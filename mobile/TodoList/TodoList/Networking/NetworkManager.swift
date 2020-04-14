@@ -9,11 +9,11 @@
 import Foundation
 
 enum HTTPError: Error {
-   case badRequest
+   case notFound
    
    var localizedDescription: String {
        switch self {
-       case .badRequest: return "Bad Request"
+       case .notFound: return "Not Found"
        }
    }
 }
@@ -26,7 +26,7 @@ class NetworkManager {
     }
     
     func requestBoard(completion: @escaping (Result<Board, Error>) -> Void) {
-        guard let request = APIRouter.board.urlRequest else { return }
+        guard let request = APIBuilder.board.urlRequest() else { return }
         
         session.dataTask(with: request) { data, _, error in
             if let error = error {
@@ -44,7 +44,7 @@ class NetworkManager {
     }
     
     func requestNewCard(card: Card, completion: @escaping (Result<CardIDResponse, Error>) -> Void) {
-        guard let request = APIRouter.newCard(card: card).urlRequest else { return }
+        guard let request = APIBuilder.newCard(card: card).urlRequest() else { return }
         
         session.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -52,7 +52,7 @@ class NetworkManager {
                 return
             }
             guard let data = data, let httpResponse = response as? HTTPURLResponse else { return }
-            if !httpResponse.isValid() { completion(.failure(HTTPError.badRequest)) }
+            if !httpResponse.isValid() { completion(.failure(HTTPError.notFound)) }
             do {
                 let response = try JSONDecoder().decode(CardIDResponse.self, from: data)
                 completion(.success(response))
