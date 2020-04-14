@@ -83,7 +83,7 @@ export class Card {
   }
 
   handleTaskEditClick() {
-    this.cardNode!.appendChild(
+    this.state.tableNode!.appendChild(
       new EditModal({
         noteContent: this.state.contents,
         editContent: this.editTask,

@@ -21,8 +21,10 @@ export class EditModal {
   };
   private textareaNode: Element | Text | null = null;
   private editModalNode: Element | Text | null = null;
+  private saveNoteButton: Element | Text | null = null;
   constructor(param: IEditModalState) {
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInput = this.handleInput.bind(this);
     this.close = this.close.bind(this);
     this.state.noteContent = param.noteContent;
     this.state.editContent = param.editContent;
@@ -34,8 +36,26 @@ export class EditModal {
 
   handleSubmit() {
     const { value } = this.textareaNode! as HTMLTextAreaElement;
+    if (value === "") {
+      return;
+    }
     this.state.editContent(value);
     this.close();
+  }
+
+  handleInput(e: InputEvent) {
+    const { value } = e.target as HTMLTextAreaElement;
+    if (value === "") {
+      (this.saveNoteButton as Element).setAttribute(
+        "style",
+        `background-color: ${COLOR.INVALID_PRIMARY}; color: ${COLOR.WHITE}; width: 10rem; height: 2rem`
+      );
+      return;
+    }
+    (this.saveNoteButton as Element).setAttribute(
+      "style",
+      `background-color: ${COLOR.PRIMARY}; color: ${COLOR.WHITE}; width: 10rem; height: 2rem`
+    );
   }
 
   render() {
@@ -56,27 +76,31 @@ export class EditModal {
       class: "edit-modal-textarea",
       maxlength: "15",
       placeholder: `${this.state.noteContent}`,
+      onInput: this.handleInput,
     })([]);
 
     const mediumSettings: ButtonType = {
       size: ButtonSize.medium,
-      color: COLOR.PRIMARY,
+      color: COLOR.INVALID_PRIMARY,
       content: "Save Note",
       contentColor: COLOR.WHITE,
       callback: this.handleSubmit,
     };
 
-    const saveNoteButton = CustomButton(mediumSettings);
+    this.saveNoteButton = CustomButton(mediumSettings);
 
     const editModalNote = InlineList({
       className: InlineListClass.SPACE_BETWEEN_COLUMN,
       width: "100%",
       userClassList: ["edit-modal-note"],
-    })([editModalNoteHeader, this.textareaNode, saveNoteButton]);
+    })([editModalNoteHeader, this.textareaNode, this.saveNoteButton]);
 
     const ModalContent = InlineList({
       className: InlineListClass.ALIGN_LEFT_COLUMN,
       userClassList: ["edit-modal-content"],
+      attributes: {
+        draggable: "false",
+      },
     })([editModalHeader, editModalNote]);
     this.editModalNode = Modal(ModalContent);
     return this.editModalNode;

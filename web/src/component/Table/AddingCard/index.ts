@@ -51,6 +51,7 @@ export class AddingCard {
     this.textareaNode = div({ style: "width: 100%; height: 50%;" })([
       textarea({
         class: "textarea card-textarea",
+        placeholder: "Enter a Note",
         onInput: this.handleTextareaInput,
       })(),
     ]);
