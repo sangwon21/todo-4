@@ -9,23 +9,23 @@ import {
 
 import "./EditModal.scss";
 
-export interface EditModalConstructor {
+export interface IEditModalState {
   noteContent: string;
   editContent: Function;
 }
 
 export class EditModal {
-  private noteContent: string;
-  private editContent: Function;
-  private textareaNode: Element | Text | null;
-  private editModalNode: Element | Text | null;
-  constructor(param: EditModalConstructor) {
+  private state: IEditModalState = {
+    noteContent: "",
+    editContent: () => {},
+  };
+  private textareaNode: Element | Text | null = null;
+  private editModalNode: Element | Text | null = null;
+  constructor(param: IEditModalState) {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.close = this.close.bind(this);
-    this.noteContent = param.noteContent;
-    this.editContent = param.editContent;
-    this.textareaNode = null;
-    this.editModalNode = null;
+    this.state.noteContent = param.noteContent;
+    this.state.editContent = param.editContent;
   }
 
   close() {
@@ -34,7 +34,7 @@ export class EditModal {
 
   handleSubmit() {
     const { value } = this.textareaNode! as HTMLTextAreaElement;
-    this.editContent(value);
+    this.state.editContent(value);
     this.close();
   }
 
@@ -54,14 +54,14 @@ export class EditModal {
 
     this.textareaNode = textarea({
       class: "edit-modal-textarea",
-      maxlength: "500",
-      placeholder: `${this.noteContent}`,
+      maxlength: "15",
+      placeholder: `${this.state.noteContent}`,
     })([]);
 
     const mediumSettings: ButtonType = {
       size: ButtonSize.medium,
       color: COLOR.PRIMARY,
-      content: "제출",
+      content: "Save Note",
       contentColor: COLOR.WHITE,
       callback: this.handleSubmit,
     };
