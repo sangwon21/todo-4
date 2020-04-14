@@ -12,6 +12,11 @@ protocol CardListViewControllerDelegate: class {
     func addNewCardDidTouch(viewController: CardListViewController)
 }
 
+protocol CardListUpdater {
+    func update(list: List)
+    func insert(card: Card)
+}
+
 class CardListViewController: UIViewController {
 
     @IBOutlet weak var cardCountLabel: UILabel!
@@ -28,16 +33,6 @@ class CardListViewController: UIViewController {
         super.viewDidLoad()
         
         setupDataSource()
-    }
-    
-    func update(list: List) {
-        viewModel = CardListViewModel(with: ListChangeDetails(with: list)) { [weak self] listChange in
-            DispatchQueue.main.async { self?.updateList(with: listChange) }
-        }
-    }
-    
-    func insert(card: Card) {
-        viewModel?.insert(card: card)
     }
     
     private func updateList(with listChange: ListChangeDetails?) {
@@ -63,5 +58,17 @@ class CardListViewController: UIViewController {
     
     @IBAction func addNewCard(_ sender: Any) {
         delegate?.addNewCardDidTouch(viewController: self)
+    }
+}
+
+extension CardListViewController: CardListUpdater {
+    func update(list: List) {
+        viewModel = CardListViewModel(with: ListChangeDetails(with: list)) { [weak self] listChange in
+            DispatchQueue.main.async { self?.updateList(with: listChange) }
+        }
+    }
+    
+    func insert(card: Card) {
+        viewModel?.insert(card: card)
     }
 }

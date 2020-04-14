@@ -12,7 +12,7 @@ class BoardViewController: UIViewController {
 
     @IBOutlet weak var boardStackView: UIStackView!
     
-    private var listViewControllers = [Int: CardListViewController]()
+    private var listViewControllers = [Int: CardListUpdater]()
     private var networkManager: NetworkManager?
     
     override func viewDidLoad() {
