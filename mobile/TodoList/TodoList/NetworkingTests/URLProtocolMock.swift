@@ -9,8 +9,8 @@
 import Foundation
 
 class URLProtocolMock: URLProtocol {
-    static var testURLs = [APIBuilder.board.urlRequest()!.url!: boardResponseJSONMock,
-                           APIBuilder.newCard(card: Card()).urlRequest()!.url!: newCardResponseJSONMock]
+    static var testURLs = [APIBuilder.board.urlRequest()!.url!: Data.readJSON(for: "BoardResponse"),
+                           APIBuilder.newCard(card: Card()).urlRequest()!.url!: Data.readJSON(for: "NewCardResponse")]
     
     override class func canInit(with request: URLRequest) -> Bool {
         return true
@@ -33,4 +33,12 @@ class URLProtocolMock: URLProtocol {
     }
     
     override func stopLoading() { }
+}
+
+private extension Data {
+    static func readJSON(for resource: String) -> Data {
+        let url = Bundle.main.url(forResource: resource, withExtension: "json")!
+        let jsonData = try? Data(contentsOf: url)
+        return jsonData!
+    }
 }
