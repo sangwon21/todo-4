@@ -1,6 +1,5 @@
 import { div, textarea } from "wonnie-template";
-import { CustomButton, ButtonSize, ButtonType } from "../../CustomButton";
-import COLOR from "../../../util/color";
+import { CustomButton, ButtonType } from "../../CustomButton";
 import {
   InlineList,
   InlineListClass,
@@ -9,10 +8,8 @@ import {
 import "./AddingCard.scss";
 
 export interface AddingCardParam {
-  rightButtonType?: ButtonType;
-  leftButtonType?: ButtonType;
-  rightButtonCallback?: Function;
-  leftButtonCallback?: Function;
+  rightButtonType: ButtonType;
+  leftButtonType: ButtonType;
   userClass: string;
 }
 
@@ -21,23 +18,10 @@ export class AddingCard {
   private leftButtonType: ButtonType;
   private userClass: string;
 
-  constructor(param: AddingCardParam | void) {
-    this.rightButtonType = (param && param.rightButtonType) || {
-      size: ButtonSize.large,
-      color: COLOR.SECONDARY,
-      content: "Cancel",
-      contentColor: COLOR.FONT,
-      callback: (param && param.rightButtonCallback) || undefined,
-    };
-    this.leftButtonType = (param && param.leftButtonType) || {
-      size: ButtonSize.large,
-      color: COLOR.PRIMARY,
-      content: "Add",
-      contentColor: COLOR.WHITE,
-      callback: (param && param.leftButtonCallback) || undefined,
-    };
-
-    this.userClass = param ? param.userClass : "";
+  constructor(param: AddingCardParam) {
+    this.rightButtonType = param.rightButtonType;
+    this.leftButtonType = param.leftButtonType;
+    this.userClass = param.userClass;
   }
 
   render() {
