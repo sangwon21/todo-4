@@ -31,8 +31,6 @@ class CardListViewController: UIViewController {
         
         addViewUpdatingObservers()
         
-        setupViewModel()
-        
         setupDataSource()
     }
     
@@ -40,29 +38,28 @@ class CardListViewController: UIViewController {
         observers.removeObservers()
     }
     
-    private func addViewUpdatingObservers() {
-        var observer = List.addListObserver(forName: .boardDidUpdate, listID: listID) { [weak self] in
-            self?.viewModel?.update(list: $0)
+    func update(list: List) {
+        viewModel = CardListViewModel(with: ListChangeDetails(with: list)) { [weak self] listChange in
+            DispatchQueue.main.async { self?.updateList(with: listChange) }
         }
-        observers.addObserver(observer)
-        
-        observer = Card.addCardObserver(forName: .newCardDidUpdate, listID: listID) { [weak self] in
+    }
+    
+    private func updateList(with listChange: ListChangeDetails?) {
+        if let insertedRow = listChange?.insertedRow {
+            let indexPath = IndexPath(row: insertedRow, section: 0)
+            tableView.insertRows(at: [indexPath], with: .automatic)
+        } else {
+            titleLabel.text = listChange?.list.title
+            tableView.reloadData()
+        }
+        cardCountLabel.text = "\(listChange?.list.count ?? 0)"
+    }
+    
+    private func addViewUpdatingObservers() {
+        let observer = Card.addCardObserver(forName: .newCardDidUpdate, listID: listID) { [weak self] in
             self?.viewModel?.insert(card: $0)
         }
         observers.addObserver(observer)
-    }
-    
-    private func setupViewModel() {
-        viewModel?.updateNotify { [weak self] listChange in
-            if let insertedRow = listChange?.insertedRow {
-                let indexPath = IndexPath(row: insertedRow, section: 0)
-                self?.tableView.insertRows(at: [indexPath], with: .automatic)
-            } else {
-                self?.titleLabel.text = listChange?.list.title
-                self?.tableView.reloadData()
-            }
-            self?.cardCountLabel.text = "\(listChange?.list.count ?? 0)"
-        }
     }
     
     private func setupDataSource() {
@@ -77,16 +74,6 @@ class CardListViewController: UIViewController {
     
     @IBAction func addNewCard(_ sender: Any) {
         delegate?.addNewCardDidTouch(viewController: self)
-    }
-}
-
-private extension List {
-    static func addListObserver(forName name: NSNotification.Name,
-                                listID id: Int?,
-                                using block: @escaping (List) -> Void) -> NSObjectProtocol {
-        return NotificationCenter.default.addObserver(forName: name, object: nil, queue: .main) {
-            if let list = $0.userInfo?[id] as? List { block(list) }
-        }
     }
 }
 

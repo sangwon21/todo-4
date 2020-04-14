@@ -12,7 +12,7 @@ class BoardViewController: UIViewController {
 
     @IBOutlet weak var boardStackView: UIStackView!
     
-    private var listViewControllers = [UIViewController]()
+    private var listViewControllers = [Int: CardListViewController]()
     private var networkManager: NetworkManager?
     
     override func viewDidLoad() {
@@ -32,27 +32,28 @@ class BoardViewController: UIViewController {
     }
     
     private func setupTodoLists(for number: Int) {
-        listViewControllers = (0..<number).map { [unowned self] id in
+        listViewControllers = (0..<number).reduce(into: [:]) { [unowned self] viewControllers, number in
             guard let vc = UILoader.load(viewControllerType: CardListViewController.self,
-                                         from: storyboard) else { return nil }
-            vc.listID = id
-            vc.viewModel = CardListViewModel(with: nil)
+                                         from: storyboard) else { return }
+            vc.listID = number
             vc.dataSource = CardListDataSource()
             vc.delegate = self
             self.boardStackView.addArrangedSubview(vc.view)
-            return vc
-        }.compactMap { $0 }
+            viewControllers[number] = vc
+        }
     }
 }
 
 extension BoardViewController {
     private func requestBoard() {
-        let center = NotificationCenter.default
         networkManager?.requestBoard { result in
             switch result {
             case .failure: return
             case let .success(board):
-                center.post(name: .boardDidUpdate, object: self, userInfo: board.listPackage)
+                let listPackage = board.listPackage
+                (0..<listPackage.count).forEach { [weak self] in
+                    self?.listViewControllers[$0]?.update(list: listPackage[$0] ?? List(with: 0))
+                }
             }
         }
     }
