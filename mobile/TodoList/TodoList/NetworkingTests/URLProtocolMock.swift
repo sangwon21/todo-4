@@ -22,7 +22,12 @@ class URLProtocolMock: URLProtocol {
     
     override func startLoading() {
         if let url = request.url, let data = URLProtocolMock.testURLs[url] {
-            self.client?.urlProtocol(self, didLoad: data)
+            let response = HTTPURLResponse(url: url,
+                                           statusCode: 200,
+                                           httpVersion: nil,
+                                           headerFields: nil)!
+            client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+            client?.urlProtocol(self, didLoad: data)
         }
         self.client?.urlProtocolDidFinishLoading(self)
     }
