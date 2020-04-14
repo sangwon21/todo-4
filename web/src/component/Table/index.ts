@@ -1,4 +1,4 @@
-import { div, textarea } from "wonnie-template";
+import { div } from "wonnie-template";
 import { ButtonSize } from "../CustomButton";
 import COLOR from "../../util/color";
 import { AddingCard } from "./AddingCard";
@@ -21,21 +21,35 @@ const defaultLeftButtonType = {
   contentColor: COLOR.WHITE,
 };
 
+interface ITableState {
+  cardCounts: number;
+  tableName: string;
+  handleDragCardCountsChange: Function;
+}
+
 export class Table {
   private tableHeader: TableHeader;
   private addingCard: AddingCard;
   private headerNode: Element | Text | null = null;
   private tableNode: Element | Text | null = null;
   private addingCardNode: Element | Text | null = null;
-  constructor(tableName: string) {
+  private state: ITableState;
+  constructor(param: ITableState) {
     this.cancelCardButtonHandler = this.cancelCardButtonHandler.bind(this);
     this.createAddingCardSection = this.createAddingCardSection.bind(this);
     this.removeAddingCardSection = this.removeAddingCardSection.bind(this);
     this.addCardButtonHandler = this.addCardButtonHandler.bind(this);
     this.handleDragOver = this.handleDragOver.bind(this);
     this.getDragAfterElement = this.getDragAfterElement.bind(this);
+
+    this.state = {
+      cardCounts: param.cardCounts,
+      tableName: param.tableName,
+      handleDragCardCountsChange: param.handleDragCardCountsChange,
+    };
+
     this.tableHeader = new TableHeader(
-      tableName,
+      this.state.tableName,
       this.createAddingCardSection,
       this.removeAddingCardSection
     );
@@ -53,6 +67,23 @@ export class Table {
       rightButtonType,
       leftButtonType,
     });
+  }
+
+  getTableNode() {
+    return this.tableNode;
+  }
+
+  increaseCardCount() {
+    this.state.cardCounts++;
+    this.tableHeader.updateCardCounts(this.state.cardCounts);
+  }
+
+  decreaseCardCount() {
+    if (this.state.cardCounts === 0) {
+      return;
+    }
+    this.state.cardCounts--;
+    this.tableHeader.updateCardCounts(this.state.cardCounts);
   }
 
   makeButtonInvalid() {
@@ -80,9 +111,16 @@ export class Table {
     }
     const firstCard = (this.tableNode as Element).querySelector(".card");
     (this.tableNode as Element).insertBefore(
-      new Card({ isLoading: false, contents: textArea.value }).render(),
+      new Card({
+        isLoading: false,
+        contents: textArea.value,
+        tableType: this.state.tableName,
+        tableNode: this.tableNode as Element,
+        handleDragCardCountsChange: this.state.handleDragCardCountsChange,
+      }).render(),
       firstCard
     );
+    this.increaseCardCount();
     this.makeButtonInvalid();
     textArea.value = "";
   }

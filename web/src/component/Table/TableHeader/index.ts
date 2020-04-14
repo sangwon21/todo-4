@@ -5,24 +5,36 @@ import {
 } from "../../../styled-component/InlineList";
 import { Spacing } from "../../../styled-component/Spacing";
 
+interface ITableHeaderState {
+  cardCounts: number;
+}
+
 export class TableHeader {
-  private cardCount: number;
   private tableName: string;
   private addCardSection: Function;
   private removeCardSection: Function;
-  private changeIconNode: Element | Text | null;
+  private changeIconNode: Element | Text | null = null;
+  private numberCircleNode: Element | Text | null = null;
+  private state: ITableHeaderState;
   constructor(
     tableName: string,
     addCardSection: Function,
     removeCardSection: Function
   ) {
-    this.cardCount = 0;
+    this.state = {
+      cardCounts: 0,
+    };
     this.tableName = tableName;
     this.addCardSection = addCardSection;
     this.removeCardSection = removeCardSection;
-    this.changeIconNode = null;
     this.plusIconHandler = this.plusIconHandler.bind(this);
     this.closeIconHandler = this.closeIconHandler.bind(this);
+  }
+
+  updateCardCounts(cardCounts: number) {
+    this.state.cardCounts = cardCounts;
+    (this
+      .numberCircleNode! as HTMLDivElement).innerHTML = this.state.cardCounts.toString();
   }
 
   plusIconHandler() {
@@ -46,7 +58,9 @@ export class TableHeader {
   }
 
   render() {
-    const numberCircle = div({ class: "number-circle" })([this.cardCount]);
+    this.numberCircleNode = div({ class: "number-circle" })([
+      this.state.cardCounts,
+    ]);
 
     const about = Spacing({ left: 0.4 })(
       div({ class: "table-about" })([`${this.tableName}`])
@@ -60,7 +74,7 @@ export class TableHeader {
     })();
 
     const leftSide = InlineList({ className: InlineListClass.DEFAULT })([
-      numberCircle,
+      this.numberCircleNode,
       about,
     ]);
     const rightSide = InlineList({ className: InlineListClass.DEFAULT })([

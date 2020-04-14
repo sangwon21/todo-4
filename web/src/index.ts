@@ -6,7 +6,7 @@ import "./index.scss";
 import "./util/style/semantic-ui/icon.css";
 import "./util/style/reset.scss";
 
-const board = new Board("test").render();
+const board = new Board().render();
 
 const root = div({ id: "root" })();
 const body = document.querySelector("body")!;

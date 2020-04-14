@@ -13,17 +13,29 @@ import "./card.scss";
 export interface ICardState {
   contents: string;
   isLoading: boolean;
+  tableType: string;
+  tableNode?: Element | null;
+  handleDragCardCountsChange: Function;
 }
 
 export class Card {
   private cardNode: Element | Text | null = null;
   private contentNode: Element | Text | null = null;
-  private previousNode: Element | null = null;
   private spinnerNode: Element | Text | null = null;
-  private state: ICardState = { contents: "", isLoading: false };
+  private state: ICardState = {
+    contents: "",
+    isLoading: false,
+    tableType: "",
+    tableNode: null,
+    handleDragCardCountsChange: () => {},
+  };
 
   constructor(cardParam: ICardState) {
     this.state.contents = cardParam.contents;
+    this.state.tableType = cardParam.tableType;
+    this.state.tableNode = cardParam.tableNode;
+    this.state.handleDragCardCountsChange =
+      cardParam.handleDragCardCountsChange;
     this.spinnerNode = Spinner(SpinnerSize.SMALL);
     this.closeButtonHandler = this.closeButtonHandler.bind(this);
     this.editTask = this.editTask.bind(this);
@@ -31,6 +43,7 @@ export class Card {
     this.handleDragEnd = this.handleDragEnd.bind(this);
     this.handleLoading = this.handleLoading.bind(this);
     this.handleTaskEditClick = this.handleTaskEditClick.bind(this);
+    this.setTableNode = this.setTableNode.bind(this);
   }
 
   async closeButtonHandler() {
@@ -55,8 +68,17 @@ export class Card {
     target.classList.add("dragging");
   }
 
+  setTableNode(table: Element) {
+    this.state.tableNode = table;
+  }
+
   handleDragEnd(e: DragEvent) {
     const target = e.target! as Element;
+    const nextTableNode = this.state.handleDragCardCountsChange!(
+      target,
+      this.state.tableNode
+    );
+    this.setTableNode(nextTableNode);
     target.classList.remove("dragging");
   }
 
