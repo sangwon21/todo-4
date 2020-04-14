@@ -20,14 +20,4 @@ public class History {
     private String movedColumn;
     private LocalDateTime changedTime;
     private String contents;
-
-    public History (String nickname, String action, String actingColumn,
-                    String movedColumn, LocalDateTime changedTime, String contents) {
-        this.nickname = nickname;
-        this.action = action;
-        this.actingColumn = actingColumn;
-        this.movedColumn = movedColumn;
-        this.changedTime = changedTime;
-        this.contents = contents;
-    }
 }

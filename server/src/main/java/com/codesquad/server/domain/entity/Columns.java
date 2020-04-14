@@ -21,12 +21,7 @@ public class Columns {
 
     private List<Card> cards = new ArrayList<>();
 
-    public Columns(String title, LocalDateTime createdTime) {
-        this.title = title;
-        this.createdTime = createdTime;
-    }
-
-    public void addCard(String note, LocalDateTime createdTime) {
-        cards.add(new Card(note, createdTime));
+    public void addCard(Long id, String note, LocalDateTime createdTime) {
+        cards.add(new Card(id, note, createdTime));
     }
 }

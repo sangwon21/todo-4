@@ -19,12 +19,12 @@ public class Board {
     private List<Columns> columns = new ArrayList<>();
     private List<History> histories = new ArrayList<>();
 
-    public void addHistory(String nickname, String action, String actingColumn,
+    public void addHistory(Long id, String nickname, String action, String actingColumn,
                            String movedColumn, LocalDateTime changedTime, String contents) {
-        histories.add(new History(nickname, action, actingColumn, movedColumn, changedTime, contents));
+        histories.add(new History(id, nickname, action, actingColumn, movedColumn, changedTime, contents));
     }
 
-    public void addColumn(String title, LocalDateTime createdTime) {
-        columns.add(new Columns(title, createdTime));
+    public void addColumn(Long id, String title, LocalDateTime createdTime, List<Card> cards) {
+        columns.add(new Columns(id, title, createdTime,cards));
     }
 }
