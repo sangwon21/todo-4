@@ -20,7 +20,7 @@ public class ColumnsServiceImpl implements ColumnsService {
 
     @Override
     public HttpStatus update(Columns columns) {
-        columnsRepository.update(columns);
+        columnsRepository.update(columns.getTitle(), columns.getId());
         return HttpStatus.NO_CONTENT;
     }
 

@@ -2,6 +2,7 @@ package com.codesquad.server.domain.entity;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,8 +16,11 @@ public class Board {
 
     @Id
     private Long id;
+
     private LocalDateTime createdTime;
+
     private List<Columns> columns = new ArrayList<>();
+
     private List<History> histories = new ArrayList<>();
 
     public void addHistory(Long id, String nickname, String action, String actingColumn,
@@ -25,6 +29,6 @@ public class Board {
     }
 
     public void addColumn(Long id, String title, LocalDateTime createdTime, List<Card> cards) {
-        columns.add(new Columns(id, title, createdTime,cards));
+        columns.add(new Columns(id, title, createdTime, cards));
     }
 }
