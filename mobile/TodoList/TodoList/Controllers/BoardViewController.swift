@@ -60,14 +60,13 @@ extension BoardViewController {
     
     private func requestNewCard(listID id: Int, card: Card) {
         var card = card
-        let center = NotificationCenter.default
-        networkManager?.requestNewCard(card: card) { result in
+        networkManager?.requestNewCard(card: card) { [weak self] result in
             switch result {
             case .failure: return
             case let .success(response):
                 guard let response = response as? CardIDResponse else { return }
                 card.id = response.cardID
-                center.post(name: .newCardDidUpdate, object: self, userInfo: card.package(listID: id))
+                self?.listViewControllers[id]?.insert(card: card)
             }
         }
     }
@@ -87,9 +86,4 @@ extension BoardViewController: FormViewControllerDelegate {
         guard let id = viewController.listID else { return }
         requestNewCard(listID: id, card: card)
     }
-}
-
-extension Notification.Name {
-    static let boardDidUpdate = Notification.Name(rawValue: "boardDidUpdate")
-    static let newCardDidUpdate = Notification.Name(rawValue: "newCardDidUpdate")
 }

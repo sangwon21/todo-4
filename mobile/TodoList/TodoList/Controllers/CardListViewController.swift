@@ -18,8 +18,6 @@ class CardListViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    private let observers = Observers()
-    
     var viewModel: CardListViewModel?
     var dataSource: CardListDataSource?
     var listID: Int?
@@ -29,19 +27,17 @@ class CardListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addViewUpdatingObservers()
-        
         setupDataSource()
-    }
-    
-    deinit {
-        observers.removeObservers()
     }
     
     func update(list: List) {
         viewModel = CardListViewModel(with: ListChangeDetails(with: list)) { [weak self] listChange in
             DispatchQueue.main.async { self?.updateList(with: listChange) }
         }
+    }
+    
+    func insert(card: Card) {
+        viewModel?.insert(card: card)
     }
     
     private func updateList(with listChange: ListChangeDetails?) {
@@ -53,13 +49,6 @@ class CardListViewController: UIViewController {
             tableView.reloadData()
         }
         cardCountLabel.text = "\(listChange?.list.count ?? 0)"
-    }
-    
-    private func addViewUpdatingObservers() {
-        let observer = Card.addCardObserver(forName: .newCardDidUpdate, listID: listID) { [weak self] in
-            self?.viewModel?.insert(card: $0)
-        }
-        observers.addObserver(observer)
     }
     
     private func setupDataSource() {
@@ -74,15 +63,5 @@ class CardListViewController: UIViewController {
     
     @IBAction func addNewCard(_ sender: Any) {
         delegate?.addNewCardDidTouch(viewController: self)
-    }
-}
-
-private extension Card {
-    static func addCardObserver(forName name: NSNotification.Name,
-                                listID id: Int?,
-                                using block: @escaping (Card) -> Void) -> NSObjectProtocol {
-        return NotificationCenter.default.addObserver(forName: name, object: nil, queue: .main) {
-            if let card = $0.userInfo?[id] as? Card { block(card) }
-        }
     }
 }

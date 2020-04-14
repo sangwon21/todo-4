@@ -60,8 +60,4 @@ extension Card {
         detail = ""
         author = ""
     }
-    
-    func package(listID id: Int) -> Dictionary<Int, Card> {
-        return [id: self]
-    }
 }
