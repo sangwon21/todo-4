@@ -92,10 +92,7 @@ export class Card {
     const rightHeader = InlineList({
       class: InlineListClass.DEFAULT,
       width: "80%",
-    })([
-      i({ class: "tasks icon", onClick: this.handleTaskEditClick })(),
-      this.contentNode,
-    ]);
+    })([i({ class: "tasks icon" })(), this.contentNode]);
 
     const closeButton = div({ onClick: this.closeButtonHandler })([
       i({ class: "close icon" })(),
@@ -118,6 +115,7 @@ export class Card {
         draggable: "true",
         onDragstart: this.handleDragStart,
         onDragend: this.handleDragEnd,
+        onDblClick: this.handleTaskEditClick,
       },
     })([header, footer]);
 

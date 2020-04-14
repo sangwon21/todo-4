@@ -1,10 +1,9 @@
-import { div } from "wonnie-template";
-import { CustomButton, ButtonSize, ButtonType } from "../CustomButton";
+import { div, textarea } from "wonnie-template";
+import { ButtonSize } from "../CustomButton";
 import COLOR from "../../util/color";
 import { AddingCard } from "./AddingCard";
 import { TableHeader } from "./TableHeader";
 import { Card } from "./Card";
-import axios from "axios";
 
 import "./Table.scss";
 
@@ -17,7 +16,7 @@ const defaultRightButtonType = {
 
 const defaultLeftButtonType = {
   size: ButtonSize.large,
-  color: COLOR.PRIMARY,
+  color: COLOR.INVALID_PRIMARY,
   content: "Add",
   contentColor: COLOR.WHITE,
 };
@@ -56,22 +55,35 @@ export class Table {
     });
   }
 
+  makeButtonInvalid() {
+    const leftButton = (this.tableNode as Element).querySelector("button")!;
+    leftButton.setAttribute(
+      "style",
+      `background-color: ${COLOR.INVALID_PRIMARY}; color: ${COLOR.WHITE}; width: 10rem; height: 2rem`
+    );
+  }
+
   cancelCardButtonHandler() {
     const textArea = (this.tableNode as Element).querySelector(
       "textarea"
     ) as HTMLTextAreaElement;
     textArea!.value = "";
+    this.makeButtonInvalid();
   }
 
   addCardButtonHandler() {
     const textArea = (this.tableNode as Element).querySelector(
       "textarea"
     )! as HTMLTextAreaElement;
+    if (textArea.value === "") {
+      return;
+    }
     const firstCard = (this.tableNode as Element).querySelector(".card");
     (this.tableNode as Element).insertBefore(
       new Card({ isLoading: false, contents: textArea.value }).render(),
       firstCard
     );
+    this.makeButtonInvalid();
     textArea.value = "";
   }
 

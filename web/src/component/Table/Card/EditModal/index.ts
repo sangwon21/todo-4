@@ -1,4 +1,4 @@
-import { div, span, i, textarea } from "wonnie-template";
+import { span, i, textarea } from "wonnie-template";
 import { Modal } from "../../../Modal";
 import { CustomButton, ButtonSize, ButtonType } from "../../../CustomButton";
 import COLOR from "../../../../util/color";
@@ -76,7 +76,7 @@ export class EditModal {
 
     const ModalContent = InlineList({
       class: InlineListClass.ALIGN_LEFT_COLUMN,
-      userClassList: ["modal-content"],
+      userClassList: ["edit-modal-content"],
     })([editModalHeader, editModalNote]);
     this.editModalNode = Modal(ModalContent);
     return this.editModalNode;
