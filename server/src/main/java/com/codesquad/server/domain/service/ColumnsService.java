@@ -1,4 +1,4 @@
 package com.codesquad.server.domain.service;
 
-public class ColumnService {
+public class ColumnsService {
 }

@@ -3,6 +3,7 @@ package com.codesquad.server.domain.entity;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,10 @@ public class Columns {
 
     @Id
     private Long id;
+
+    @NotBlank
     private String title;
+
     private LocalDateTime createdTime;
 
     private List<Card> cards = new ArrayList<>();

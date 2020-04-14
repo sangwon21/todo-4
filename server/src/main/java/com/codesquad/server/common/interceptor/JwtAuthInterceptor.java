@@ -4,8 +4,6 @@ import com.codesquad.server.domain.service.JwtUtil;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -20,7 +18,7 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
     @NonNull
     private JwtUtil jwtUtil;
 
-    private String token = "123";
+    private String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjb2RlLXNxdWFkLmNvbSIsInVzZXJJZCI6IkVWRVIifQ.qBB-zuqxeXMxTeqWeDU4esYUv5ew2VCamWNmvZM7kA4";
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
