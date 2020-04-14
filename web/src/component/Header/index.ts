@@ -4,15 +4,12 @@ import {
   Spacing,
   ISpacingStyleParameter,
 } from "../../styled-component/Spacing";
+import { LogColumn } from "./LogColumn";
 
 import "./Header.scss";
 
 const leftMargin: ISpacingStyleParameter = {
   left: 2,
-};
-
-const rightMargin: ISpacingStyleParameter = {
-  right: 2,
 };
 
 const service = Spacing(leftMargin)(
@@ -21,18 +18,17 @@ const service = Spacing(leftMargin)(
     class: "header-content header-content-todo",
   })(["TODO 서비스"])
 );
-const menu = Spacing(rightMargin)(
-  div({
-    style: "text-align: right;",
-    class: "header-content header-content-menu",
-  })(["menu"])
-);
+const menu = div({
+  style: "text-align: right; position: relative;",
+  class: "header-content header-content-menu",
+})(["menu", LogColumn]);
 
 export const Header = header({
   style: "background-color: #000000; height: 4rem; font-size: 1rem;",
 })([
-  InlineList({ className: InlineListClass.SPACE_BETWEEN, height: "100%" })([
-    service,
-    menu,
-  ]),
+  InlineList({
+    className: InlineListClass.SPACE_BETWEEN,
+    height: "100%",
+    userClassList: ["header"],
+  })([service, menu]),
 ]);
