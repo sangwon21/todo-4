@@ -84,13 +84,13 @@ export class Card {
 
   render() {
     this.contentNode = InlineList({
-      class: InlineListClass.DEFAULT,
+      className: InlineListClass.DEFAULT,
       userClassList: ["card-contents"],
       width: "80%",
     })([div()([this.state.contents])]);
 
     const rightHeader = InlineList({
-      class: InlineListClass.DEFAULT,
+      className: InlineListClass.DEFAULT,
       width: "80%",
     })([i({ class: "tasks icon" })(), this.contentNode]);
 
@@ -99,17 +99,17 @@ export class Card {
     ]);
 
     const header = InlineList({
-      class: InlineListClass.SPACE_BETWEEN,
+      className: InlineListClass.SPACE_BETWEEN,
       width: "100%",
     })([rightHeader, closeButton]);
 
-    const footer = InlineList({ class: InlineListClass.DEFAULT })([
+    const footer = InlineList({ className: InlineListClass.DEFAULT })([
       span({ class: "card-prefix" })(["Added by"]),
       span({ class: "card-author" })(["nigayo"]),
     ]);
 
     this.cardNode = InlineList({
-      class: InlineListClass.SPACE_BETWEEN_COLUMN,
+      className: InlineListClass.SPACE_BETWEEN_COLUMN,
       userClassList: ["card"],
       attributes: {
         draggable: "true",

@@ -44,7 +44,7 @@ export class AddingCard {
 
   render() {
     const buttons = InlineList({
-      class: InlineListClass.SPACE_BETWEEN,
+      className: InlineListClass.SPACE_BETWEEN,
       width: "100%",
     })([this.leftButtonNode, this.rightButtonNode]);
 
@@ -56,7 +56,7 @@ export class AddingCard {
     ]);
 
     return InlineList({
-      class: InlineListClass.SPACE_BETWEEN_COLUMN,
+      className: InlineListClass.SPACE_BETWEEN_COLUMN,
       width: "100%",
       height: "8rem",
       userClassList: ["adding-card", this.userClass],

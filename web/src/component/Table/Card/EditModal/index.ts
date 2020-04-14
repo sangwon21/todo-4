@@ -45,7 +45,7 @@ export class EditModal {
     const rightHeader = i({ class: "close icon", onClick: this.close })();
 
     const editModalHeader = InlineList({
-      class: InlineListClass.SPACE_BETWEEN,
+      className: InlineListClass.SPACE_BETWEEN,
       width: "100%",
       userClassList: ["edit-modal-header"],
     })([leftHeader, rightHeader]);
@@ -69,13 +69,13 @@ export class EditModal {
     const saveNoteButton = CustomButton(mediumSettings);
 
     const editModalNote = InlineList({
-      class: InlineListClass.SPACE_BETWEEN_COLUMN,
+      className: InlineListClass.SPACE_BETWEEN_COLUMN,
       width: "100%",
       userClassList: ["edit-modal-note"],
     })([editModalNoteHeader, this.textareaNode, saveNoteButton]);
 
     const ModalContent = InlineList({
-      class: InlineListClass.ALIGN_LEFT_COLUMN,
+      className: InlineListClass.ALIGN_LEFT_COLUMN,
       userClassList: ["edit-modal-content"],
     })([editModalHeader, editModalNote]);
     this.editModalNode = Modal(ModalContent);

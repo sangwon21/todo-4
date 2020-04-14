@@ -31,7 +31,7 @@ const menu = Spacing(rightMargin)(
 export const Header = header({
   style: "background-color: #000000; height: 4rem; font-size: 1rem;",
 })([
-  InlineList({ class: InlineListClass.SPACE_BETWEEN, height: "100%" })([
+  InlineList({ className: InlineListClass.SPACE_BETWEEN, height: "100%" })([
     service,
     menu,
   ]),

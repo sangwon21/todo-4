@@ -27,7 +27,7 @@ export interface IInlineStyle {
     | InlineListClass
     | IInlineListAttribute
     | undefined;
-  class: InlineListClass;
+  className: InlineListClass;
   height?: string;
   width?: string;
   userClassList?: string[];
@@ -53,11 +53,11 @@ const flattenStyles = (styles: IInlineStyle | void): IInlineParam => {
     style: Object.keys(styles)
       .filter(
         (key) =>
-          key !== "class" && key != "userClassList" && key != "attributes"
+          key !== "className" && key != "userClassList" && key != "attributes"
       )
       .reduce((acc, cur) => (acc += `${cur}: ${styles[cur]};`), ""),
     class: Object.keys(styles)
-      .filter((key) => key === "userClassList" || key === "class")
+      .filter((key) => key === "userClassList" || key === "className")
       .reduce((acc, cur) => {
         if (!styles[cur]) {
           return acc;

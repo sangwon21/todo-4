@@ -59,16 +59,16 @@ export class TableHeader {
       onClick: this.closeIconHandler,
     })();
 
-    const leftSide = InlineList({ class: InlineListClass.DEFAULT })([
+    const leftSide = InlineList({ className: InlineListClass.DEFAULT })([
       numberCircle,
       about,
     ]);
-    const rightSide = InlineList({ class: InlineListClass.DEFAULT })([
+    const rightSide = InlineList({ className: InlineListClass.DEFAULT })([
       plusIcon,
       this.changeIconNode,
     ]);
 
-    return InlineList({ class: InlineListClass.SPACE_BETWEEN })([
+    return InlineList({ className: InlineListClass.SPACE_BETWEEN })([
       leftSide,
       rightSide,
     ]);

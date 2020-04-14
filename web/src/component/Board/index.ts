@@ -9,7 +9,7 @@ export class Board {
 
   render() {
     return InlineList({
-      class: InlineListClass.SPACE_AROUND,
+      className: InlineListClass.SPACE_AROUND,
       width: "100%",
       userClassList: [this.boardClass],
     })([

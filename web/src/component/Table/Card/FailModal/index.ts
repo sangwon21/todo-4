@@ -24,7 +24,7 @@ export class FailModal {
     const rightHeader = i({ class: "close icon", onClick: this.close })();
 
     const header = InlineList({
-      class: InlineListClass.SPACE_BETWEEN,
+      className: InlineListClass.SPACE_BETWEEN,
       width: "100%",
       userClassList: ["fail-modal-header"],
     })([leftHeader, rightHeader]);
@@ -42,12 +42,12 @@ export class FailModal {
     };
 
     const closeButton = InlineList({
-      class: InlineListClass.ALIGN_RIGHT,
+      className: InlineListClass.ALIGN_RIGHT,
       userClassList: ["fail-modal-button"],
     })([CustomButton(mediumSettings)]);
 
     const ModalContent = InlineList({
-      class: InlineListClass.SPACE_BETWEEN_COLUMN,
+      className: InlineListClass.SPACE_BETWEEN_COLUMN,
       userClassList: ["fail-modal-content"],
     })([header, contents, closeButton]);
     this.failModalNode = Modal(ModalContent);
