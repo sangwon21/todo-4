@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface ColumnsRepository extends CrudRepository<Columns, Long> {
     @Query("select * from columns where id=:id")
     public List<Card> findAllByColumnsId(Long id);
