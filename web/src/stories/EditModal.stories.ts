@@ -6,5 +6,8 @@ const example = () => {
 };
 
 storiesOf("Edit Modal Storybook", module).add("기본 Modal 창", () =>
-  new EditModal({ noteContent: "Hello World", editContent: example }).render()
+  new EditModal({
+    noteContent: "Hello World",
+    editContent: example,
+  }).render()
 );
