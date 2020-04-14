@@ -2,13 +2,18 @@ package com.codesquad.server.domain.service;
 
 import com.codesquad.server.domain.entity.Card;
 import com.codesquad.server.domain.repository.CardRepository;
+import com.codesquad.server.domain.repository.ColumnsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CardServiceImpl implements CardService {
+
+    private final ColumnsRepository columnsRepository;
 
     private final CardRepository cardRepository;
 
@@ -19,18 +24,19 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public HttpStatus update(Card updatedCard) {
-        Card card = findCardById(updatedCard.getId());
-        card.setNote(updatedCard.getNote());
-        return save(card);
+    public List<Card> findAllById(Long id) {
+        return columnsRepository.findAllByColumnsId(id);
+    }
+
+    @Override
+    public HttpStatus update(Card card) {
+        cardRepository.update(card);
+        return HttpStatus.NO_CONTENT;
     }
 
     @Override
     public HttpStatus delete(Card card) {
-        return null;
-    }
-
-    private Card findCardById(Long id) {
-        return cardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("카드가 존재하지 않습니다!"));
+        cardRepository.delete(card);
+        return HttpStatus.NO_CONTENT;
     }
 }
