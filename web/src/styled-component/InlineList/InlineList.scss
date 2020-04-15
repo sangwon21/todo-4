@@ -29,6 +29,13 @@
   align-items: center;
 }
 
+.default-no-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .align-center {
   display: flex;
   flex-direction: row;
