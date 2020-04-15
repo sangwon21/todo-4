@@ -11,6 +11,7 @@ import Foundation
 enum HTTPMethod: String {
     case get = "GET"
     case post = "POST"
+    case delete = "DELETE"
 }
 
 protocol APIRouter {
@@ -51,11 +52,13 @@ extension APIRouter {
 enum APIBuilder: APIRouter {
     case board
     case newCard(card: Card)
+    case deleteCard(card: Card)
     
     var path: String {
         switch self {
         case .board: return Endpoints.boardRequestURL
-        case .newCard: return Endpoints.newCardRequestURL
+        case .newCard: return Endpoints.cardListRequestURL
+        case .deleteCard: return Endpoints.cardRequestURL
         }
     }
     
@@ -63,6 +66,7 @@ enum APIBuilder: APIRouter {
         switch self {
         case .board: return .get
         case .newCard: return .post
+        case .deleteCard: return .delete
         }
     }
     
@@ -75,6 +79,7 @@ enum APIBuilder: APIRouter {
     var body: Data? {
         switch self {
         case let .newCard(card): return encode(card)
+        case let .deleteCard(card): return encode(card)
         default: return nil
         }
     }

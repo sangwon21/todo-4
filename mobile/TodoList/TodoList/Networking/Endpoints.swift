@@ -12,5 +12,6 @@ class Endpoints {
     static let baseURL = "https://lucas.codesquad.kr"
     
     static let boardRequestURL = "\(baseURL)/columns"
-    static let newCardRequestURL = "\(boardRequestURL)/columnId/cards"
+    static let cardListRequestURL = "\(boardRequestURL)/columnId/cards"
+    static let cardRequestURL = "\(cardListRequestURL)/cardId"
 }
