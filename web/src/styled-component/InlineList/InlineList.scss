@@ -83,3 +83,16 @@
   flex-wrap: wrap;
   justify-content: space-between;
 }
+
+.space-around-column-base {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.align-left-column-base-no-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}

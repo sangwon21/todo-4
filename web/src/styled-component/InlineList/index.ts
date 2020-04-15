@@ -10,9 +10,11 @@ export enum InlineListClass {
   COLUMN_BASE = "column-base",
   DEFAULT = "default-inline",
   ALIGN_LEFT_COLUMN = "align-left-column-base ",
+  ALIGN_LEFT_COLUMN_NO_WRAP = "align-left-column-base-no-wrap",
   ALIGN_CENTER_COLUMN = "align-center-column-base",
   ALIGN_RIGHT_COLUMN = "align-right-column-base",
   SPACE_BETWEEN_COLUMN = "space-between-column-base",
+  SPACE_AROUND_COLUMN = "space-around-column-base",
   CENTER = "center",
 }
 
