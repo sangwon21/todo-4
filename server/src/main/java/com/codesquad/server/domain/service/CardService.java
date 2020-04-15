@@ -1,6 +1,7 @@
 package com.codesquad.server.domain.service;
 
 import com.codesquad.server.domain.entity.Card;
+import com.codesquad.server.domain.value.Location;
 import org.springframework.http.HttpStatus;
 
 public interface CardService {
@@ -8,6 +9,7 @@ public interface CardService {
 
     public HttpStatus update(Card card);
 
-    public HttpStatus delete(Card card);
+    public HttpStatus move(Location location);
 
+    public HttpStatus delete(Card card);
 }

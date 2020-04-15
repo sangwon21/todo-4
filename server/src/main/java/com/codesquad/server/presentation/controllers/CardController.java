@@ -2,13 +2,13 @@ package com.codesquad.server.presentation.controllers;
 
 import com.codesquad.server.domain.entity.Card;
 import com.codesquad.server.domain.service.CardService;
+import com.codesquad.server.domain.value.Location;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -28,6 +28,11 @@ public class CardController {
     public HttpStatus update(@RequestBody @Valid Card card) {
         log.info("card : {}", card);
         return cardService.update(card);
+    }
+
+    @PutMapping("/move")
+    public HttpStatus move(@RequestBody @Valid Location locaiton) {
+        return cardService.move(locaiton);
     }
 
     @DeleteMapping("")

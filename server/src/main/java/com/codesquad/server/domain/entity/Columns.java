@@ -32,6 +32,10 @@ public class Columns {
     }
 
     public void addCard(Card card) {
-        cards.add(card);
+        this.cards.add(card);
+    }
+
+    public void moveCard(int index, Card card) {
+        this.cards.add(index, card);
     }
 }
