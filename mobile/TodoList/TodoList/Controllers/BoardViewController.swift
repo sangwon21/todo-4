@@ -79,6 +79,10 @@ extension BoardViewController: CardListViewControllerDelegate {
         vc.delegate = self
         present(vc, animated: true)
     }
+    
+    func deleteCardDidInvoke(viewController: CardListViewController, card: Card) {
+        
+    }
 }
 
 extension BoardViewController: FormViewControllerDelegate {

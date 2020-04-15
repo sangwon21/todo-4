@@ -10,6 +10,7 @@ import UIKit
 
 protocol CardListViewControllerDelegate: class {
     func addNewCardDidTouch(viewController: CardListViewController)
+    func deleteCardDidInvoke(viewController: CardListViewController, card: Card)
 }
 
 protocol CardListUpdater {
@@ -64,7 +65,8 @@ class CardListViewController: UIViewController {
     
     private func setupDelegate() {
         tableViewDelegate?.deleteAction = { [weak self] in
-            return self?.viewModel?.remove(at: $0)
+            guard let self = self, let card = self.viewModel?.card(at: $0) else { return }
+            self.delegate?.deleteCardDidInvoke(viewController: self, card: card)
         }
         tableView.delegate = tableViewDelegate
     }
