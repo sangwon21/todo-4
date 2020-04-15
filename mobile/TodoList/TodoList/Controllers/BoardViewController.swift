@@ -38,6 +38,7 @@ class BoardViewController: UIViewController {
             vc.listID = number
             vc.tableViewDataSource = CardListDataSource()
             vc.tableViewDelegate = CardListDelegate()
+            vc.networkManager = networkManager
             vc.delegate = self
             self.boardStackView.addArrangedSubview(vc.view)
             viewControllers[number] = vc
@@ -78,10 +79,6 @@ extension BoardViewController: CardListViewControllerDelegate {
         vc.listID = viewController.listID
         vc.delegate = self
         present(vc, animated: true)
-    }
-    
-    func deleteCardDidInvoke(viewController: CardListViewController, card: Card) {
-        
     }
 }
 

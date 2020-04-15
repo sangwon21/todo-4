@@ -10,7 +10,6 @@ import UIKit
 
 protocol CardListViewControllerDelegate: class {
     func addNewCardDidTouch(viewController: CardListViewController)
-    func deleteCardDidInvoke(viewController: CardListViewController, card: Card)
 }
 
 protocol CardListUpdater {
@@ -27,6 +26,7 @@ class CardListViewController: UIViewController {
     var viewModel: CardListViewModel?
     var tableViewDataSource: CardListDataSource?
     var tableViewDelegate: CardListDelegate?
+    var networkManager: NetworkManager?
     var listID: Int?
     
     weak var delegate: CardListViewControllerDelegate?
@@ -66,7 +66,7 @@ class CardListViewController: UIViewController {
     private func setupDelegate() {
         tableViewDelegate?.deleteAction = { [weak self] in
             guard let self = self, let card = self.viewModel?.card(at: $0) else { return }
-            self.delegate?.deleteCardDidInvoke(viewController: self, card: card)
+            self.requestDelete(card: card, cardIndex: $0)
         }
         tableView.delegate = tableViewDelegate
     }
@@ -85,5 +85,16 @@ extension CardListViewController: CardListUpdater {
     
     func insert(card: Card) {
         viewModel?.insert(card: card)
+    }
+}
+
+extension CardListViewController {
+    private func requestDelete(card: Card, cardIndex: Int) {
+        networkManager?.requestDelete(card: card) { [weak self] result in
+            switch result {
+            case .failure: return
+            case .success: self?.viewModel?.remove(at: cardIndex)
+            }
+        }
     }
 }

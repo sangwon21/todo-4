@@ -25,7 +25,8 @@ class NetworkManager {
         self.session = session
     }
     
-    func request(with request: URLRequest?, completion: @escaping (Result<Data, Error>) -> Void) {
+    private func request(with request: URLRequest?,
+                         completion: @escaping (Result<Data, Error>) -> Void) {
         guard let request = request else { return }
         
         session.dataTask(with: request) { data, response, error in
@@ -71,6 +72,15 @@ extension NetworkManager {
                 } catch {
                     completion(.failure(error))
                 }
+            }
+        }
+    }
+    
+    func requestDelete(card: Card, completion: @escaping (Result<Bool, Error>) -> Void) {
+        request(with: APIBuilder.newCard(card: card).urlRequest()) { result in
+            switch result {
+            case let .failure(error): completion(.failure(error))
+            case .success: completion(.success(true))
             }
         }
     }
