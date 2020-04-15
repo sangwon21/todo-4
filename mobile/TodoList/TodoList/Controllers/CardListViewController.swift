@@ -41,7 +41,7 @@ class CardListViewController: UIViewController {
     private func updateList(with listChange: ListChangeDetails?) {
         if let deletedRow = listChange?.deletedRow {
             let indexPath = IndexPath(row: deletedRow, section: 0)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.deleteRows(at: [indexPath], with: .left)
         } else if let insertedRow = listChange?.insertedRow {
             let indexPath = IndexPath(row: insertedRow, section: 0)
             tableView.insertRows(at: [indexPath], with: .automatic)
