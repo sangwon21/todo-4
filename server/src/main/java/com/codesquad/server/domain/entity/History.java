@@ -8,8 +8,6 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @ToString
 public class History {
 
@@ -32,4 +30,14 @@ public class History {
 
     @NotBlank
     private String contents;
+
+    public History(Long id, @NotBlank String nickname, @NotBlank String action, @NotBlank String actingColumn, @NotBlank String movedColumn, LocalDateTime changedTime, @NotBlank String contents) {
+        this.id = id;
+        this.nickname = nickname;
+        this.action = action;
+        this.actingColumn = actingColumn;
+        this.movedColumn = movedColumn;
+        this.changedTime = LocalDateTime.now();
+        this.contents = contents;
+    }
 }
