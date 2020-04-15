@@ -7,7 +7,22 @@
     "build-dev": "webpack --mode development",
     "build": "webpack --mode production",
     "dev": "webpack-dev-server --open --mode development",
-    "storybook": "start-storybook -p 6006"
+    "storybook": "start-storybook -p 6006",
+    "test": "jest"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "testRegex": "\\.test\\.ts$",
+    "moduleFileExtensions": [
+      "ts", "js"
+    ],
+    "globals": {
+      "ts-jest": {
+        "enableTsDiagnostics": true
+      }
+    }
   },
   "author": "",
   "license": "MIT",
@@ -19,14 +34,17 @@
     "@babel/runtime": "^7.9.2",
     "@storybook/html": "^5.3.18",
     "@storybook/preset-typescript": "^3.0.0",
+    "@types/jest": "^25.2.1",
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.4.2",
     "file-loader": "^6.0.0",
     "fork-ts-checker-webpack-plugin": "^4.1.2",
     "html-webpack-plugin": "^4.0.4",
+    "jest": "^25.3.0",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.1.3",
+    "ts-jest": "^25.3.1",
     "ts-loader": "^6.2.2",
     "typescript": "^3.8.3",
     "webpack": "^4.42.1",
