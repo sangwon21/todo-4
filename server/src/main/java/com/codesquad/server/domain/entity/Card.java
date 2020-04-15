@@ -1,6 +1,8 @@
 package com.codesquad.server.domain.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 
 import javax.validation.constraints.NotBlank;

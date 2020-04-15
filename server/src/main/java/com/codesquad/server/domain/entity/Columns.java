@@ -1,14 +1,12 @@
 package com.codesquad.server.domain.entity;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -24,7 +22,7 @@ public class Columns {
 
     private LocalDateTime createdTime;
 
-    private List<Card> cards = new ArrayList<>();
+    private List<Card> cards;
 
     public Columns(Long id, @NotBlank String title, LocalDateTime createdTime, List<Card> cards) {
         this.id = id;

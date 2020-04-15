@@ -1,10 +1,8 @@
 package com.codesquad.server.domain.entity;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
@@ -25,9 +23,8 @@ public class Board {
 
     private List<History> histories = new ArrayList<>();
 
-    public void addHistory(Long id, String nickname, String action, String actingColumn,
-                           String movedColumn, LocalDateTime changedTime, String contents) {
-        histories.add(new History(id, nickname, action, actingColumn, movedColumn, changedTime, contents));
+    public void addHistory(History history) {
+        histories.add(history);
     }
 
     public void addColumn(Columns columns) {
