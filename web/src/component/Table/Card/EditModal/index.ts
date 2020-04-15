@@ -22,6 +22,7 @@ export class EditModal {
   private textareaNode: Element | Text | null = null;
   private editModalNode: Element | Text | null = null;
   private saveNoteButton: Element | Text | null = null;
+  private modalContentNode: Element | Text | null = null;
   constructor(param: IEditModalState) {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInput = this.handleInput.bind(this);
@@ -95,14 +96,14 @@ export class EditModal {
       userClassList: ["edit-modal-note"],
     })([editModalNoteHeader, this.textareaNode, this.saveNoteButton]);
 
-    const ModalContent = InlineList({
+    this.modalContentNode = InlineList({
       className: InlineListClass.ALIGN_LEFT_COLUMN,
-      userClassList: ["edit-modal-content"],
+      userClassList: ["edit-modal-content", "modal-skew-from-left"],
       attributes: {
         draggable: "false",
       },
     })([editModalHeader, editModalNote]);
-    this.editModalNode = Modal(ModalContent);
+    this.editModalNode = Modal(this.modalContentNode);
     return this.editModalNode;
   }
 }

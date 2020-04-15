@@ -11,4 +11,4 @@ const board = new Board().render();
 const root = div({ id: "root" })();
 const body = document.querySelector("body")!;
 body.appendChild(root);
-root.appendChild(div()([Header, board]));
+root.appendChild(div()([new Header().render(), board]));
