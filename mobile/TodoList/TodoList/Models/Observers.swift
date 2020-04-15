@@ -6,7 +6,7 @@
 //  Copyright © 2020 Chaewan Park. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class Observers {
     private var observers = [NSObjectProtocol]()
@@ -23,5 +23,27 @@ class Observers {
     
     func removeObservers() {
         observers.forEach { center.removeObserver($0) }
+    }
+}
+
+extension Observers {
+    func addKeyboardShowObserver(using block: @escaping (CGFloat) -> Void) {
+        let observer = center.addObserver(forName: UIResponder.keyboardWillShowNotification,
+                                          object: nil,
+                                          queue: .main) {
+            guard let userInfo = $0.userInfo,
+                let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+            block(keyboardFrame.size.height)
+        }
+        observers.append(observer)
+    }
+    
+    func addKeyboardHideObserver(using block: @escaping () -> Void) {
+        let observer = center.addObserver(forName: UIResponder.keyboardWillHideNotification,
+                                          object: nil,
+                                          queue: .main) { _ in
+            block()
+        }
+        observers.append(observer)
     }
 }

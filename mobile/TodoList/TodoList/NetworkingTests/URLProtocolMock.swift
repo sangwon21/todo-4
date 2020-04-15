@@ -9,7 +9,8 @@
 import Foundation
 
 class URLProtocolMock: URLProtocol {
-    static var testURLs = [APIRouter.board.url: boardResponseJSON]
+    static var testURLs = [APIBuilder.board.urlRequest()!.url!: Data.readJSON(for: "BoardResponse"),
+                           APIBuilder.newCard(card: Card()).urlRequest()!.url!: Data.readJSON(for: "NewCardResponse")]
     
     override class func canInit(with request: URLRequest) -> Bool {
         return true
@@ -21,10 +22,23 @@ class URLProtocolMock: URLProtocol {
     
     override func startLoading() {
         if let url = request.url, let data = URLProtocolMock.testURLs[url] {
-            self.client?.urlProtocol(self, didLoad: data)
+            let response = HTTPURLResponse(url: url,
+                                           statusCode: 200,
+                                           httpVersion: nil,
+                                           headerFields: nil)!
+            client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+            client?.urlProtocol(self, didLoad: data)
         }
         self.client?.urlProtocolDidFinishLoading(self)
     }
     
     override func stopLoading() { }
+}
+
+private extension Data {
+    static func readJSON(for resource: String) -> Data {
+        let url = Bundle.main.url(forResource: resource, withExtension: "json")!
+        let jsonData = try? Data(contentsOf: url)
+        return jsonData!
+    }
 }

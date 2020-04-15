@@ -13,34 +13,52 @@ protocol ViewModelBinding {
     func updateNotify(handler: @escaping (Key) -> Void)
 }
 
+struct ListChangeDetails {
+    let list: List
+    let insertedRow: Int?
+}
+
+extension ListChangeDetails {
+    init(with list: List) {
+        self.list = list
+        self.insertedRow = nil
+    }
+}
+
 class CardListViewModel: ViewModelBinding {
-    typealias Key = List?
+    typealias Key = ListChangeDetails?
     
-    private var list: Key = nil {
-        didSet { changeHandler(list) }
+    private var listChangeDetails: Key = nil {
+        didSet { changeHandler(listChangeDetails) }
     }
     
     private var changeHandler: (Key) -> Void
     
     var cardCount: Int {
-        return list?.cards.count ?? 0
+        return listChangeDetails?.list.count ?? 0
     }
     
-    init(with list: Key, handler: @escaping (Key) -> Void = { _ in }) {
+    init(with listChange: Key, handler: @escaping (Key) -> Void = { _ in }) {
         self.changeHandler = handler
-        self.list = list
-        changeHandler(list)
-    }
-    
-    func update(list: Key) {
-        self.list = list
+        self.listChangeDetails = listChange
+        changeHandler(listChange)
     }
     
     func updateNotify(handler: @escaping (Key) -> Void) {
-        self.changeHandler = handler
+        changeHandler = handler
+    }
+    
+    func update(list: List) {
+        listChangeDetails = ListChangeDetails(with: list)
+    }
+    
+    func insert(card: Card) {
+        guard var list = listChangeDetails?.list else { return }
+        list.insert(card: card)
+        listChangeDetails = ListChangeDetails(list: list, insertedRow: 0)
     }
     
     func card(at row: Int) -> Card? {
-        return list?.cards[row]
+        return listChangeDetails?.list[row]
     }
 }

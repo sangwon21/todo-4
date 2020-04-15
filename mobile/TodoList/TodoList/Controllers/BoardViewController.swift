@@ -12,7 +12,7 @@ class BoardViewController: UIViewController {
 
     @IBOutlet weak var boardStackView: UIStackView!
     
-    private var listViewControllers = [UIViewController]()
+    private var listViewControllers = [Int: CardListUpdater]()
     private var networkManager: NetworkManager?
     
     override func viewDidLoad() {
@@ -32,32 +32,57 @@ class BoardViewController: UIViewController {
     }
     
     private func setupTodoLists(for number: Int) {
-        listViewControllers = (0..<number).map { [unowned self] id in
+        listViewControllers = (0..<number).reduce(into: [:]) { [unowned self] viewControllers, number in
             guard let vc = UILoader.load(viewControllerType: CardListViewController.self,
-                                         from: storyboard) else { return nil }
-            vc.listID = id
-            vc.viewModel = CardListViewModel(with: nil)
+                                         from: storyboard) else { return }
+            vc.listID = number
             vc.dataSource = CardListDataSource()
+            vc.delegate = self
             self.boardStackView.addArrangedSubview(vc.view)
-            return vc
-        }.compactMap { $0 }
+            viewControllers[number] = vc
+        }
     }
 }
 
 extension BoardViewController {
     private func requestBoard() {
-        let center = NotificationCenter.default
         networkManager?.requestBoard { result in
             switch result {
             case .failure: return
             case let .success(board):
-                let userInfo = board.listPackage
-                center.post(name: .boardDidUpdate, object: self, userInfo: userInfo)
+                let listPackage = board.listPackage
+                (0..<listPackage.count).forEach { [weak self] in
+                    self?.listViewControllers[$0]?.update(list: listPackage[$0] ?? List(with: 0))
+                }
+            }
+        }
+    }
+    
+    private func requestNewCard(listID id: Int, card: Card) {
+        var card = card
+        networkManager?.requestNewCard(card: card) { [weak self] result in
+            switch result {
+            case .failure: return
+            case let .success(response):
+                card.id = response.cardID
+                self?.listViewControllers[id]?.insert(card: card)
             }
         }
     }
 }
 
-extension Notification.Name {
-    static let boardDidUpdate = Notification.Name(rawValue: "boardDidUpdate")
+extension BoardViewController: CardListViewControllerDelegate {
+    func addNewCardDidTouch(viewController: CardListViewController) {
+        guard let vc = UILoader.load(viewControllerType: FormViewController.self, from: storyboard) else { return }
+        vc.listID = viewController.listID
+        vc.delegate = self
+        present(vc, animated: true)
+    }
+}
+
+extension BoardViewController: FormViewControllerDelegate {
+    func newCardDidSubmit(viewController: FormViewController, card: Card) {
+        guard let id = viewController.listID else { return }
+        requestNewCard(listID: id, card: card)
+    }
 }

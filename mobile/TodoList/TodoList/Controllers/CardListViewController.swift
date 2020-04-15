@@ -8,41 +8,42 @@
 
 import UIKit
 
+protocol CardListViewControllerDelegate: class {
+    func addNewCardDidTouch(viewController: CardListViewController)
+}
+
+protocol CardListUpdater {
+    func update(list: List)
+    func insert(card: Card)
+}
+
 class CardListViewController: UIViewController {
 
+    @IBOutlet weak var cardCountLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    
-    private let observers = Observers()
     
     var viewModel: CardListViewModel?
     var dataSource: CardListDataSource?
     var listID: Int?
     
+    weak var delegate: CardListViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        addViewUpdatingObservers()
-        
-        setupViewModel()
         
         setupDataSource()
     }
     
-    deinit {
-        observers.removeObservers()
-    }
-    
-    private func addViewUpdatingObservers() {
-        let listObserver = List.addListObserver(forName: .boardDidUpdate, listID: listID) { [weak self] in
-            self?.viewModel?.update(list: $0)
+    private func updateList(with listChange: ListChangeDetails?) {
+        if let insertedRow = listChange?.insertedRow {
+            let indexPath = IndexPath(row: insertedRow, section: 0)
+            tableView.insertRows(at: [indexPath], with: .automatic)
+        } else {
+            titleLabel.text = listChange?.list.title
+            tableView.reloadData()
         }
-        observers.addObserver(listObserver)
-    }
-    
-    private func setupViewModel() {
-        viewModel?.updateNotify { [weak self] _ in
-            self?.tableView.reloadData()
-        }
+        cardCountLabel.text = "\(listChange?.list.count ?? 0)"
     }
     
     private func setupDataSource() {
@@ -54,14 +55,20 @@ class CardListViewController: UIViewController {
         }
         tableView.dataSource = dataSource
     }
+    
+    @IBAction func addNewCard(_ sender: Any) {
+        delegate?.addNewCardDidTouch(viewController: self)
+    }
 }
 
-private extension List {
-    static func addListObserver(forName name: NSNotification.Name,
-                                listID id: Int?,
-                                using block: @escaping (List) -> Void) -> NSObjectProtocol {
-        return NotificationCenter.default.addObserver(forName: name, object: nil, queue: .main) {
-            if let list = $0.userInfo?[id] as? List { block(list) }
+extension CardListViewController: CardListUpdater {
+    func update(list: List) {
+        viewModel = CardListViewModel(with: ListChangeDetails(with: list)) { [weak self] listChange in
+            DispatchQueue.main.async { self?.updateList(with: listChange) }
         }
+    }
+    
+    func insert(card: Card) {
+        viewModel?.insert(card: card)
     }
 }

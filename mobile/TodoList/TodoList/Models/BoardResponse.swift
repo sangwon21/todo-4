@@ -18,11 +18,12 @@ struct Board: Decodable {
 
 struct List: Decodable {
     let title: String
-    let cards: [Card]
+    var cards: [Card]
 }
 
-struct Card: Decodable, Equatable {
-    let id, title, detail, author: String
+struct Card: Codable, Equatable {
+    var id: String
+    let title, detail, author: String
 }
 
 extension Board {
@@ -33,18 +34,30 @@ extension Board {
     }
 }
 
+extension List {
+    var count: Int {
+        return cards.count
+    }
+    
+    init(with number: Int) {
+        title = ""
+        cards = (0..<number).map { _ in Card() }
+    }
+    
+    mutating func insert(card: Card) {
+        cards.insert(card, at: 0)
+    }
+    
+    subscript(index: Int) -> Card {
+        get { return cards[index] }
+    }
+}
+
 extension Card {
     init() {
         id = ""
         title = ""
         detail = ""
         author = ""
-    }
-}
-
-extension List {
-    init(with number: Int) {
-        title = ""
-        cards = (0..<number).map { _ in Card() }
     }
 }
