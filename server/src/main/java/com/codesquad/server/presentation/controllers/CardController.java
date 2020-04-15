@@ -13,20 +13,15 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/columns/{columnId}/cards")
+@RequestMapping("/columns/{columnsId}/cards")
 public class CardController {
 
     private final CardService cardService;
 
     @PostMapping("")
-    public HttpStatus create(@RequestBody @Valid Card card) {
+    public HttpStatus create(@PathVariable Long columnsId, @RequestBody @Valid Card card) {
         log.info("card : {}", card);
-        return cardService.save(card);
-    }
-
-    @GetMapping("")
-    public List<Card> list(@PathVariable @Valid Long columnId) {
-        return cardService.findAllById(columnId);
+        return cardService.save(card, columnsId);
     }
 
     @PutMapping("")

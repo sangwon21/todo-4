@@ -1,8 +1,11 @@
 package com.codesquad.server.domain.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -10,7 +13,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public class Board {
 
@@ -28,7 +30,7 @@ public class Board {
         histories.add(new History(id, nickname, action, actingColumn, movedColumn, changedTime, contents));
     }
 
-    public void addColumn(Long id, String title, LocalDateTime createdTime, List<Card> cards) {
-        columns.add(new Columns(id, title, createdTime, cards));
+    public void addColumn(Columns columns) {
+        this.columns.add(columns);
     }
 }

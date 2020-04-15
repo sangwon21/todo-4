@@ -1,9 +1,10 @@
 package com.codesquad.server.domain.entity;
 
-import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
@@ -12,8 +13,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 @ToString
 public class Columns {
 
@@ -23,20 +22,18 @@ public class Columns {
     @NotBlank
     private String title;
 
-    @CreatedDate
-    @Column("created_time")
     private LocalDateTime createdTime;
 
     private List<Card> cards = new ArrayList<>();
 
-    public Columns(@NotBlank String title) {
-        this.id = null;
+    public Columns(Long id, @NotBlank String title, LocalDateTime createdTime, List<Card> cards) {
+        this.id = id;
         this.title = title;
         this.createdTime = LocalDateTime.now();
-        this.cards = null;
+        this.cards = cards;
     }
 
-    public void addCard(Long id, String note, LocalDateTime createdTime) {
-        cards.add(new Card(id, note, createdTime));
+    public void addCard(Card card) {
+        cards.add(card);
     }
 }
