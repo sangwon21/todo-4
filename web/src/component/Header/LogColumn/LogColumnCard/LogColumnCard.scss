@@ -30,3 +30,14 @@
 .log-column-card-title {
   color: #000000;
 }
+
+.log-column-id {
+  color: #1a74da;
+  font-size: 0.8rem;
+}
+
+.log-column-tags .log-column-text:not(:nth-child(1)) {
+  display: inline-block;
+  margin-left: 0.1rem;
+  font-size: 0.8rem;
+}

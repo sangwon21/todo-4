@@ -1,12 +1,49 @@
 .log-column {
   height: 100vh;
   top: 0;
-  right: -25vw;
-  position: absolute;
+  position: fixed;
   width: 25vw;
   background-color: #e6ecf2;
   color: #000000;
   z-index: 100;
+}
+
+.log-column-menu-text {
+  margin-left: 0.5rem;
+}
+
+.log-column-move-right {
+  right: -25vw;
+}
+
+.animation-move-right {
+  animation-name: move-right;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+
+@keyframes move-right {
+  from {
+    right: -25vw;
+  }
+  to {
+    right: 0;
+  }
+}
+
+.animation-move-left {
+  animation-name: move-left;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+
+@keyframes move-left {
+  from {
+    right: 0vw;
+  }
+  to {
+    right: -25vw;
+  }
 }
 
 .log-column-log-wrapper {

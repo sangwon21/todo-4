@@ -2,5 +2,5 @@ import { storiesOf } from "@storybook/html";
 import { LogColumnCard } from "../component/Header/LogColumn/LogColumnCard";
 
 storiesOf("LogColumnCard Storybook", module).add("기본 LogColumn 설정", () =>
-  LogColumnCard()
+  new LogColumnCard().render()
 );
