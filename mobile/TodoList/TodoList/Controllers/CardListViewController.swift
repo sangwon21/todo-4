@@ -14,7 +14,13 @@ protocol CardListViewControllerDelegate: class {
 
 protocol CardListUpdater {
     func update(list: List)
-    func insert(card: Card)
+    func insert(card: Card, at row: Int)
+}
+
+extension CardListUpdater {
+    func insert(card: Card, at row: Int = 0) {
+        insert(card: card, at: row)
+    }
 }
 
 class CardListViewController: UIViewController {
@@ -91,8 +97,8 @@ extension CardListViewController: CardListUpdater {
         }
     }
     
-    func insert(card: Card) {
-        viewModel?.insert(card: card)
+    func insert(card: Card, at row: Int) {
+        viewModel?.insert(card: card, at: row)
     }
 }
 
