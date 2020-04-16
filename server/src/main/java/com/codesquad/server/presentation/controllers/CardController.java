@@ -1,101 +1,47 @@
 package com.codesquad.server.presentation.controllers;
 
-import com.codesquad.server.domain.entity.Card;
-import com.codesquad.server.domain.entity.Columns;
-import com.codesquad.server.domain.repository.CardRepository;
-import com.codesquad.server.domain.repository.ColumnsRepository;
-import org.json.simple.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.codesquad.server.domain.service.CardService;
+import com.codesquad.server.domain.value.RequestCardDTO;
+import com.codesquad.server.domain.value.RequestLocationDTO;
+import com.codesquad.server.domain.value.ResponseDTO;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
+import javax.validation.Valid;
+import java.time.LocalDateTime;
 
+@Slf4j
+@RequiredArgsConstructor
 @RestController
-@RequestMapping("/columns/{columnId}/cards")
+@RequestMapping("/api/columns/{columnId}/cards")
 public class CardController {
-    private final Logger logger = LoggerFactory.getLogger(CardController.class);
 
-    @Autowired
-    ColumnsRepository columnsRepository;
+    private final CardService cardService;
 
-    @Autowired
-    CardRepository cardRepository;
-
-    /**
-     * Card을 생성한다.
-     *
-     * @RequestBody
-     *{
-     * 	"note": "순두부찌개는 맛있어",
-     * }
-     *
-     * @return
-     * Status Code를 반환(CREATED, 201)
-     */
+    @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping("")
-    public JSONObject create(@PathVariable Long columnId, @RequestBody Map<String, String> bodyMap) {
-        Columns columns = columnsRepository.findById(columnId).orElseThrow(NoSuchElementException::new);
-        columns.addCard(bodyMap.get("note"));
-        columnsRepository.save(columns);
-
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("StatusCode", HttpStatus.CREATED.value());
-        return jsonObject;
+    public ResponseDTO create(@PathVariable Long columnId, @RequestBody @Valid RequestCardDTO requestCardDTO) {
+        log.info("card : {}", requestCardDTO.getCard());
+        return cardService.save(requestCardDTO, columnId);
     }
 
-    /**
-     * 해당하는 Column의 전체 Card 목록 반환
-     *
-     * @return
-     * Column 객체가 json 형태로 반환
-     */
-    @GetMapping("")
-    public List<Card> list(@PathVariable Long columnId) {
-        Columns columns = columnsRepository.findById(columnId).orElseThrow(NoSuchElementException::new);
-        return columns.getCards();
+    @ResponseStatus(value = HttpStatus.OK)
+    @PutMapping("")
+    public LocalDateTime update(@RequestBody @Valid RequestCardDTO requestCardDTO) {
+        return cardService.update(requestCardDTO);
     }
 
-    /**
-     * Card 이름 수정
-     *
-     * @RequestBody
-     *{
-     * 	"afterNote": "노맛존맛"
-     * }
-     *
-     * @return
-     * Status Code를 반환(NO_CONTENT, 204)
-     */
-    @PutMapping("/{cardId}")
-    public JSONObject update(@PathVariable Long cardId, @RequestBody HashMap<String, String> bodyMap) {
-        Card card = cardRepository.findById(cardId).orElseThrow(NoSuchElementException::new);
-        card.setNote(bodyMap.get("afterNote"));
-        cardRepository.save(card);
-
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("StatusCode", HttpStatus.NO_CONTENT.value());
-        return jsonObject;
+    @ResponseStatus(value = HttpStatus.OK)
+    @PutMapping("/move")
+    public LocalDateTime move(@RequestBody @Valid RequestLocationDTO requestLocationDTO) {
+        return cardService.move(requestLocationDTO);
     }
 
-    /**
-     * Card 삭제
-     *
-     * @return
-     * Status Code를 반환(NO_CONTENT, 204)
-     */
-    @DeleteMapping("/{cardId}")
-    public JSONObject delete(@PathVariable Long cardId) {
-        Card card = cardRepository.findById(cardId).orElseThrow(NoSuchElementException::new);
-        cardRepository.delete(card);
-
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("StatusCode", HttpStatus.NO_CONTENT.value());
-        return jsonObject;
+    @ResponseStatus(value = HttpStatus.OK)
+    @DeleteMapping("")
+    public LocalDateTime delete(@RequestBody @Valid RequestCardDTO requestCardDTO) {
+        return cardService.delete(requestCardDTO);
     }
 }

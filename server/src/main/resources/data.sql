@@ -1,18 +1,30 @@
-insert into user(user_id, password) values ('hamill', '1234');
+INSERT INTO board (created_time)
+VALUES (CURRENT_TIMESTAMP);
 
-insert into columns(title, user, user_key, previous_id) values ('해야할일', 1, 0, NULL);
-insert into columns(title, user, user_key, previous_id) values ('하는중', 1, 1, 0);
-insert into columns(title, user, user_key, previous_id) values ('다했어', 1, 2, 1);
+INSERT INTO columns (title, board, board_key)
+VALUES ('TODO', 1, 0);
+INSERT INTO columns (title, board, board_key)
+VALUES ('DOING', 1, 1);
+INSERT INTO columns (title, board, board_key)
+VALUES ('DONE', 1, 2);
 
-insert into card(note, columns, columns_key, previous_id) values ('맛있는 김치볶음밥', 3, 0,  NULL);
-insert into card(note, columns, columns_key, previous_id) values ('재밌는 코드스쿼드', 3, 1,  0);
-insert into card(note, columns, columns_key, previous_id) values ('투두앱만들기~', 3, 2,  1);
-
-insert into card(note, columns, columns_key, previous_id) values ('맛없어', 2, 0,  NULL);
-insert into card(note, columns, columns_key, previous_id) values ('슬기로운 깜빵생활', 2, 1,  0);
-insert into card(note, columns, columns_key, previous_id) values ('히히헤헤', 2, 2,  1);
-
-insert into card(note, columns, columns_key, previous_id) values ('떡순이', 1, 0,  NULL);
-insert into card(note, columns, columns_key, previous_id) values ('떡돌이', 1, 1,  0);
-insert into card(note, columns, columns_key, previous_id) values ('떡튀순', 1, 2,  1);
-
+INSERT INTO card (author, title, note, columns, columns_key)
+VALUES ('iOS', '제목1', '2번 내용',  1, 0);
+INSERT INTO card (author, title, note, columns, columns_key)
+VALUES ('iOS', '제목2', '2번 내용', 1, 1);
+INSERT INTO card (author, title, note, columns, columns_key)
+VALUES ('iOS', '제목3', '3번 내용', 1, 2);
+INSERT INTO card (author, title, note, columns, columns_key)
+VALUES ('iOS', '제목4', '4번 내용', 2, 0);
+INSERT INTO card (author, title, note, columns, columns_key)
+VALUES ('iOS', '제목5', '5번 내용', 2, 1);
+INSERT INTO card (author, title, note, columns, columns_key)
+VALUES ('iOS', '제목6', '6번 내용', 2, 2);
+INSERT INTO card (author, title, note, columns, columns_key)
+VALUES ('iOS', '제목7', '7번 내용', 2, 3);
+INSERT INTO card (author, title, note, columns, columns_key)
+VALUES ('iOS', '제목8', '8번 내용', 3, 0);
+INSERT INTO card (author, title, note, columns, columns_key)
+VALUES ('iOS', '제목9', '9번 내용', 3, 1);
+INSERT INTO card (author, title, note, columns, columns_key)
+VALUES ('iOS', '제목10', '10번 내용', 3, 2);

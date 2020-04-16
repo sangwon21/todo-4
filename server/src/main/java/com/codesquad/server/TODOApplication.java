@@ -18,7 +18,7 @@ public class TODOApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
         encryptor.setAlgorithm("PBEWithMD5AndDES");
-        encryptor.setPassword("spring");
+        encryptor.setPassword("code-squad");
 
         //암호화할 내용
         String content = encryptor.encrypt("test");

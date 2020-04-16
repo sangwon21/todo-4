@@ -7,8 +7,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 @RequiredArgsConstructor
@@ -18,12 +20,6 @@ public class WebConfig implements WebMvcConfigurer {
     @NonNull
     private final JwtAuthInterceptor jwtAuthInterceptor;
 
-    private String[] interceptorWhiteList = {
-            "/signup/**",
-            "/signin/**",
-            "/swagger-ui.html"
-    };
-
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
@@ -32,14 +28,19 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        List<String> swaggerPathPatterns = new ArrayList<>();
+
+        swaggerPathPatterns.add("/");
+        swaggerPathPatterns.add("/swagger-ui.html");
+        swaggerPathPatterns.add("/swagger-resources/**");
+        swaggerPathPatterns.add("/error");
+        swaggerPathPatterns.add("/webjars/**");
+        swaggerPathPatterns.add("/csrf");
+
         registry.addInterceptor(jwtAuthInterceptor)
                 .addPathPatterns("/*")
-                .excludePathPatterns("/signup", "/signin", "swagger-ui.html", "/swagger-resources");
-    }
-
-    @Override public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("/static/");
-        registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
-        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+                .excludePathPatterns("/signup")
+                .excludePathPatterns("/signin")
+                .excludePathPatterns(swaggerPathPatterns);
     }
 }

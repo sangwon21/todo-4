@@ -3,18 +3,21 @@ package com.codesquad.server.domain.entity;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 
+import javax.validation.constraints.NotBlank;
+
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class Card {
 
     @Id
     private Long id;
-    private String note;
 
-    public Card(String note) {
-        this.note = note;
-    }
+    private String author;
+
+    private String title;
+
+    private String note;
 }
