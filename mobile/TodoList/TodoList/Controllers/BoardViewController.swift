@@ -80,6 +80,14 @@ extension BoardViewController: CardListViewControllerDelegate {
         vc.delegate = self
         present(vc, animated: true)
     }
+    
+    func deleteCard(viewController: CardListViewController, cards: [FloatingCard]) -> Bool {
+        cards.forEach { [weak self] in
+            guard let listID = $0.sourceListID else { return }
+            self?.listViewControllers[listID]?.delete(at: $0.sourceIndex)
+        }
+        return true
+    }
 }
 
 extension BoardViewController: FormViewControllerDelegate {

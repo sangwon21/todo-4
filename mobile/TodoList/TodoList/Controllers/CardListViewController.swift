@@ -10,11 +10,13 @@ import UIKit
 
 protocol CardListViewControllerDelegate: class {
     func addNewCardDidTouch(viewController: CardListViewController)
+    func deleteCard(viewController: CardListViewController, cards: [FloatingCard]) -> Bool
 }
 
 protocol CardListUpdater {
     func update(list: List)
     func insert(cards: [Card], at row: Int)
+    func delete(at row: Int)
 }
 
 extension CardListUpdater {
@@ -50,7 +52,7 @@ class CardListViewController: UIViewController {
     private func updateList(with listChange: ListChangeDetails?) {
         if let deletedRow = listChange?.deletedRow {
             let indexPath = IndexPath(row: deletedRow, section: 0)
-            tableView.deleteRows(at: [indexPath], with: .left)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
         } else if let insertedRows = listChange?.insertedRows {
             let indexPaths = insertedRows.map { IndexPath(row: $0, section: 0) }
             tableView.insertRows(at: indexPaths, with: .automatic)
@@ -77,11 +79,15 @@ class CardListViewController: UIViewController {
             self.requestDelete(card: card, cardIndex: $0)
         }
         tableViewDelegate?.dragItem = { [weak self] in
-            guard let card = self?.viewModel?.card(at: $0) else { return nil }
-            return Drag.item(from: card)
+            guard let self = self, let card = self.viewModel?.card(at: $0) else { return nil }
+            return Drag.item(from: FloatingCard(sourceListID: self.listID, sourceIndex: $0, card: card))
         }
         tableViewDelegate?.dropItem = { [weak self] coordinator, index in
-            let cards = Drop.objects(from: coordinator) as [Card]
+            guard let self = self else { return }
+            let cards = Drop.objects(from: coordinator) as [FloatingCard]
+            if let result = self.delegate?.deleteCard(viewController: self, cards: cards), result {
+                self.viewModel?.insert(cards: cards.map { $0.card }, at: index)
+            }
         }
         tableView.delegate = tableViewDelegate
         tableView.dragDelegate = tableViewDelegate
@@ -102,6 +108,10 @@ extension CardListViewController: CardListUpdater {
     
     func insert(cards: [Card], at row: Int) {
         viewModel?.insert(cards: cards, at: row)
+    }
+    
+    func delete(at row: Int) {
+        viewModel?.remove(at: row)
     }
 }
 
