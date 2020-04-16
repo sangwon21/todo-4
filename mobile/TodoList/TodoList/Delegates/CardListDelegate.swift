@@ -35,6 +35,11 @@ extension CardListDelegate: UITableViewDragDelegate {
         guard let dragItem = dragItem?(indexPath.row) else { return [] }
         return [dragItem]
     }
+    
+    func tableView(_ tableView: UITableView, itemsForAddingTo session: UIDragSession, at indexPath: IndexPath, point: CGPoint) -> [UIDragItem] {
+        guard let dragItem = dragItem?(indexPath.row) else { return [] }
+        return [dragItem]
+    }
 }
 
 extension CardListDelegate: UITableViewDropDelegate {
