@@ -34,6 +34,7 @@
 		C2B8CF202445F4B50076F34D /* BoardResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C2B8CF1E2445F4B40076F34D /* BoardResponse.json */; };
 		C2B8CF212445F4B50076F34D /* NewCardResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C2B8CF1F2445F4B50076F34D /* NewCardResponse.json */; };
 		C2B8CF252446D5F80076F34D /* CardListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B8CF242446D5F70076F34D /* CardListDelegate.swift */; };
+		C2B8CF2724480F2F0076F34D /* Drag.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B8CF2624480F2F0076F34D /* Drag.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		C2B8CF1E2445F4B40076F34D /* BoardResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BoardResponse.json; sourceTree = "<group>"; };
 		C2B8CF1F2445F4B50076F34D /* NewCardResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NewCardResponse.json; sourceTree = "<group>"; };
 		C2B8CF242446D5F70076F34D /* CardListDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListDelegate.swift; sourceTree = "<group>"; };
+		C2B8CF2624480F2F0076F34D /* Drag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drag.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 				C26472CE243C7677006D87EB /* ReusableView.swift */,
 				C288495D243EF88700D4B603 /* UILoader.swift */,
 				C24C8DC92440472C00825031 /* FirstResponder.swift */,
+				C2B8CF2624480F2F0076F34D /* Drag.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 				C2884956243E37B900D4B603 /* CardListViewModel.swift in Sources */,
 				C288495E243EF88700D4B603 /* UILoader.swift in Sources */,
 				C26472D8243C8F57006D87EB /* Endpoints.swift in Sources */,
+				C2B8CF2724480F2F0076F34D /* Drag.swift in Sources */,
 				C26472E6243DFF6D006D87EB /* CardCell.swift in Sources */,
 				C26472CC243C7551006D87EB /* CardListViewController.swift in Sources */,
 			);

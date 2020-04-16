@@ -13,10 +13,6 @@ class CardListDataSource: NSObject {
     var rowCount: (() -> Int)?
     
     var cardAtRow: ((Int) -> Card)?
-    
-    override init() {
-        super.init()
-    }
 }
 
 extension CardListDataSource: UITableViewDataSource {

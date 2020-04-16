@@ -36,7 +36,9 @@ class CardListViewController: UIViewController {
         
         setupDataSource()
         
-        setupDelegate()
+        setupDelegates()
+        
+        tableView.dragInteractionEnabled = true
     }
     
     private func updateList(with listChange: ListChangeDetails?) {
@@ -63,12 +65,18 @@ class CardListViewController: UIViewController {
         tableView.dataSource = tableViewDataSource
     }
     
-    private func setupDelegate() {
+    private func setupDelegates() {
         tableViewDelegate?.deleteAction = { [weak self] in
             guard let self = self, let card = self.viewModel?.card(at: $0) else { return }
             self.requestDelete(card: card, cardIndex: $0)
         }
+        tableViewDelegate?.dragItem = { [weak self] in
+            guard let card = self?.viewModel?.card(at: $0) else { return nil }
+            return Drag.item(from: card)
+        }
         tableView.delegate = tableViewDelegate
+        tableView.dragDelegate = tableViewDelegate
+        tableView.dropDelegate = tableViewDelegate
     }
     
     @IBAction func addNewCard(_ sender: Any) {
