@@ -3,25 +3,34 @@ import {
   InlineList,
   InlineListClass,
 } from "../../../../styled-component/InlineList";
-
-import * as imgSrc from "./yein.jpg";
+import yein from "./yein.jpg";
+import { dateDiff } from "../../../../util/date";
 
 import "./LogColumnCard.scss";
 
+interface ILogColumnCardState {
+  log: string;
+  fromDate: string;
+}
+
 export class LogColumnCard {
-  constructor() {}
+  private state: ILogColumnCardState;
+  constructor(props: ILogColumnCardState) {
+    this.state = {
+      log: props.log,
+      fromDate: props.fromDate,
+    };
+  }
   render() {
     const imgElement = div()([
-      img({ src: imgSrc, class: "log-column-card-img" })(),
+      img({ src: yein, class: "log-column-card-img" })(),
     ]);
 
     const idTag = span({ class: "log-column-text log-column-id" })([
       "@nigayo ",
     ]);
     const contentTag = span({ class: "log-column-text" })(["moved "]);
-    const footerTag = span({ class: "log-column-text" })([
-      "github 공부하기asdfasdfasdfasdfasdfasdfasdfasdf",
-    ]);
+    const footerTag = span({ class: "log-column-text" })([`${this.state.log}`]);
 
     const tags = div({ class: "log-column-tags" })([
       idTag,
@@ -30,7 +39,10 @@ export class LogColumnCard {
     ]);
 
     const title = div({ class: "log-column-card-title" })([tags]);
-    const footer = span({ class: "log-column-card-time" })(["38 minutes ago"]);
+
+    const footer = span({ class: "log-column-card-time" })([
+      dateDiff(new Date(this.state.fromDate), new Date()),
+    ]);
 
     const contents = InlineList({
       className: InlineListClass.SPACE_AROUND_COLUMN,

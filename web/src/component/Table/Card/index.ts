@@ -6,6 +6,8 @@ import {
 import { EditModal } from "./EditModal";
 import { FailModal } from "./FailModal";
 import { Spinner, SpinnerSize } from "../../Spinner";
+import store from "../../../store";
+import { ADD_LOG_HISTORY } from "../../../store/action/logHistory";
 import axios from "axios";
 
 import "./card.scss";
@@ -80,6 +82,7 @@ export class Card {
     );
     this.setTableNode(nextTableNode);
     target.classList.remove("dragging");
+    store.dispatch({ type: ADD_LOG_HISTORY, userAction: "move", contents: "" });
   }
 
   handleTaskEditClick() {
