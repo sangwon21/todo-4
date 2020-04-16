@@ -7,6 +7,8 @@ import com.codesquad.server.domain.repository.ColumnsRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ColumnsServiceImpl implements ColumnsService {
 
@@ -20,6 +22,11 @@ public class ColumnsServiceImpl implements ColumnsService {
         this.boardRepository = boardRepository;
         this.columnsRepository = columnsRepository;
         this.board = boardRepository.findById(1L).get();
+    }
+
+    @Override
+    public Iterable<Columns> list() {
+        return columnsRepository.findAll();
     }
 
     @Override

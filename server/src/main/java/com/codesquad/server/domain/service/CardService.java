@@ -1,17 +1,17 @@
 package com.codesquad.server.domain.service;
 
-import com.codesquad.server.domain.entity.Card;
-import com.codesquad.server.domain.value.Location;
 import com.codesquad.server.domain.value.RequestCardDTO;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.codesquad.server.domain.value.RequestLocationDTO;
+import com.codesquad.server.domain.value.ResponseCardDTO;
+
+import java.time.LocalDateTime;
 
 public interface CardService {
-    public ResponseEntity<Object> save(RequestCardDTO requestCardDTO, Long id);
+    ResponseCardDTO save(RequestCardDTO requestCardDTO, Long id);
 
-    public HttpStatus update(RequestCardDTO requestCardDTO);
+    LocalDateTime update(RequestCardDTO requestCardDTO);
 
-    public HttpStatus move(Location location);
+    LocalDateTime move(RequestLocationDTO requestLocationDTO, Long id);
 
-    public HttpStatus delete(Card card);
+    LocalDateTime delete(RequestCardDTO requestCardDTO);
 }

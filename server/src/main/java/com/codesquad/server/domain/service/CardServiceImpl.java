@@ -8,11 +8,10 @@ import com.codesquad.server.domain.repository.ColumnsRepository;
 import com.codesquad.server.domain.repository.HistoryRepository;
 import com.codesquad.server.domain.value.Location;
 import com.codesquad.server.domain.value.RequestCardDTO;
+import com.codesquad.server.domain.value.RequestLocationDTO;
 import com.codesquad.server.domain.value.ResponseCardDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -29,16 +28,12 @@ public class CardServiceImpl implements CardService {
     private final HistoryRepository historyRepository;
 
     @Override
-    public ResponseEntity<Object> save(RequestCardDTO requestCardDTO, Long columnsId) {
-        Columns columns = columnsRepository.findById(columnsId).orElseThrow(() -> new IllegalArgumentException("컬럼이 존재하지 않습니다!"));
+    public ResponseCardDTO save(RequestCardDTO requestCardDTO, Long columnId) {
+        Columns columns = columnsRepository.findById(columnId).orElseThrow(() -> new IllegalArgumentException("컬럼이 존재하지 않습니다!"));
         Card card = requestCardDTO.getCard();
         columns.addCard(card);
+        log.info("columns : {}", columns);
         columnsRepository.save(columns);
-
-        if (card.getAuthor().equals("iOS")) {
-            log.info("##### : {}", card);
-            return new ResponseEntity<>(card, HttpStatus.CREATED);
-        }
 
         History history = requestCardDTO.getHistory();
         historyRepository.save(history);
@@ -46,29 +41,44 @@ public class CardServiceImpl implements CardService {
         Long id = card.getId();
         LocalDateTime createdTime = history.getHistoryCreatedTime();
 
-        return new ResponseEntity<>(new ResponseCardDTO(id, createdTime), HttpStatus.CREATED);
+        return new ResponseCardDTO(id, createdTime);
     }
 
     @Override
-    public ResponseEntity<Object> update(RequestCardDTO requestCardDTO) {
-        Card card = requestCardDTO.getCard();;
+    public LocalDateTime update(RequestCardDTO requestCardDTO) {
+        Card card = requestCardDTO.getCard();
         cardRepository.save(card);
-        return new ResponseEntity<>(new ResponseCardDTO())
+
+        History history = requestCardDTO.getHistory();
+        historyRepository.save(history);
+
+        return history.getHistoryCreatedTime();
     }
 
     @Override
-    public HttpStatus move(Location location) {
-        cardRepository.delete(location.getCard());
-        Columns columns = columnsRepository.findById(location.getColumnsIndex()).get();
-        log.info("index : {}", location.getAfterMoveCardIndex());
-        columns.insertCard(location.getAfterMoveCardIndex(), location.getCard());
-        columnsRepository.save(columns);
-        return HttpStatus.OK;
-    }
-
-    @Override
-    public HttpStatus delete(Card card) {
+    public LocalDateTime move(RequestLocationDTO requestLocationDTO, Long id) {
+        Location location = requestLocationDTO.getLocation();
+        Card card = cardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("카드가 존재하지 않습니다!"));
         cardRepository.delete(card);
-        return HttpStatus.NO_CONTENT;
+
+        Columns columns = columnsRepository.findById(location.getColumnId()).orElseThrow(() -> new IllegalArgumentException("컬럼이 존재하지 않습니다!"));
+        columns.insertCard(location.getAfterMoveCardIndex(), card);
+        columnsRepository.save(columns);
+
+        History history = requestLocationDTO.getHistory();
+        historyRepository.save(history);
+
+        return history.getHistoryCreatedTime();
+    }
+
+    @Override
+    public LocalDateTime delete(RequestCardDTO requestCardDTO) {
+        Card card = requestCardDTO.getCard();
+        cardRepository.delete(card);
+
+        History history = requestCardDTO.getHistory();
+        historyRepository.save(history);
+
+        return history.getHistoryCreatedTime();
     }
 }
