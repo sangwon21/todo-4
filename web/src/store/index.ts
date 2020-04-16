@@ -1,14 +1,20 @@
 import { createStore, Action } from "redux";
 import { ADD_LOG_HISTORY } from "./action/logHistory";
 
-interface ILogHistoryState {
-  history: string[];
-}
-
 interface ILogHistoryAction extends Action {
   userAction: string;
   contents: string;
   suffix?: string;
+}
+
+interface ILogHistoryType {
+  userAction: string;
+  contents: string;
+  suffix?: string;
+}
+
+interface ILogHistoryState {
+  history: ILogHistoryType[];
 }
 
 const initialState: ILogHistoryState = {
@@ -21,10 +27,16 @@ const logHistoryManagement = (
 ) => {
   switch (action.type) {
     case ADD_LOG_HISTORY:
-      const log = action.suffix
-        ? `${action.userAction} ${action.contents} ${action.suffix}`
-        : `${action.userAction} ${action.contents}`;
-      return { history: [...state.history, log] };
+      return {
+        history: [
+          ...state.history,
+          {
+            userAction: action.userAction,
+            contents: action.contents,
+            suffix: action.suffix,
+          },
+        ],
+      };
     default:
       return state;
   }

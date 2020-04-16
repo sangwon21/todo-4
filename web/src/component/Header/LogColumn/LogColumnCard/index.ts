@@ -9,7 +9,9 @@ import { dateDiff } from "../../../../util/date";
 import "./LogColumnCard.scss";
 
 interface ILogColumnCardState {
-  log: string;
+  userAction: string;
+  contents: string;
+  suffix?: string;
   fromDate: string;
 }
 
@@ -17,7 +19,9 @@ export class LogColumnCard {
   private state: ILogColumnCardState;
   constructor(props: ILogColumnCardState) {
     this.state = {
-      log: props.log,
+      userAction: props.userAction,
+      contents: props.contents,
+      suffix: props.suffix,
       fromDate: props.fromDate,
     };
   }
@@ -26,19 +30,25 @@ export class LogColumnCard {
       img({ src: yein, class: "log-column-card-img" })(),
     ]);
 
-    const idTag = span({ class: "log-column-text log-column-id" })([
+    const idText = span({ class: "log-column-text log-column-id" })([
       "@nigayo ",
     ]);
-    const contentTag = span({ class: "log-column-text" })(["moved "]);
-    const footerTag = span({ class: "log-column-text" })([`${this.state.log}`]);
-
-    const tags = div({ class: "log-column-tags" })([
-      idTag,
-      contentTag,
-      footerTag,
+    const actionText = span({ class: "log-column-text" })([
+      this.state.userAction,
+    ]);
+    const suffixText = span({ class: "log-column-text" })([
+      this.state.suffix
+        ? `${this.state.contents} ${this.state.suffix}`
+        : this.state.contents,
     ]);
 
-    const title = div({ class: "log-column-card-title" })([tags]);
+    const texts = div({ class: "log-column-texts" })([
+      idText,
+      actionText,
+      suffixText,
+    ]);
+
+    const title = div({ class: "log-column-card-title" })([texts]);
 
     const footer = span({ class: "log-column-card-time" })([
       dateDiff(new Date(this.state.fromDate), new Date()),

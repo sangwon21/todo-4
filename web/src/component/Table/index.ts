@@ -73,6 +73,10 @@ export class Table {
     return this.tableNode;
   }
 
+  getTableName() {
+    return this.state.tableName;
+  }
+
   increaseCardCount() {
     this.state.cardCounts++;
     this.tableHeader.updateCardCounts(this.state.cardCounts);

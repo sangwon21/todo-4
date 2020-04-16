@@ -40,12 +40,16 @@ export class LogColumn {
 
   update() {
     this.deleteAllChildren();
-    const currentStatus = store.getState().history;
-    console.log(currentStatus);
-    console.log(this.logsNode);
-    currentStatus
+    const { history } = store.getState();
+    console.log("history", history);
+    history
       .map((log) =>
-        new LogColumnCard({ fromDate: "2020-04-15T18:13:34.247", log }).render()
+        new LogColumnCard({
+          fromDate: "2020-04-15T18:13:34.247",
+          userAction: log.userAction,
+          contents: log.contents,
+          suffix: log.suffix,
+        }).render()
       )
       .reverse()
       .forEach((logColmun) => {
@@ -70,12 +74,11 @@ export class LogColumn {
     })([rightHeader, closeButton]);
 
     const bellIcon = div()([i({ class: "bell icon" })()]);
-    const activity = div()(["Activity"]);
 
     const subHeader = InlineList({
       className: InlineListClass.DEFAULT,
       width: "100%",
-    })([bellIcon, activity]);
+    })([bellIcon, div()(["Activity"])]);
 
     const composedHeader = InlineList({
       className: InlineListClass.SPACE_AROUND_COLUMN,
@@ -88,12 +91,7 @@ export class LogColumn {
       width: "100%",
       height: "90%",
       userClassList: ["log-column-log-wrapper"],
-    })(
-      new LogColumnCard({
-        log: "hello",
-        fromDate: "2020-04-15T14:05:34.247",
-      }).render()
-    );
+    })(div()());
 
     this.logColumnNode = InlineList({
       className: InlineListClass.ALIGN_LEFT_COLUMN,

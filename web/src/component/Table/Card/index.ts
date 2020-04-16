@@ -76,13 +76,26 @@ export class Card {
 
   handleDragEnd(e: DragEvent) {
     const target = e.target! as Element;
-    const nextTableNode = this.state.handleDragCardCountsChange!(
-      target,
-      this.state.tableNode
-    );
-    this.setTableNode(nextTableNode);
+    const { returnTableElement, targetTableName } = this.state
+      .handleDragCardCountsChange!(target, this.state.tableNode);
+    this.setTableNode(returnTableElement);
     target.classList.remove("dragging");
-    store.dispatch({ type: ADD_LOG_HISTORY, userAction: "move", contents: "" });
+    const contents = this.state.contents;
+    if (targetTableName !== "") {
+      this.state.tableType = targetTableName;
+    }
+
+    const suffix =
+      targetTableName !== ""
+        ? `to ${targetTableName}`
+        : `to ${this.state.tableType}`;
+
+    store.dispatch({
+      type: ADD_LOG_HISTORY,
+      userAction: "move",
+      contents,
+      suffix,
+    });
   }
 
   handleTaskEditClick() {
