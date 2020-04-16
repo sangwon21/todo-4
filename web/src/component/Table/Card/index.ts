@@ -56,6 +56,12 @@ export class Card {
         "http://52.207.159.215:8080/columns/1/cards/1",
         {}
       );
+      store.dispatch({
+        type: ADD_LOG_HISTORY,
+        userAction: "removed",
+        contents: this.state.contents,
+        suffix: `from ${this.state.tableType}`,
+      });
       this.cardNode && this.cardNode.remove();
     } catch (error) {
       this.cardNode!.appendChild(new FailModal().render());
@@ -80,21 +86,16 @@ export class Card {
       .handleDragCardCountsChange!(target, this.state.tableNode);
     this.setTableNode(returnTableElement);
     target.classList.remove("dragging");
-    const contents = this.state.contents;
+    const previousTableName = this.state.tableType;
     if (targetTableName !== "") {
       this.state.tableType = targetTableName;
     }
 
-    const suffix =
-      targetTableName !== ""
-        ? `to ${targetTableName}`
-        : `to ${this.state.tableType}`;
-
     store.dispatch({
       type: ADD_LOG_HISTORY,
-      userAction: "move",
-      contents,
-      suffix,
+      userAction: "moved",
+      contents: this.state.contents,
+      suffix: `from ${previousTableName} to ${this.state.tableType}`,
     });
   }
 
@@ -110,6 +111,12 @@ export class Card {
   editTask(task: string) {
     (this.contentNode! as Element).innerHTML = task;
     this.state.contents = task;
+
+    store.dispatch({
+      type: ADD_LOG_HISTORY,
+      userAction: "updated",
+      contents: this.state.contents,
+    });
   }
 
   handleLoading() {

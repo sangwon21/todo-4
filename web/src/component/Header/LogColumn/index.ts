@@ -41,7 +41,6 @@ export class LogColumn {
   update() {
     this.deleteAllChildren();
     const { history } = store.getState();
-    console.log("history", history);
     history
       .map((log) =>
         new LogColumnCard({
