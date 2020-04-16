@@ -35,6 +35,7 @@
 		C2B8CF212445F4B50076F34D /* NewCardResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = C2B8CF1F2445F4B50076F34D /* NewCardResponse.json */; };
 		C2B8CF252446D5F80076F34D /* CardListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B8CF242446D5F70076F34D /* CardListDelegate.swift */; };
 		C2B8CF2724480F2F0076F34D /* DragDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B8CF2624480F2F0076F34D /* DragDrop.swift */; };
+		C2B8CF2924484DE50076F34D /* FloatingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B8CF2824484DE50076F34D /* FloatingCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		C2B8CF1F2445F4B50076F34D /* NewCardResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NewCardResponse.json; sourceTree = "<group>"; };
 		C2B8CF242446D5F70076F34D /* CardListDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListDelegate.swift; sourceTree = "<group>"; };
 		C2B8CF2624480F2F0076F34D /* DragDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragDrop.swift; sourceTree = "<group>"; };
+		C2B8CF2824484DE50076F34D /* FloatingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 				C26472DF243D9CA8006D87EB /* BoardResponse.swift */,
 				C24C8DCB24405CD400825031 /* CardIDResponse.swift */,
 				C2884957243E41E100D4B603 /* Observers.swift */,
+				C2B8CF2824484DE50076F34D /* FloatingCard.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				C288495E243EF88700D4B603 /* UILoader.swift in Sources */,
 				C26472D8243C8F57006D87EB /* Endpoints.swift in Sources */,
 				C2B8CF2724480F2F0076F34D /* DragDrop.swift in Sources */,
+				C2B8CF2924484DE50076F34D /* FloatingCard.swift in Sources */,
 				C26472E6243DFF6D006D87EB /* CardCell.swift in Sources */,
 				C26472CC243C7551006D87EB /* CardListViewController.swift in Sources */,
 			);
