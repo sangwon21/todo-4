@@ -21,8 +21,9 @@ CREATE TABLE columns
 CREATE TABLE card
 (
     id           BIGINT PRIMARY KEY AUTO_INCREMENT,
+    title        VARCHAR(10),
     note         VARCHAR(500),
-    created_time DATETIME,
+    author       VARCHAR(10),
     columns      INT REFERENCES columns (id),
     columns_key  INT
 );

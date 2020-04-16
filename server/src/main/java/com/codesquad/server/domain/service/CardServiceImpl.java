@@ -5,6 +5,7 @@ import com.codesquad.server.domain.entity.Columns;
 import com.codesquad.server.domain.repository.CardRepository;
 import com.codesquad.server.domain.repository.ColumnsRepository;
 import com.codesquad.server.domain.value.Location;
+import com.codesquad.server.domain.value.RequestCardDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -20,9 +21,9 @@ public class CardServiceImpl implements CardService {
     private final CardRepository cardRepository;
 
     @Override
-    public HttpStatus save(Card card, Long columnsId) {
+    public HttpStatus save(RequestCardDTO card, Long columnsId) {
         Columns columns = columnsRepository.findById(columnsId).orElseThrow(() -> new IllegalArgumentException("컬럼이 존재하지 않습니다!"));
-        columns.addCard(card);
+        columns.addCard(new Card(null, card.getTitle(), card.getNote(), card.getAuthor()));
         columnsRepository.save(columns);
         return HttpStatus.CREATED;
     }
@@ -38,7 +39,7 @@ public class CardServiceImpl implements CardService {
         cardRepository.delete(location.getCard());
         Columns columns = columnsRepository.findById(location.getColumnsIndex()).get();
         log.info("index : {}", location.getAfterMoveCardIndex());
-        columns.moveCard(location.getAfterMoveCardIndex(), location.getCard());
+        columns.insertCard(location.getAfterMoveCardIndex(), location.getCard());
         columnsRepository.save(columns);
         return HttpStatus.OK;
     }

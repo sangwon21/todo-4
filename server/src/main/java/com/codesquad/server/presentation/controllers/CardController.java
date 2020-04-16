@@ -3,12 +3,14 @@ package com.codesquad.server.presentation.controllers;
 import com.codesquad.server.domain.entity.Card;
 import com.codesquad.server.domain.service.CardService;
 import com.codesquad.server.domain.value.Location;
+import com.codesquad.server.domain.value.RequestCardDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Map;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -19,7 +21,7 @@ public class CardController {
     private final CardService cardService;
 
     @PostMapping("")
-    public HttpStatus create(@PathVariable Long columnsId, @RequestBody @Valid Card card) {
+    public HttpStatus create(@PathVariable Long columnsId, @RequestBody RequestCardDTO card) {
         log.info("card : {}", card);
         return cardService.save(card, columnsId);
     }
