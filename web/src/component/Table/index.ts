@@ -4,6 +4,8 @@ import COLOR from "../../util/color";
 import { AddingCard } from "./AddingCard";
 import { TableHeader } from "./TableHeader";
 import { Card } from "./Card";
+import store from "../../store";
+import { ADD_LOG_HISTORY } from "../../store/action/logHistory";
 
 import "./Table.scss";
 
@@ -73,6 +75,10 @@ export class Table {
     return this.tableNode;
   }
 
+  getTableName() {
+    return this.state.tableName;
+  }
+
   increaseCardCount() {
     this.state.cardCounts++;
     this.tableHeader.updateCardCounts(this.state.cardCounts);
@@ -106,9 +112,11 @@ export class Table {
     const textArea = (this.tableNode as Element).querySelector(
       "textarea"
     )! as HTMLTextAreaElement;
+
     if (textArea.value === "") {
       return;
     }
+
     const firstCard = (this.tableNode as Element).querySelector(".card");
     (this.tableNode as Element).insertBefore(
       new Card({
@@ -120,6 +128,14 @@ export class Table {
       }).render(),
       firstCard
     );
+
+    store.dispatch({
+      type: ADD_LOG_HISTORY,
+      userAction: "added",
+      contents: textArea.value,
+      suffix: `to ${this.state.tableName}`,
+    });
+
     this.increaseCardCount();
     this.makeButtonInvalid();
     textArea.value = "";

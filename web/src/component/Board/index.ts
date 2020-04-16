@@ -22,6 +22,7 @@ export class Board {
 
   handleDragCardCountsChange(cardElement: Element, tableElement: Element) {
     let returnTableElement = tableElement;
+    let targetTableName = "";
 
     this.state.tables.forEach((table) => {
       const tableNode = table.getTableNode()!;
@@ -30,6 +31,7 @@ export class Board {
           return;
         }
         table.increaseCardCount();
+        targetTableName = table.getTableName();
         returnTableElement = tableNode as Element;
         return;
       }
@@ -38,7 +40,7 @@ export class Board {
         return;
       }
     });
-    return returnTableElement;
+    return { returnTableElement, targetTableName };
   }
 
   render() {

@@ -6,6 +6,8 @@ import {
 } from "../../styled-component/Spacing";
 import { LogColumn } from "./LogColumn";
 
+import store from "../../store";
+
 import "./Header.scss";
 
 export class Header {
@@ -13,6 +15,7 @@ export class Header {
   constructor() {
     this.handleMenuClick = this.handleMenuClick.bind(this);
     this.logColumn = new LogColumn();
+    store.subscribe(this.logColumn.update);
   }
 
   handleMenuClick() {

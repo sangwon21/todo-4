@@ -4,14 +4,18 @@ import {
   InlineListClass,
 } from "../../../styled-component/InlineList";
 import { LogColumnCard } from "./LogColumnCard";
+import store from "../../../store";
 
 import "./LogColumn.scss";
 
 export class LogColumn {
   private logColumnNode: Element | Text | null = null;
+  private logsNode: Element | Text | null = null;
   constructor() {
     this.moveLeft = this.moveLeft.bind(this);
     this.moveRight = this.moveRight.bind(this);
+    this.update = this.update.bind(this);
+    this.deleteAllChildren = this.deleteAllChildren.bind(this);
   }
 
   moveLeft() {
@@ -24,6 +28,32 @@ export class LogColumn {
     const { classList } = this.logColumnNode as Element;
     classList.remove("animation-move-right");
     classList.add("animation-move-left");
+  }
+
+  deleteAllChildren() {
+    let currentNode = (this.logsNode as Element).firstElementChild;
+    while (currentNode) {
+      currentNode.remove();
+      currentNode = (this.logsNode as Element).firstElementChild;
+    }
+  }
+
+  update() {
+    this.deleteAllChildren();
+    const { history } = store.getState();
+    history
+      .map((log) =>
+        new LogColumnCard({
+          fromDate: "2020-04-15T18:13:34.247",
+          userAction: log.userAction,
+          contents: log.contents,
+          suffix: log.suffix,
+        }).render()
+      )
+      .reverse()
+      .forEach((logColmun) => {
+        this.logsNode!.appendChild(logColmun);
+      });
   }
 
   render() {
@@ -43,12 +73,11 @@ export class LogColumn {
     })([rightHeader, closeButton]);
 
     const bellIcon = div()([i({ class: "bell icon" })()]);
-    const activity = div()(["Activity"]);
 
     const subHeader = InlineList({
       className: InlineListClass.DEFAULT,
       width: "100%",
-    })([bellIcon, activity]);
+    })([bellIcon, div()(["Activity"])]);
 
     const composedHeader = InlineList({
       className: InlineListClass.SPACE_AROUND_COLUMN,
@@ -56,27 +85,17 @@ export class LogColumn {
       height: "10%",
     })([header, subHeader]);
 
-    const logs = InlineList({
+    this.logsNode = InlineList({
       className: InlineListClass.ALIGN_LEFT_COLUMN_NO_WRAP,
       width: "100%",
       height: "90%",
       userClassList: ["log-column-log-wrapper"],
-    })([
-      new LogColumnCard().render(),
-      new LogColumnCard().render(),
-      new LogColumnCard().render(),
-      new LogColumnCard().render(),
-      new LogColumnCard().render(),
-      new LogColumnCard().render(),
-      new LogColumnCard().render(),
-      new LogColumnCard().render(),
-      new LogColumnCard().render(),
-    ]);
+    })(div()());
 
     this.logColumnNode = InlineList({
       className: InlineListClass.ALIGN_LEFT_COLUMN,
       userClassList: ["log-column", "log-column-move-right"],
-    })([composedHeader, logs]);
+    })([composedHeader, this.logsNode]);
 
     return this.logColumnNode;
   }

@@ -6,6 +6,8 @@ import {
 import { EditModal } from "./EditModal";
 import { FailModal } from "./FailModal";
 import { Spinner, SpinnerSize } from "../../Spinner";
+import store from "../../../store";
+import { ADD_LOG_HISTORY } from "../../../store/action/logHistory";
 import axios from "axios";
 
 import "./card.scss";
@@ -54,6 +56,12 @@ export class Card {
         "http://52.207.159.215:8080/columns/1/cards/1",
         {}
       );
+      store.dispatch({
+        type: ADD_LOG_HISTORY,
+        userAction: "removed",
+        contents: this.state.contents,
+        suffix: `from ${this.state.tableType}`,
+      });
       this.cardNode && this.cardNode.remove();
     } catch (error) {
       this.cardNode!.appendChild(new FailModal().render());
@@ -74,12 +82,21 @@ export class Card {
 
   handleDragEnd(e: DragEvent) {
     const target = e.target! as Element;
-    const nextTableNode = this.state.handleDragCardCountsChange!(
-      target,
-      this.state.tableNode
-    );
-    this.setTableNode(nextTableNode);
+    const { returnTableElement, targetTableName } = this.state
+      .handleDragCardCountsChange!(target, this.state.tableNode);
+    this.setTableNode(returnTableElement);
     target.classList.remove("dragging");
+    const previousTableName = this.state.tableType;
+    if (targetTableName !== "") {
+      this.state.tableType = targetTableName;
+    }
+
+    store.dispatch({
+      type: ADD_LOG_HISTORY,
+      userAction: "moved",
+      contents: this.state.contents,
+      suffix: `from ${previousTableName} to ${this.state.tableType}`,
+    });
   }
 
   handleTaskEditClick() {
@@ -94,6 +111,12 @@ export class Card {
   editTask(task: string) {
     (this.contentNode! as Element).innerHTML = task;
     this.state.contents = task;
+
+    store.dispatch({
+      type: ADD_LOG_HISTORY,
+      userAction: "updated",
+      contents: this.state.contents,
+    });
   }
 
   handleLoading() {
