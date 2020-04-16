@@ -15,6 +15,8 @@ class CardListDelegate: NSObject {
     var deleteAction: ((Int) -> Void)?
     
     var dragItem: ((Int) -> UIDragItem?)?
+    
+    var dropItem: ((UITableViewDropCoordinator, Int) -> Void)?
 }
 
 extension CardListDelegate: UITableViewDelegate {
@@ -37,6 +39,12 @@ extension CardListDelegate: UITableViewDragDelegate {
 
 extension CardListDelegate: UITableViewDropDelegate {
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
-        
+        let destinationIndexPath: IndexPath
+        if let indexPath = coordinator.destinationIndexPath {
+            destinationIndexPath = indexPath
+        } else {
+            destinationIndexPath = IndexPath(row: tableView.numberOfRows(inSection: 0), section: 0)
+        }
+        dropItem?(coordinator, destinationIndexPath.row)
     }
 }

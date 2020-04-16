@@ -19,8 +19,12 @@ class Drag {
 }
 
 class Drop {
-    static func object<T>(from item: UIDragItem) -> T? {
-        guard let object = item.localObject as? T else { return nil }
+    static func objects<T>(from coordinator: UITableViewDropCoordinator) -> [T] {
+        return coordinator.items.map { Drop.object(from: $0) }.compactMap { $0 }
+    }
+    
+    private static func object<T>(from item: UITableViewDropItem) -> T? {
+        guard let object = item.dragItem.localObject as? T else { return nil }
         return object
     }
 }

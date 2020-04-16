@@ -80,6 +80,9 @@ class CardListViewController: UIViewController {
             guard let card = self?.viewModel?.card(at: $0) else { return nil }
             return Drag.item(from: card)
         }
+        tableViewDelegate?.dropItem = { [weak self] coordinator, index in
+            let cards: [Card] = Drop.objects(from: coordinator)
+        }
         tableView.delegate = tableViewDelegate
         tableView.dragDelegate = tableViewDelegate
         tableView.dropDelegate = tableViewDelegate
