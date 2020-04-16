@@ -1,4 +1,4 @@
-import { div, span, i, textarea } from "wonnie-template";
+import { span, i, textarea } from "wonnie-template";
 import { Modal } from "../../../Modal";
 import { CustomButton, ButtonSize, ButtonType } from "../../../CustomButton";
 import COLOR from "../../../../util/color";
@@ -9,23 +9,26 @@ import {
 
 import "./EditModal.scss";
 
-export interface EditModalConstructor {
+export interface IEditModalState {
   noteContent: string;
   editContent: Function;
 }
 
 export class EditModal {
-  private noteContent: string;
-  private editContent: Function;
-  private textareaNode: Element | Text | null;
-  private editModalNode: Element | Text | null;
-  constructor(param: EditModalConstructor) {
+  private state: IEditModalState = {
+    noteContent: "",
+    editContent: () => {},
+  };
+  private textareaNode: Element | Text | null = null;
+  private editModalNode: Element | Text | null = null;
+  private saveNoteButton: Element | Text | null = null;
+  private modalContentNode: Element | Text | null = null;
+  constructor(param: IEditModalState) {
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInput = this.handleInput.bind(this);
     this.close = this.close.bind(this);
-    this.noteContent = param.noteContent;
-    this.editContent = param.editContent;
-    this.textareaNode = null;
-    this.editModalNode = null;
+    this.state.noteContent = param.noteContent;
+    this.state.editContent = param.editContent;
   }
 
   close() {
@@ -34,8 +37,26 @@ export class EditModal {
 
   handleSubmit() {
     const { value } = this.textareaNode! as HTMLTextAreaElement;
-    this.editContent(value);
+    if (value === "") {
+      return;
+    }
+    this.state.editContent(value);
     this.close();
+  }
+
+  handleInput(e: InputEvent) {
+    const { value } = e.target as HTMLTextAreaElement;
+    if (value === "") {
+      (this.saveNoteButton as Element).setAttribute(
+        "style",
+        `background-color: ${COLOR.INVALID_PRIMARY}; color: ${COLOR.WHITE}; width: 10rem; height: 2rem`
+      );
+      return;
+    }
+    (this.saveNoteButton as Element).setAttribute(
+      "style",
+      `background-color: ${COLOR.PRIMARY}; color: ${COLOR.WHITE}; width: 10rem; height: 2rem`
+    );
   }
 
   render() {
@@ -45,7 +66,7 @@ export class EditModal {
     const rightHeader = i({ class: "close icon", onClick: this.close })();
 
     const editModalHeader = InlineList({
-      class: InlineListClass.SPACE_BETWEEN,
+      className: InlineListClass.SPACE_BETWEEN,
       width: "100%",
       userClassList: ["edit-modal-header"],
     })([leftHeader, rightHeader]);
@@ -54,31 +75,35 @@ export class EditModal {
 
     this.textareaNode = textarea({
       class: "edit-modal-textarea",
-      maxlength: "500",
-      placeholder: `${this.noteContent}`,
+      maxlength: "15",
+      placeholder: `${this.state.noteContent}`,
+      onInput: this.handleInput,
     })([]);
 
     const mediumSettings: ButtonType = {
       size: ButtonSize.medium,
-      color: COLOR.PRIMARY,
-      content: "제출",
+      color: COLOR.INVALID_PRIMARY,
+      content: "Save Note",
       contentColor: COLOR.WHITE,
       callback: this.handleSubmit,
     };
 
-    const saveNoteButton = CustomButton(mediumSettings);
+    this.saveNoteButton = CustomButton(mediumSettings);
 
     const editModalNote = InlineList({
-      class: InlineListClass.SPACE_BETWEEN_COLUMN,
+      className: InlineListClass.SPACE_BETWEEN_COLUMN,
       width: "100%",
       userClassList: ["edit-modal-note"],
-    })([editModalNoteHeader, this.textareaNode, saveNoteButton]);
+    })([editModalNoteHeader, this.textareaNode, this.saveNoteButton]);
 
-    const ModalContent = InlineList({
-      class: InlineListClass.ALIGN_LEFT_COLUMN,
-      userClassList: ["modal-content"],
+    this.modalContentNode = InlineList({
+      className: InlineListClass.ALIGN_LEFT_COLUMN,
+      userClassList: ["edit-modal-content", "modal-skew-from-left"],
+      attributes: {
+        draggable: "false",
+      },
     })([editModalHeader, editModalNote]);
-    this.editModalNode = Modal(ModalContent);
+    this.editModalNode = Modal(this.modalContentNode);
     return this.editModalNode;
   }
 }

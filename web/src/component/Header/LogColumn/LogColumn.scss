@@ -1,0 +1,77 @@
+.log-column {
+  height: 100vh;
+  top: 0;
+  position: fixed;
+  width: 25vw;
+  background-color: #e6ecf2;
+  color: #000000;
+  z-index: 100;
+}
+
+.log-column-menu-text {
+  margin-left: 0.5rem;
+}
+
+.log-column-move-right {
+  right: -25vw;
+}
+
+.animation-move-right {
+  animation-name: move-right;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+
+@keyframes move-right {
+  from {
+    right: -25vw;
+  }
+  to {
+    right: 0;
+  }
+}
+
+.animation-move-left {
+  animation-name: move-left;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+
+@keyframes move-left {
+  from {
+    right: 0vw;
+  }
+  to {
+    right: -25vw;
+  }
+}
+
+.log-column-log-wrapper {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+// reference: https://codepen.io/GhostRider/pen/GHaFw
+.log-column-log-wrapper::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
+  border-radius: 30px;
+}
+
+.log-column-log-wrapper::-webkit-scrollbar {
+  width: 3px;
+  background-color: #f5f5f5;
+}
+
+.log-column-log-wrapper::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0.44, rgb(198, 203, 211)),
+    color-stop(0.72, rgb(119, 124, 131)),
+    color-stop(0.86, rgb(45, 46, 48))
+  );
+}

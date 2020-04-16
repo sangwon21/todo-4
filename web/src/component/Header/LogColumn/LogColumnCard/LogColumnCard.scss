@@ -1,0 +1,43 @@
+.log-column-card-img {
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+}
+
+.log-column-card:nth-child(1) {
+  border-top: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  box-sizing: border-box;
+  background-color: #ffffff;
+}
+
+.log-column-card:not(:nth-child(1)) {
+  border-bottom: 1px solid #000000;
+  box-sizing: border-box;
+  background-color: #ffffff;
+}
+
+.log-column-card-contents {
+  margin-left: 1rem;
+}
+
+.log-column-card-time {
+  font-size: 0.8rem;
+  display: block;
+  color: #a2a8ae;
+}
+
+.log-column-card-title {
+  color: #000000;
+}
+
+.log-column-id {
+  color: #1a74da;
+  font-size: 0.8rem;
+}
+
+.log-column-tags .log-column-text:not(:nth-child(1)) {
+  display: inline-block;
+  margin-left: 0.1rem;
+  font-size: 0.8rem;
+}

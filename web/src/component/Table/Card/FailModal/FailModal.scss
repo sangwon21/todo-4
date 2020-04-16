@@ -1,0 +1,34 @@
+.fail-modal-content {
+  background-color: #fefefe;
+  border: 1px solid #888;
+  width: 50%;
+  height: 20%;
+}
+
+.fail-modal-header {
+  background-color: #f6f8fa;
+  height: 20%;
+  border-bottom: 1px solid #000000;
+}
+
+.fail-modal-header-title,
+.fail-modal-text {
+  margin-left: 1rem;
+}
+
+.fail-modal-header-title {
+  font-weight: 700;
+  display: block;
+}
+
+.fail-modal-header i {
+  margin-right: 1rem;
+}
+
+.fail-modal-text {
+  font-weight: 700;
+}
+
+.fail-modal-button {
+  margin-right: 1rem;
+}

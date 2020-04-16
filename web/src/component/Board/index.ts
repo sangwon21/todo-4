@@ -1,21 +1,70 @@
 import { Table } from "../Table";
 import { InlineList, InlineListClass } from "../../styled-component/InlineList";
 
+interface IBoardState {
+  tables: Table[];
+}
+
 export class Board {
-  private boardClass: string;
-  constructor(boardClass: string) {
-    this.boardClass = boardClass;
+  private state: IBoardState;
+  constructor() {
+    this.handleDragCardCountsChange = this.handleDragCardCountsChange.bind(
+      this
+    );
+    this.state = {
+      tables: [],
+    };
+  }
+
+  pushToTables(table: Table) {
+    this.state.tables.push(table);
+  }
+
+  handleDragCardCountsChange(cardElement: Element, tableElement: Element) {
+    let returnTableElement = tableElement;
+
+    this.state.tables.forEach((table) => {
+      const tableNode = table.getTableNode()!;
+      if (tableNode.contains(cardElement)) {
+        if (tableNode === tableElement) {
+          return;
+        }
+        table.increaseCardCount();
+        returnTableElement = tableNode as Element;
+        return;
+      }
+      if (tableNode === tableElement && !tableNode.contains(cardElement)) {
+        table.decreaseCardCount();
+        return;
+      }
+    });
+    return returnTableElement;
   }
 
   render() {
+    const todo = new Table({
+      cardCounts: 0,
+      tableName: "할 일",
+      handleDragCardCountsChange: this.handleDragCardCountsChange,
+    });
+    const doing = new Table({
+      cardCounts: 0,
+      tableName: "하는 중",
+      handleDragCardCountsChange: this.handleDragCardCountsChange,
+    });
+    const done = new Table({
+      cardCounts: 0,
+      tableName: "한 일",
+      handleDragCardCountsChange: this.handleDragCardCountsChange,
+    });
+
+    this.pushToTables(todo);
+    this.pushToTables(doing);
+    this.pushToTables(done);
+
     return InlineList({
-      class: InlineListClass.SPACE_AROUND,
+      className: InlineListClass.SPACE_AROUND,
       width: "100%",
-      userClassList: [this.boardClass],
-    })([
-      new Table("할 일").render(),
-      new Table("하는 중").render(),
-      new Table("한 일").render(),
-    ]);
+    })([todo.render(), doing.render(), done.render()]);
   }
 }

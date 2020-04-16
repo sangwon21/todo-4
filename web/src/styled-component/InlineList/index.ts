@@ -9,10 +9,13 @@ export enum InlineListClass {
   ALIGN_RIGHT = "align-right",
   COLUMN_BASE = "column-base",
   DEFAULT = "default-inline",
+  DEFAULT_NO_WRAP = "default-no-wrap",
   ALIGN_LEFT_COLUMN = "align-left-column-base ",
+  ALIGN_LEFT_COLUMN_NO_WRAP = "align-left-column-base-no-wrap",
   ALIGN_CENTER_COLUMN = "align-center-column-base",
   ALIGN_RIGHT_COLUMN = "align-right-column-base",
   SPACE_BETWEEN_COLUMN = "space-between-column-base",
+  SPACE_AROUND_COLUMN = "space-around-column-base",
   CENTER = "center",
 }
 
@@ -27,7 +30,7 @@ export interface IInlineStyle {
     | InlineListClass
     | IInlineListAttribute
     | undefined;
-  class: InlineListClass;
+  className: InlineListClass;
   height?: string;
   width?: string;
   userClassList?: string[];
@@ -53,11 +56,11 @@ const flattenStyles = (styles: IInlineStyle | void): IInlineParam => {
     style: Object.keys(styles)
       .filter(
         (key) =>
-          key !== "class" && key != "userClassList" && key != "attributes"
+          key !== "className" && key != "userClassList" && key != "attributes"
       )
       .reduce((acc, cur) => (acc += `${cur}: ${styles[cur]};`), ""),
     class: Object.keys(styles)
-      .filter((key) => key === "userClassList" || key === "class")
+      .filter((key) => key === "userClassList" || key === "className")
       .reduce((acc, cur) => {
         if (!styles[cur]) {
           return acc;

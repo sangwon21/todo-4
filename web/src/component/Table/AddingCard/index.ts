@@ -1,5 +1,5 @@
 import { div, textarea } from "wonnie-template";
-import { CustomButton, ButtonSize, ButtonType } from "../../CustomButton";
+import { CustomButton, ButtonType } from "../../CustomButton";
 import COLOR from "../../../util/color";
 import {
   InlineList,
@@ -9,54 +9,58 @@ import {
 import "./AddingCard.scss";
 
 export interface AddingCardParam {
-  rightButtonType?: ButtonType;
-  leftButtonType?: ButtonType;
-  rightButtonCallback?: Function;
-  leftButtonCallback?: Function;
+  rightButtonType: ButtonType;
+  leftButtonType: ButtonType;
   userClass: string;
 }
 
 export class AddingCard {
-  private rightButtonType: ButtonType;
-  private leftButtonType: ButtonType;
+  private leftButtonNode: Element | Text;
+  private rightButtonNode: Element | Text;
+  private textareaNode: Element | Text | null = null;
   private userClass: string;
 
-  constructor(param: AddingCardParam | void) {
-    this.rightButtonType = (param && param.rightButtonType) || {
-      size: ButtonSize.large,
-      color: COLOR.SECONDARY,
-      content: "Cancel",
-      contentColor: COLOR.FONT,
-      callback: (param && param.rightButtonCallback) || undefined,
-    };
-    this.leftButtonType = (param && param.leftButtonType) || {
-      size: ButtonSize.large,
-      color: COLOR.PRIMARY,
-      content: "Add",
-      contentColor: COLOR.WHITE,
-      callback: (param && param.leftButtonCallback) || undefined,
-    };
+  constructor(param: AddingCardParam) {
+    this.leftButtonNode = CustomButton(param.leftButtonType);
+    this.rightButtonNode = CustomButton(param.rightButtonType);
+    this.handleTextareaInput = this.handleTextareaInput.bind(this);
+    this.userClass = param.userClass;
+  }
 
-    this.userClass = param ? param.userClass : "";
+  handleTextareaInput(e: InputEvent) {
+    const { value } = e.target as HTMLTextAreaElement;
+    if (value !== "") {
+      (this.leftButtonNode as Element).setAttribute(
+        "style",
+        `background-color: ${COLOR.PRIMARY}; color: ${COLOR.WHITE}; width: 10rem; height: 2rem`
+      );
+      return;
+    }
+    (this.leftButtonNode as Element).setAttribute(
+      "style",
+      `background-color: ${COLOR.INVALID_PRIMARY}; color: ${COLOR.WHITE}; width: 10rem; height: 2rem`
+    );
   }
 
   render() {
     const buttons = InlineList({
-      class: InlineListClass.SPACE_BETWEEN,
+      className: InlineListClass.SPACE_BETWEEN,
       width: "100%",
-    })([CustomButton(this.leftButtonType), CustomButton(this.rightButtonType)]);
+    })([this.leftButtonNode, this.rightButtonNode]);
 
-    const cardTextarea = div({ style: "width: 100%; height: 50%;" })([
+    this.textareaNode = div({ style: "width: 100%; height: 50%;" })([
       textarea({
         class: "textarea card-textarea",
+        placeholder: "Enter a Note",
+        onInput: this.handleTextareaInput,
       })(),
     ]);
 
     return InlineList({
-      class: InlineListClass.SPACE_BETWEEN_COLUMN,
+      className: InlineListClass.SPACE_BETWEEN_COLUMN,
       width: "100%",
       height: "8rem",
       userClassList: ["adding-card", this.userClass],
-    })([cardTextarea, buttons]);
+    })([this.textareaNode, buttons]);
   }
 }
