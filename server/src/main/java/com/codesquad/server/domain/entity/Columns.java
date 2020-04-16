@@ -35,7 +35,7 @@ public class Columns {
         this.cards.add(card);
     }
 
-    public void moveCard(int index, Card card) {
+    public void insertCard(int index, Card card) {
         this.cards.add(index, card);
     }
 }
