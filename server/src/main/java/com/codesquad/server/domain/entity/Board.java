@@ -21,12 +21,6 @@ public class Board {
 
     private List<Columns> columns = new ArrayList<>();
 
-    private List<History> histories = new ArrayList<>();
-
-    public void addHistory(History history) {
-        histories.add(history);
-    }
-
     public void addColumn(Columns columns) {
         this.columns.add(columns);
     }

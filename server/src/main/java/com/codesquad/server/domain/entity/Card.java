@@ -1,15 +1,16 @@
 package com.codesquad.server.domain.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
 
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @ToString
 public class Card {
 
@@ -19,11 +20,22 @@ public class Card {
     @NotBlank
     private String note;
 
-    private LocalDateTime createdTime;
+    @NotBlank
+    private String title;
 
-    public Card(Long id, @NotBlank String note, LocalDateTime createdTime) {
+    @NotBlank
+    private String author;
+
+    public Card(Long id, @NotBlank String title, @NotBlank String note, @NotBlank String author) {
         this.id = id;
         this.note = note;
-        this.createdTime = LocalDateTime.now();
+        this.title = title;
+        this.author = author;
+    }
+
+    public Card(Long id, @NotBlank String title, @NotBlank String note) {
+        this.id = id;
+        this.note = note;
+        this.title = title;
     }
 }
