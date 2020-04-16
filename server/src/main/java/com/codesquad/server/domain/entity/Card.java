@@ -26,7 +26,6 @@ public class Card {
     @NotBlank
     private String author;
 
-
     public Card(Long id, @NotBlank String title, @NotBlank String note, @NotBlank String author) {
         this.id = id;
         this.note = note;

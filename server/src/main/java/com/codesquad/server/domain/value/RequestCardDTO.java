@@ -14,9 +14,4 @@ import lombok.Setter;
 public class RequestCardDTO {
     private Card card;
     private History history;
-
-//    private Long id;
-//    private String title;
-//    private String note;
-//    private String author;
 }
