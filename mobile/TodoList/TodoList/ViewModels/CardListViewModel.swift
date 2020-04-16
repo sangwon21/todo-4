@@ -70,4 +70,10 @@ class CardListViewModel: ViewModelBinding {
     func card(at row: Int) -> Card? {
         return listChangeDetails?.list[row]
     }
+    
+    func move(at sourceRow: Int, to destinationRow: Int) {
+        guard var list = listChangeDetails?.list else { return }
+        list.move(at: sourceRow, to: destinationRow)
+        listChangeDetails = ListChangeDetails(with: list)
+    }
 }

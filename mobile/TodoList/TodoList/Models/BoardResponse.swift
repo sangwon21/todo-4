@@ -52,6 +52,13 @@ extension List {
         cards.remove(at: row)
     }
     
+    mutating func move(at sourceRow: Int, to destinationRow: Int) {
+        guard sourceRow != destinationRow else { return }
+        let card = cards[sourceRow]
+        cards.remove(at: sourceRow)
+        cards.insert(card, at: destinationRow)
+    }
+    
     subscript(index: Int) -> Card {
         get { return cards[index] }
     }

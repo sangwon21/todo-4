@@ -13,6 +13,8 @@ class CardListDataSource: NSObject {
     var rowCount: (() -> Int)?
     
     var cardAtRow: ((Int) -> Card)?
+    
+    var moveCard: ((Int, Int) -> Void)?
 }
 
 extension CardListDataSource: UITableViewDataSource {
@@ -24,5 +26,13 @@ extension CardListDataSource: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CardCell.reuseIdentifier, for: indexPath) as? CardCell, let card = cardAtRow?(indexPath.row) else { return UITableViewCell() }
         cell.card = card
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        moveCard?(sourceIndexPath.row, destinationIndexPath.row)
     }
 }

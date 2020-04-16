@@ -70,6 +70,9 @@ class CardListViewController: UIViewController {
         tableViewDataSource?.cardAtRow = { [weak self] in
             return self?.viewModel?.card(at: $0) ?? Card()
         }
+        tableViewDataSource?.moveCard = { [weak self] source, destination in
+            self?.viewModel?.move(at: source, to: destination)
+        }
         tableView.dataSource = tableViewDataSource
     }
     
