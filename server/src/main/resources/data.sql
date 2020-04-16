@@ -1,12 +1,12 @@
 INSERT INTO board (created_time)
 VALUES (CURRENT_TIMESTAMP);
 
-INSERT INTO columns (title, created_time, board, board_key)
-VALUES ('TODO', NOW(), 1, 0);
-INSERT INTO columns (title, created_time, board, board_key)
-VALUES ('DOING', CURRENT_TIMESTAMP, 1, 1);
-INSERT INTO columns (title, created_time, board, board_key)
-VALUES ('DONE', CURRENT_TIMESTAMP, 1, 2);
+INSERT INTO columns (title, board, board_key)
+VALUES ('TODO', 1, 0);
+INSERT INTO columns (title, board, board_key)
+VALUES ('DOING', 1, 1);
+INSERT INTO columns (title, board, board_key)
+VALUES ('DONE', 1, 2);
 
 INSERT INTO card (author, title, note, columns, columns_key)
 VALUES ('iOS', '제목1', '2번 내용',  1, 0);

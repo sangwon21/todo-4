@@ -13,7 +13,6 @@ CREATE TABLE columns
 (
     id           BIGINT PRIMARY KEY AUTO_INCREMENT,
     title        VARCHAR(64),
-    created_time DATETIME,
     board        INT REFERENCES board (id),
     board_key    INT
 );

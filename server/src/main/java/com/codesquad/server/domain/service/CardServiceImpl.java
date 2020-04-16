@@ -9,7 +9,7 @@ import com.codesquad.server.domain.repository.HistoryRepository;
 import com.codesquad.server.domain.value.Location;
 import com.codesquad.server.domain.value.RequestCardDTO;
 import com.codesquad.server.domain.value.RequestLocationDTO;
-import com.codesquad.server.domain.value.ResponseCardDTO;
+import com.codesquad.server.domain.value.ResponseDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -28,11 +28,10 @@ public class CardServiceImpl implements CardService {
     private final HistoryRepository historyRepository;
 
     @Override
-    public ResponseCardDTO save(RequestCardDTO requestCardDTO, Long columnId) {
+    public ResponseDTO save(RequestCardDTO requestCardDTO, Long columnId) {
         Columns columns = columnsRepository.findById(columnId).orElseThrow(() -> new IllegalArgumentException("컬럼이 존재하지 않습니다!"));
         Card card = requestCardDTO.getCard();
         columns.addCard(card);
-        log.info("columns : {}", columns);
         columnsRepository.save(columns);
 
         History history = requestCardDTO.getHistory();
@@ -41,7 +40,7 @@ public class CardServiceImpl implements CardService {
         Long id = card.getId();
         LocalDateTime createdTime = history.getHistoryCreatedTime();
 
-        return new ResponseCardDTO(id, createdTime);
+        return new ResponseDTO(id, createdTime);
     }
 
     @Override
@@ -56,9 +55,9 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public LocalDateTime move(RequestLocationDTO requestLocationDTO, Long id) {
+    public LocalDateTime move(RequestLocationDTO requestLocationDTO) {
         Location location = requestLocationDTO.getLocation();
-        Card card = cardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("카드가 존재하지 않습니다!"));
+        Card card = cardRepository.findById(location.getCardId()).orElseThrow(() -> new IllegalArgumentException("카드가 존재하지 않습니다!"));
         cardRepository.delete(card);
 
         Columns columns = columnsRepository.findById(location.getColumnId()).orElseThrow(() -> new IllegalArgumentException("컬럼이 존재하지 않습니다!"));
@@ -73,12 +72,11 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public LocalDateTime delete(RequestCardDTO requestCardDTO) {
-        Card card = requestCardDTO.getCard();
+        Card card = cardRepository.findById(requestCardDTO.getCard().getId()).orElseThrow(() -> new IllegalArgumentException("카드가 존재하지 않습니다!"));
         cardRepository.delete(card);
 
         History history = requestCardDTO.getHistory();
         historyRepository.save(history);
-
         return history.getHistoryCreatedTime();
     }
 }

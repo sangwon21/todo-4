@@ -1,13 +1,13 @@
 package com.codesquad.server.domain.service;
 
 import com.codesquad.server.domain.entity.Columns;
+import com.codesquad.server.domain.value.RequestColumnsDTO;
 import org.springframework.http.HttpStatus;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 public interface ColumnsService {
-    public Iterable<Columns> list();
-    public HttpStatus save(Columns columns);
-    public HttpStatus update(Columns columns);
-    public HttpStatus delete(Columns columns);
+    Iterable<Columns> list();
+
+    LocalDateTime update(RequestColumnsDTO requestColumnsDTO);
 }

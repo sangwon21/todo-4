@@ -6,6 +6,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public class Location {
+    Long cardId;
     Long columnId;
     int afterMoveCardIndex;
 }

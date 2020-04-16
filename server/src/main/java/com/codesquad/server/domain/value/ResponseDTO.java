@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
-public class ResponseCardDTO {
-    private Long id;
-    private LocalDateTime historyCreatedTime;
+public class ResponseDTO {
+    private final Long id;
+    private final LocalDateTime historyCreatedTime;
 }

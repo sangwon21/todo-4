@@ -3,7 +3,7 @@ package com.codesquad.server.presentation.controllers;
 import com.codesquad.server.domain.service.CardService;
 import com.codesquad.server.domain.value.RequestCardDTO;
 import com.codesquad.server.domain.value.RequestLocationDTO;
-import com.codesquad.server.domain.value.ResponseCardDTO;
+import com.codesquad.server.domain.value.ResponseDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -22,25 +22,26 @@ public class CardController {
 
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping("")
-    public ResponseCardDTO create(@PathVariable Long columnId, @RequestBody @Valid RequestCardDTO requestCardDTO) {
+    public ResponseDTO create(@PathVariable Long columnId, @RequestBody @Valid RequestCardDTO requestCardDTO) {
         log.info("card : {}", requestCardDTO.getCard());
         return cardService.save(requestCardDTO, columnId);
     }
 
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    @PutMapping("/{cardId}")
-    public LocalDateTime update(@PathVariable Long columnId, @PathVariable Long cardId, @RequestBody @Valid RequestCardDTO requestCardDTO) {
-        log.info("requestCardDTO : {}", requestCardDTO);
+    @ResponseStatus(value = HttpStatus.OK)
+    @PutMapping("")
+    public LocalDateTime update(@RequestBody @Valid RequestCardDTO requestCardDTO) {
         return cardService.update(requestCardDTO);
     }
 
-    @PutMapping("/{cardId}/move")
-    public LocalDateTime move(@PathVariable Long columnId, @PathVariable Long cardId, @RequestBody @Valid RequestLocationDTO requestLocationDTO) {
-        return cardService.move(requestLocationDTO, cardId);
+    @ResponseStatus(value = HttpStatus.OK)
+    @PutMapping("/move")
+    public LocalDateTime move(@RequestBody @Valid RequestLocationDTO requestLocationDTO) {
+        return cardService.move(requestLocationDTO);
     }
 
-    @DeleteMapping("/{cardId}")
-    public LocalDateTime delete(@PathVariable Long columnId, @PathVariable Long cardId, @RequestBody @Valid RequestCardDTO requestCardDTO) {
+    @ResponseStatus(value = HttpStatus.OK)
+    @DeleteMapping("")
+    public LocalDateTime delete(@RequestBody @Valid RequestCardDTO requestCardDTO) {
         return cardService.delete(requestCardDTO);
     }
 }

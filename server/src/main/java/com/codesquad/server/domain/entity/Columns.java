@@ -1,5 +1,6 @@
 package com.codesquad.server.domain.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,25 +12,16 @@ import java.util.List;
 
 @Getter
 @Setter
+@AllArgsConstructor
 @ToString
 public class Columns {
 
     @Id
     private Long id;
 
-    @NotBlank
     private String title;
 
-    private LocalDateTime createdTime;
-
     private List<Card> cards;
-
-    public Columns(Long id, @NotBlank String title, LocalDateTime createdTime, List<Card> cards) {
-        this.id = id;
-        this.title = title;
-        this.createdTime = LocalDateTime.now();
-        this.cards = cards;
-    }
 
     public void addCard(Card card) {
         this.cards.add(card);
