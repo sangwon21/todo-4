@@ -81,10 +81,16 @@ extension BoardViewController: CardListViewControllerDelegate {
         present(vc, animated: true)
     }
     
-    func deleteCard(viewController: CardListViewController, cards: [FloatingCard]) -> Bool {
-        cards.forEach { [weak self] in
-            guard let listID = $0.sourceListID else { return }
-            self?.listViewControllers[listID]?.delete(at: $0.sourceIndex)
+    func deleteCards(viewController: CardListViewController, cards: [FloatingCard]) -> Bool {
+        var cardsToDelete = [Int: [Int]]()
+        (0..<listViewControllers.count).forEach { number in
+            cardsToDelete[number] = cards
+                .filter { $0.sourceListID == number }
+                .map { $0.sourceIndex }
+                .sorted()
+        }
+        cardsToDelete.forEach { [weak self] listID, indices in
+            self?.listViewControllers[listID]?.delete(cardsAt: indices)
         }
         return true
     }

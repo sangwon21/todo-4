@@ -10,13 +10,13 @@ import UIKit
 
 protocol CardListViewControllerDelegate: class {
     func addNewCardDidTouch(viewController: CardListViewController)
-    func deleteCard(viewController: CardListViewController, cards: [FloatingCard]) -> Bool
+    func deleteCards(viewController: CardListViewController, cards: [FloatingCard]) -> Bool
 }
 
 protocol CardListUpdater {
     func update(list: List)
     func insert(cards: [Card], at row: Int)
-    func delete(at row: Int)
+    func delete(cardsAt rows: [Int])
 }
 
 extension CardListUpdater {
@@ -50,9 +50,9 @@ class CardListViewController: UIViewController {
     }
     
     private func updateList(with listChange: ListChangeDetails?) {
-        if let deletedRow = listChange?.deletedRow {
-            let indexPath = IndexPath(row: deletedRow, section: 0)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+        if let deletedRows = listChange?.deletedRows {
+            let indexPaths = deletedRows.map { IndexPath(row: $0, section: 0) }
+            tableView.deleteRows(at: indexPaths, with: .automatic)
         } else if let insertedRows = listChange?.insertedRows {
             let indexPaths = insertedRows.map { IndexPath(row: $0, section: 0) }
             tableView.insertRows(at: indexPaths, with: .automatic)
@@ -88,7 +88,7 @@ class CardListViewController: UIViewController {
         tableViewDelegate?.dropItem = { [weak self] coordinator, index in
             guard let self = self else { return }
             let cards = Drop.objects(from: coordinator) as [FloatingCard]
-            if let result = self.delegate?.deleteCard(viewController: self, cards: cards), result {
+            if let result = self.delegate?.deleteCards(viewController: self, cards: cards), result {
                 self.viewModel?.insert(cards: cards.map { $0.card }, at: index)
             }
         }
@@ -113,8 +113,9 @@ extension CardListViewController: CardListUpdater {
         viewModel?.insert(cards: cards, at: row)
     }
     
-    func delete(at row: Int) {
-        viewModel?.remove(at: row)
+    func delete(cardsAt rows: [Int]) {
+        guard rows.count > 0 else { return }
+        viewModel?.remove(cardsAt: rows)
     }
 }
 
@@ -123,7 +124,7 @@ extension CardListViewController {
         networkManager?.requestDelete(card: card) { [weak self] result in
             switch result {
             case .failure: return
-            case .success: self?.viewModel?.remove(at: cardIndex)
+            case .success: self?.viewModel?.remove(cardsAt: [cardIndex])
             }
         }
     }

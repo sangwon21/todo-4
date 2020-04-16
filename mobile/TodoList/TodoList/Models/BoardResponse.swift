@@ -48,8 +48,8 @@ extension List {
         self.cards.insert(contentsOf: cards, at: row)
     }
     
-    mutating func remove(at row: Int) {
-        cards.remove(at: row)
+    mutating func remove(cardsAt rows: [Int]) {
+        rows.reversed().forEach { cards.remove(at: $0) }
     }
     
     mutating func move(at sourceRow: Int, to destinationRow: Int) {
