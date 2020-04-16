@@ -1,5 +1,5 @@
 //
-//  Drag.swift
+//  DragDrop.swift
 //  TodoList
 //
 //  Created by Chaewan Park on 2020/04/16.
@@ -15,5 +15,12 @@ class Drag {
         let dragItem = UIDragItem(itemProvider: itemProvider)
         dragItem.localObject = object
         return dragItem
+    }
+}
+
+class Drop {
+    static func object<T>(from item: UIDragItem) -> T? {
+        guard let object = item.localObject as? T else { return nil }
+        return object
     }
 }
