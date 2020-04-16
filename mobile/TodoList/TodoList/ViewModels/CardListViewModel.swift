@@ -54,11 +54,12 @@ class CardListViewModel: ViewModelBinding {
         listChangeDetails = ListChangeDetails(with: list)
     }
     
-    func insert(cards: [Card], at row: Int) {
+    func insert(cards: [Card], at row: Int?) {
         guard var list = listChangeDetails?.list, cards.count > 0 else { return }
-        list.insert(cards: cards, at: row)
-        let rows = (row..<row + cards.count).map { $0 }
-        listChangeDetails = ListChangeDetails(with: list, insertedRows: rows)
+        let index = row != nil ? row! : list.count
+        list.insert(cards: cards, at: index)
+        let indices = (index..<index + cards.count).map { $0 }
+        listChangeDetails = ListChangeDetails(with: list, insertedRows: indices)
     }
     
     func remove(cardsAt rows: [Int]) {
