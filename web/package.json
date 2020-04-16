@@ -16,7 +16,8 @@
     },
     "testRegex": "\\.test\\.ts$",
     "moduleFileExtensions": [
-      "ts", "js"
+      "ts",
+      "js"
     ],
     "globals": {
       "ts-jest": {
@@ -29,6 +30,8 @@
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-async-to-generator": "^7.8.3",
+    "@babel/plugin-transform-regenerator": "^7.8.7",
     "@babel/preset-env": "^7.9.0",
     "@babel/preset-typescript": "^7.9.0",
     "@babel/runtime": "^7.9.2",
@@ -36,6 +39,8 @@
     "@storybook/preset-typescript": "^3.0.0",
     "@types/jest": "^25.2.1",
     "babel-loader": "^8.1.0",
+    "babel-plugin-transform-async-generator-functions": "^6.24.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.4.2",
     "file-loader": "^6.0.0",
@@ -53,9 +58,12 @@
   },
   "dependencies": {
     "@types/lodash": "^4.14.149",
+    "@types/redux": "^3.6.0",
     "axios": "^0.19.2",
+    "babel-polyfill": "^6.26.0",
     "lodash": "^4.17.15",
     "node-sass": "^4.13.1",
+    "redux": "^4.0.5",
     "wonnie-template": "^1.2.8"
   }
 }
