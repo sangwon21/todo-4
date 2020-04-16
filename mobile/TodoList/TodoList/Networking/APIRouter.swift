@@ -87,7 +87,7 @@ enum APIBuilder: APIRouter {
     
     var body: Data? {
         switch self {
-        case let .newCard(_, card): return encode(card)
+        case let .newCard(_, card): return encode(NewCardRequest(card: card))
         case let .deleteCard(card): return encode(card)
         default: return nil
         }

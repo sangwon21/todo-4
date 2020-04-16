@@ -36,6 +36,7 @@
 		C2B8CF252446D5F80076F34D /* CardListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B8CF242446D5F70076F34D /* CardListDelegate.swift */; };
 		C2B8CF2724480F2F0076F34D /* DragDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B8CF2624480F2F0076F34D /* DragDrop.swift */; };
 		C2B8CF2924484DE50076F34D /* FloatingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B8CF2824484DE50076F34D /* FloatingCard.swift */; };
+		C2B8CF2B2448E6260076F34D /* NewCardRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B8CF2A2448E6260076F34D /* NewCardRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		C2B8CF242446D5F70076F34D /* CardListDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListDelegate.swift; sourceTree = "<group>"; };
 		C2B8CF2624480F2F0076F34D /* DragDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragDrop.swift; sourceTree = "<group>"; };
 		C2B8CF2824484DE50076F34D /* FloatingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingCard.swift; sourceTree = "<group>"; };
+		C2B8CF2A2448E6260076F34D /* NewCardRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 				C24C8DCB24405CD400825031 /* CardIDResponse.swift */,
 				C2884957243E41E100D4B603 /* Observers.swift */,
 				C2B8CF2824484DE50076F34D /* FloatingCard.swift */,
+				C2B8CF2A2448E6260076F34D /* NewCardRequest.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				C27B287D243B5A33005785AB /* SceneDelegate.swift in Sources */,
 				C24C8DCC24405CD400825031 /* CardIDResponse.swift in Sources */,
 				C2884956243E37B900D4B603 /* CardListViewModel.swift in Sources */,
+				C2B8CF2B2448E6260076F34D /* NewCardRequest.swift in Sources */,
 				C288495E243EF88700D4B603 /* UILoader.swift in Sources */,
 				C26472D8243C8F57006D87EB /* Endpoints.swift in Sources */,
 				C2B8CF2724480F2F0076F34D /* DragDrop.swift in Sources */,

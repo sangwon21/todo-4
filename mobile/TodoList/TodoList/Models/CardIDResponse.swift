@@ -10,4 +10,8 @@ import Foundation
 
 struct CardIDResponse: Decodable {
     let cardID: Int
+    
+    enum CodingKeys : String, CodingKey {
+        case cardID = "id"
+    }
 }
