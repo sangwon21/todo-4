@@ -53,7 +53,7 @@ extension NetworkManager {
             case let .success(data):
                 do {
                     let response = try JSONDecoder().decode(BoardResponse.self, from: data)
-                    completion(.success(response.board))
+                    completion(.success(Board(lists: response)))
                 } catch {
                     completion(.failure(error))
                 }

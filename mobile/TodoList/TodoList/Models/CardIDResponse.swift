@@ -9,5 +9,5 @@
 import Foundation
 
 struct CardIDResponse: Decodable {
-    let cardID: String
+    let cardID: Int
 }

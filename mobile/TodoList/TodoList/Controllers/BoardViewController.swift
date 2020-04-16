@@ -26,9 +26,7 @@ class BoardViewController: UIViewController {
     }
     
     private func configureSession() {
-        let config = URLSessionConfiguration.ephemeral
-        config.protocolClasses = [URLProtocolMock.self]
-        networkManager = NetworkManager(session: URLSession(configuration: config))
+        networkManager = NetworkManager(session: URLSession(configuration: .default))
     }
     
     private func setupTodoLists(for number: Int) {

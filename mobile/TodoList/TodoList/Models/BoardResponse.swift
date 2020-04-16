@@ -8,22 +8,31 @@
 
 import Foundation
 
-struct BoardResponse: Decodable {
-    let board: Board
-}
+typealias BoardResponse = [List]
 
 struct Board: Decodable {
     let lists: [List]
 }
 
 struct List: Decodable {
+    let id: Int
     let title: String
     var cards: [Card]
 }
 
 struct Card: Codable, Equatable {
-    var id: String
-    let title, detail, author: String
+    var id: Int
+    let author: Author
+    let title, detail: String
+    
+    enum CodingKeys : String, CodingKey {
+        case id, author, title
+        case detail = "note"
+    }
+}
+
+enum Author: String, Codable {
+    case iOS = "iOS"
 }
 
 extension Board {
@@ -40,6 +49,7 @@ extension List {
     }
     
     init(with number: Int) {
+        id = 0
         title = ""
         cards = (0..<number).map { _ in Card() }
     }
@@ -66,9 +76,9 @@ extension List {
 
 extension Card {
     init() {
-        id = ""
+        id = 0
         title = ""
         detail = ""
-        author = ""
+        author = .iOS
     }
 }

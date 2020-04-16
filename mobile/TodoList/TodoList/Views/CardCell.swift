@@ -18,7 +18,7 @@ class CardCell: UITableViewCell {
         didSet {
             titleLabel.text = card?.title
             detailLabel.text = card?.detail
-            authorLabel.text = card?.author
+            authorLabel.text = "Author by \(card?.author.rawValue ?? "")"
         }
     }
 }

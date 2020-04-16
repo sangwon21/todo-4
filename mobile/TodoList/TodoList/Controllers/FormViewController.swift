@@ -56,10 +56,10 @@ class FormViewController: UIViewController {
     }
     
     @IBAction func submit(_ sender: Any) {
-        let card = Card(id: "",
+        let card = Card(id: 0,
+                        author: .iOS,
                         title: titleLabel.text ?? "",
-                        detail: detailTextView.text,
-                        author: authorLabel.text ?? "")
+                        detail: detailTextView.text)
         delegate?.newCardDidSubmit(viewController: self, card: card)
         dismiss(animated: true)
     }
