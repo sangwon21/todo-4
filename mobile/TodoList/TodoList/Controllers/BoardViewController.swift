@@ -20,8 +20,6 @@ class BoardViewController: UIViewController {
         
         configureSession()
         
-        setupTodoLists(for: 3)
-        
         requestBoard()
     }
     
@@ -29,30 +27,37 @@ class BoardViewController: UIViewController {
         networkManager = NetworkManager(session: URLSession(configuration: .default))
     }
     
-    private func setupTodoLists(for number: Int) {
-        listViewControllers = (0..<number).reduce(into: [:]) { [unowned self] viewControllers, number in
+    private func setupLists(with listIDs: [Int]) {
+        listViewControllers = listIDs.reduce(into: [:]) { [unowned self] viewControllers, listID in
             guard let vc = UILoader.load(viewControllerType: CardListViewController.self,
                                          from: storyboard) else { return }
-            vc.listID = number
+            vc.listID = listID
             vc.tableViewDataSource = CardListDataSource()
             vc.tableViewDelegate = CardListDelegate()
             vc.networkManager = networkManager
             vc.delegate = self
             self.boardStackView.addArrangedSubview(vc.view)
-            viewControllers[number] = vc
+            viewControllers[listID] = vc
+        }
+    }
+    
+    private func setupBoard(with board: Board) {
+        let listPackage = board.listPackage
+        setupLists(with: listPackage.keys.sorted())
+        listPackage.forEach { id, list in
+            listViewControllers[id]?.update(list: list)
         }
     }
 }
 
 extension BoardViewController {
     private func requestBoard() {
-        networkManager?.requestBoard { result in
+        networkManager?.requestBoard { [weak self] result in
             switch result {
             case .failure: return
             case let .success(board):
-                let listPackage = board.listPackage
-                (0..<listPackage.count).forEach { [weak self] in
-                    self?.listViewControllers[$0]?.update(list: listPackage[$0] ?? List(with: 0))
+                DispatchQueue.main.async {
+                    self?.setupBoard(with: board)
                 }
             }
         }

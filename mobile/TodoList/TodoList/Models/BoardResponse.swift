@@ -39,8 +39,8 @@ enum Author: String, Codable {
 
 extension Board {
     var listPackage: Dictionary<Int, List> {
-        return lists.enumerated().reduce(into: [:]) { package, list in
-            package[list.0] = list.1
+        return lists.reduce(into: [:]) { package, list in
+            package[list.id] = list
         }
     }
 }
