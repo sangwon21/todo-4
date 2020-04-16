@@ -18,6 +18,7 @@ protocol APIRouter {
     var path: String { get }
     var method: HTTPMethod { get }
     var query: String? { get }
+    var header: [String: String] { get }
     var body: Data? { get }
     func url() -> URL?
     func urlRequest() -> URLRequest?
@@ -34,6 +35,7 @@ extension APIRouter {
         guard let url = url() else { return nil }
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
+        header.forEach { request.setValue($1, forHTTPHeaderField: $0) }
         request.httpBody = body
         return request
     }
@@ -73,6 +75,13 @@ enum APIBuilder: APIRouter {
     var query: String? {
         switch self {
         default: return nil
+        }
+    }
+    
+    var header: [String: String] {
+        switch self {
+        case .newCard: return ["Content-Type": "application/json"]
+        default: return [:]
         }
     }
     
