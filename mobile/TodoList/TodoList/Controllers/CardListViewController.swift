@@ -14,12 +14,12 @@ protocol CardListViewControllerDelegate: class {
 
 protocol CardListUpdater {
     func update(list: List)
-    func insert(card: Card, at row: Int)
+    func insert(cards: [Card], at row: Int)
 }
 
 extension CardListUpdater {
-    func insert(card: Card, at row: Int = 0) {
-        insert(card: card, at: row)
+    func insert(cards: [Card], at row: Int = 0) {
+        insert(cards: cards, at: row)
     }
 }
 
@@ -51,9 +51,9 @@ class CardListViewController: UIViewController {
         if let deletedRow = listChange?.deletedRow {
             let indexPath = IndexPath(row: deletedRow, section: 0)
             tableView.deleteRows(at: [indexPath], with: .left)
-        } else if let insertedRow = listChange?.insertedRow {
-            let indexPath = IndexPath(row: insertedRow, section: 0)
-            tableView.insertRows(at: [indexPath], with: .automatic)
+        } else if let insertedRows = listChange?.insertedRows {
+            let indexPaths = insertedRows.map { IndexPath(row: $0, section: 0) }
+            tableView.insertRows(at: indexPaths, with: .automatic)
         } else {
             titleLabel.text = listChange?.list.title
             tableView.reloadData()
@@ -81,7 +81,7 @@ class CardListViewController: UIViewController {
             return Drag.item(from: card)
         }
         tableViewDelegate?.dropItem = { [weak self] coordinator, index in
-            let cards: [Card] = Drop.objects(from: coordinator)
+            let cards = Drop.objects(from: coordinator) as [Card]
         }
         tableView.delegate = tableViewDelegate
         tableView.dragDelegate = tableViewDelegate
@@ -100,8 +100,8 @@ extension CardListViewController: CardListUpdater {
         }
     }
     
-    func insert(card: Card, at row: Int) {
-        viewModel?.insert(card: card, at: row)
+    func insert(cards: [Card], at row: Int) {
+        viewModel?.insert(cards: cards, at: row)
     }
 }
 

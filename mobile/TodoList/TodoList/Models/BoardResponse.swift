@@ -44,8 +44,8 @@ extension List {
         cards = (0..<number).map { _ in Card() }
     }
     
-    mutating func insert(card: Card) {
-        cards.insert(card, at: 0)
+    mutating func insert(cards: [Card], at row: Int) {
+        self.cards.insert(contentsOf: cards, at: row)
     }
     
     mutating func remove(at row: Int) {

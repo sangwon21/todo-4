@@ -67,7 +67,7 @@ extension BoardViewController {
             case .failure: return
             case let .success(response):
                 card.id = response.cardID
-                self?.listViewControllers[id]?.insert(card: card)
+                self?.listViewControllers[id]?.insert(cards: [card])
             }
         }
     }
