@@ -1,0 +1,1 @@
+export const ADD_LOG_HISTORY = "ADD_LOG_HISTORY";
