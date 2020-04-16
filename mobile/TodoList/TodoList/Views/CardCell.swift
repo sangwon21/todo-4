@@ -16,9 +16,10 @@ class CardCell: UITableViewCell {
     
     var card: Card? = nil {
         didSet {
-            titleLabel.text = card?.title
-            detailLabel.text = card?.detail
-            authorLabel.text = "Author by \(card?.author.rawValue ?? "")"
+            guard let card = card else { return }
+            titleLabel.text = card.title
+            detailLabel.text = card.detail
+            authorLabel.text = "Author by \(card.author)"
         }
     }
 }

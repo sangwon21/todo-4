@@ -23,7 +23,8 @@ struct List: Decodable {
 struct Card: Codable, Equatable {
     var id: Int
     let author: Author
-    let title, detail: String
+    let title: String
+    let detail: String?
     
     enum CodingKeys : String, CodingKey {
         case id, author, title
@@ -33,6 +34,7 @@ struct Card: Codable, Equatable {
 
 enum Author: String, Codable {
     case iOS = "iOS"
+    case web = "nigayo"
 }
 
 extension Board {
@@ -80,5 +82,14 @@ extension Card {
         title = ""
         detail = ""
         author = .iOS
+    }
+}
+
+extension Author: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .iOS: return "iOS"
+        case .web: return "Web"
+        }
     }
 }
