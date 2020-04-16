@@ -6,9 +6,9 @@ import com.codesquad.server.domain.value.RequestCardDTO;
 import org.springframework.http.HttpStatus;
 
 public interface CardService {
-    public HttpStatus save(RequestCardDTO card, Long id);
+    public HttpStatus save(RequestCardDTO requestCardDTO, Long id);
 
-    public HttpStatus update(Card card);
+    public HttpStatus update(RequestCardDTO card);
 
     public HttpStatus move(Location location);
 

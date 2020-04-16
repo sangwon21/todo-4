@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Map;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -21,13 +20,13 @@ public class CardController {
     private final CardService cardService;
 
     @PostMapping("")
-    public HttpStatus create(@PathVariable Long columnsId, @RequestBody RequestCardDTO card) {
-        log.info("card : {}", card);
-        return cardService.save(card, columnsId);
+    public HttpStatus create(@PathVariable Long columnsId, @RequestBody @Valid RequestCardDTO requestCardDTO) {
+        log.info("card : {}", requestCardDTO.getCard());
+        return cardService.save(requestCardDTO, columnsId);
     }
 
     @PutMapping("")
-    public HttpStatus update(@RequestBody @Valid Card card) {
+    public HttpStatus update(@RequestBody @Valid RequestCardDTO card) {
         log.info("card : {}", card);
         return cardService.update(card);
     }
