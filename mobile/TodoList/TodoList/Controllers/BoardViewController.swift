@@ -65,7 +65,7 @@ extension BoardViewController {
     
     private func requestNewCard(listID id: Int, card: Card) {
         var card = card
-        networkManager?.requestNewCard(card: card) { [weak self] result in
+        networkManager?.requestNewCard(listID: id, card: card) { [weak self] result in
             switch result {
             case .failure: return
             case let .success(response):

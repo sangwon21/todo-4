@@ -11,7 +11,8 @@ import Foundation
 class Endpoints {
     static let baseURL = "http://3.34.24.75:8080/api"
     
-    static let boardRequestURL = "\(baseURL)/columns"
-    static let cardListRequestURL = "\(boardRequestURL)/columnId/cards"
-    static let cardRequestURL = "\(cardListRequestURL)/cardId"
+    static let boardURL = "\(baseURL)/columns"
+    
+    static let listPath = "/cards"
+    static let cardRequestURL = "\(boardURL)/cardId"
 }

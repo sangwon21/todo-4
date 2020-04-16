@@ -61,8 +61,10 @@ extension NetworkManager {
         }
     }
     
-    func requestNewCard(card: Card, completion: @escaping (Result<CardIDResponse, Error>) -> Void) {
-        request(with: APIBuilder.newCard(card: card).urlRequest()) { result in
+    func requestNewCard(listID: Int,
+                        card: Card,
+                        completion: @escaping (Result<CardIDResponse, Error>) -> Void) {
+        request(with: APIBuilder.newCard(listID: listID, card: card).urlRequest()) { result in
             switch result {
             case let .failure(error): completion(.failure(error))
             case let .success(data):
@@ -77,7 +79,7 @@ extension NetworkManager {
     }
     
     func requestDelete(card: Card, completion: @escaping (Result<Bool, Error>) -> Void) {
-        request(with: APIBuilder.newCard(card: card).urlRequest()) { result in
+        request(with: APIBuilder.deleteCard(card: card).urlRequest()) { result in
             switch result {
             case let .failure(error): completion(.failure(error))
             case .success: completion(.success(true))

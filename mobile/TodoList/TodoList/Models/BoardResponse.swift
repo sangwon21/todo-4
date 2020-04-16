@@ -22,9 +22,9 @@ struct List: Decodable {
 
 struct Card: Codable, Equatable {
     var id: Int
-    let author: Author
     let title: String
     let detail: String?
+    let author: Author
     
     enum CodingKeys : String, CodingKey {
         case id, author, title
