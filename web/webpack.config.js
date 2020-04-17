@@ -1,6 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = (env, options) => {
@@ -90,7 +90,7 @@ module.exports = (env, options) => {
       },
     };
   } else {
-    config.plugins = [new CleanWebpackPlugin(["dist"])];
+    config.plugins = [new CleanWebpackPlugin()];
   }
 
   return config;
