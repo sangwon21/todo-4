@@ -22,6 +22,7 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        log.info("토큰 검증 시작!!");
         String requestUserToken = request.getHeader("token");
         verifyToken(token, requestUserToken);
         return true;
@@ -32,5 +33,6 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
             throw new IllegalArgumentException("잘못된 토큰 입니다!");
         }
         jwtUtil.verifyToken(requestUserToken);
+        log.info("토큰 검증이 성공하였습니다!!");
     }
 }
