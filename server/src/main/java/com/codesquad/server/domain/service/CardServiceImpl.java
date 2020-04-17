@@ -37,6 +37,7 @@ public class CardServiceImpl implements CardService {
         columnsRepository.save(columns);
 
         History history = requestCardDTO.getHistory();
+        history.setHistoryCreatedTime();
         historyRepository.save(history);
 
         Long id = card.getId();
@@ -54,6 +55,7 @@ public class CardServiceImpl implements CardService {
         cardRepository.save(card);
 
         History history = requestCardDTO.getHistory();
+        history.setHistoryCreatedTime();
         historyRepository.save(history);
 
         log.info("카드 수정 성공했습니다!");
@@ -73,6 +75,7 @@ public class CardServiceImpl implements CardService {
         columnsRepository.save(columns);
 
         History history = requestLocationDTO.getHistory();
+        history.setHistoryCreatedTime();
         historyRepository.save(history);
 
         log.info("카드 이동 성공했습니다!");
@@ -87,6 +90,7 @@ public class CardServiceImpl implements CardService {
         cardRepository.delete(card);
 
         History history = requestCardDTO.getHistory();
+        history.setHistoryCreatedTime();
         historyRepository.save(history);
 
         log.info("카드 삭제 성공했습니다!");

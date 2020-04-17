@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class Location {
-    Long cardId;
-    Long columnId;
-    int afterMoveCardIndex;
+    private Long cardId;
+    private Long columnId;
+    private int afterMoveCardIndex;
 }

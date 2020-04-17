@@ -36,6 +36,7 @@ public class ColumnsServiceImpl implements ColumnsService {
         columnsRepository.save(requestColumnsDTO.getColumns());
 
         History history = requestColumnsDTO.getHistory();
+        history.setHistoryCreatedTime();
         historyRepository.save(history);
 
         return history.getHistoryCreatedTime();

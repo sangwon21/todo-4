@@ -30,7 +30,7 @@ CREATE TABLE card
 CREATE TABLE history
 (
     id                   BIGINT PRIMARY KEY AUTO_INCREMENT,
-    user_action           VARCHAR(64),
+    user_action          VARCHAR(64),
     contents             VARCHAR(64),
     suffix               VARCHAR(64),
     history_created_time DATETIME
