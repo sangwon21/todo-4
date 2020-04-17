@@ -8,6 +8,11 @@
   width: 100%;
   margin-top: 1rem;
   cursor: grab;
+  position: relative;
+}
+
+.invalid {
+  background-color: #938f8f;
 }
 
 .card-prefix {

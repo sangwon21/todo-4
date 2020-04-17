@@ -17,12 +17,13 @@ export class TableHeader {
   private numberCircleNode: Element | Text | null = null;
   private state: ITableHeaderState;
   constructor(
+    cardCounts: number,
     tableName: string,
     addCardSection: Function,
     removeCardSection: Function
   ) {
     this.state = {
-      cardCounts: 0,
+      cardCounts,
     };
     this.tableName = tableName;
     this.addCardSection = addCardSection;

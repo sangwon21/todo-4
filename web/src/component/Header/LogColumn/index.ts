@@ -5,17 +5,27 @@ import {
 } from "../../../styled-component/InlineList";
 import { LogColumnCard } from "./LogColumnCard";
 import store from "../../../store";
+import { ILogColumnCardState } from "./LogColumnCard";
 
 import "./LogColumn.scss";
+import { ADD_LOG_HISTORY } from "../../../store/action/logHistory";
+
+interface ILogColumnState {
+  logs: ILogColumnCardState[];
+}
 
 export class LogColumn {
   private logColumnNode: Element | Text | null = null;
   private logsNode: Element | Text | null = null;
-  constructor() {
+  private state: ILogColumnState;
+  constructor(param: ILogColumnState) {
     this.moveLeft = this.moveLeft.bind(this);
     this.moveRight = this.moveRight.bind(this);
     this.update = this.update.bind(this);
     this.deleteAllChildren = this.deleteAllChildren.bind(this);
+    this.state = {
+      logs: param.logs,
+    };
   }
 
   moveLeft() {
@@ -44,10 +54,10 @@ export class LogColumn {
     history
       .map((log) =>
         new LogColumnCard({
-          fromDate: "2020-04-15T18:13:34.247",
           userAction: log.userAction,
           contents: log.contents,
           suffix: log.suffix,
+          historyCreatedTime: log.historyCreatedTime,
         }).render()
       )
       .reverse()
@@ -90,7 +100,28 @@ export class LogColumn {
       width: "100%",
       height: "90%",
       userClassList: ["log-column-log-wrapper"],
-    })(div()());
+    })([div()()]);
+
+    this.state.logs
+      .map((log) => {
+        return new LogColumnCard({
+          userAction: log.userAction,
+          contents: log.contents,
+          suffix: log.suffix,
+          historyCreatedTime: log.historyCreatedTime,
+        }).render();
+      })
+      .forEach((logCardElement) => this.logsNode!.appendChild(logCardElement));
+
+    this.state.logs.forEach((log) => {
+      store.dispatch({
+        type: ADD_LOG_HISTORY,
+        userAction: log.userAction,
+        contents: log.contents,
+        suffix: log.suffix,
+        historyCreatedTime: log.historyCreatedTime,
+      });
+    });
 
     this.logColumnNode = InlineList({
       className: InlineListClass.ALIGN_LEFT_COLUMN,

@@ -8,11 +8,11 @@ import { dateDiff } from "../../../../util/date";
 
 import "./LogColumnCard.scss";
 
-interface ILogColumnCardState {
+export interface ILogColumnCardState {
   userAction: string;
   contents: string;
   suffix?: string;
-  fromDate: string;
+  historyCreatedTime: string;
 }
 
 export class LogColumnCard {
@@ -22,7 +22,7 @@ export class LogColumnCard {
       userAction: props.userAction,
       contents: props.contents,
       suffix: props.suffix,
-      fromDate: props.fromDate,
+      historyCreatedTime: props.historyCreatedTime,
     };
   }
   render() {
@@ -51,7 +51,7 @@ export class LogColumnCard {
     const title = div({ class: "log-column-card-title" })([texts]);
 
     const footer = span({ class: "log-column-card-time" })([
-      dateDiff(new Date(this.state.fromDate), new Date()),
+      dateDiff(new Date(this.state.historyCreatedTime), new Date()),
     ]);
 
     const contents = InlineList({

@@ -6,8 +6,15 @@ import { TableHeader } from "./TableHeader";
 import { Card } from "./Card";
 import store from "../../store";
 import { ADD_LOG_HISTORY } from "../../store/action/logHistory";
+import API from "../../util/api";
+import { IBoardCardParam } from "../Board";
+import axios from "axios";
 
 import "./Table.scss";
+
+axios.defaults.headers.common = {
+  token: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjb2RlLXNxdWFkLmNvbSIsInVzZXJJZCI6IkVWRVIifQ.qBB-zuqxeXMxTeqWeDU4esYUv5ew2VCamWNmvZM7kA4`,
+};
 
 const defaultRightButtonType = {
   size: ButtonSize.large,
@@ -24,9 +31,18 @@ const defaultLeftButtonType = {
 };
 
 interface ITableState {
+  tableId: number;
   cardCounts: number;
   tableName: string;
   handleDragCardCountsChange: Function;
+  cards: IBoardCardParam[];
+}
+
+interface IServerData {
+  data: {
+    id: number;
+    historyCreatedTime: string;
+  };
 }
 
 export class Table {
@@ -43,14 +59,18 @@ export class Table {
     this.addCardButtonHandler = this.addCardButtonHandler.bind(this);
     this.handleDragOver = this.handleDragOver.bind(this);
     this.getDragAfterElement = this.getDragAfterElement.bind(this);
+    this.decreaseCardCount = this.decreaseCardCount.bind(this);
 
     this.state = {
+      tableId: param.tableId,
       cardCounts: param.cardCounts,
       tableName: param.tableName,
       handleDragCardCountsChange: param.handleDragCardCountsChange,
+      cards: param.cards,
     };
 
     this.tableHeader = new TableHeader(
+      this.state.cardCounts,
       this.state.tableName,
       this.createAddingCardSection,
       this.removeAddingCardSection
@@ -75,6 +95,10 @@ export class Table {
     return this.tableNode;
   }
 
+  getTableId() {
+    return this.state.tableId;
+  }
+
   getTableName() {
     return this.state.tableName;
   }
@@ -86,6 +110,7 @@ export class Table {
 
   decreaseCardCount() {
     if (this.state.cardCounts === 0) {
+      this.tableHeader.updateCardCounts(this.state.cardCounts);
       return;
     }
     this.state.cardCounts--;
@@ -108,7 +133,7 @@ export class Table {
     this.makeButtonInvalid();
   }
 
-  addCardButtonHandler() {
+  async addCardButtonHandler() {
     const textArea = (this.tableNode as Element).querySelector(
       "textarea"
     )! as HTMLTextAreaElement;
@@ -117,28 +142,50 @@ export class Table {
       return;
     }
 
-    const firstCard = (this.tableNode as Element).querySelector(".card");
-    (this.tableNode as Element).insertBefore(
-      new Card({
-        isLoading: false,
+    try {
+      const { data }: IServerData = await axios.post(
+        API.MAKE_NEW_CARD(this.state.tableId),
+        {
+          card: {
+            title: textArea.value,
+            author: "nigayo",
+            note: "ios 힘들겠다...",
+          },
+          history: {
+            userAction: "added",
+            contents: textArea.value,
+            suffix: `to ${this.state.tableName}`,
+          },
+        }
+      );
+      const cardId = data.id;
+      const { historyCreatedTime } = data;
+      store.dispatch({
+        type: ADD_LOG_HISTORY,
+        userAction: "added",
         contents: textArea.value,
-        tableType: this.state.tableName,
-        tableNode: this.tableNode as Element,
-        handleDragCardCountsChange: this.state.handleDragCardCountsChange,
-      }).render(),
-      firstCard
-    );
+        suffix: `to ${this.state.tableName}`,
+        historyCreatedTime,
+      });
 
-    store.dispatch({
-      type: ADD_LOG_HISTORY,
-      userAction: "added",
-      contents: textArea.value,
-      suffix: `to ${this.state.tableName}`,
-    });
+      (this.tableNode as Element).appendChild(
+        new Card({
+          cardId,
+          isLoading: false,
+          contents: textArea.value,
+          tableType: this.state.tableName,
+          tableNode: this.tableNode as Element,
+          handleDragCardCountsChange: this.state.handleDragCardCountsChange,
+          cardOrder: this.state.cardCounts,
+          tableId: this.state.tableId,
+          decreaseCardCount: this.decreaseCardCount,
+        }).render()
+      );
 
-    this.increaseCardCount();
-    this.makeButtonInvalid();
-    textArea.value = "";
+      this.increaseCardCount();
+      this.makeButtonInvalid();
+      textArea.value = "";
+    } catch {}
   }
 
   createAddingCardSection() {
@@ -192,6 +239,23 @@ export class Table {
       class: `table`,
       onDragover: this.handleDragOver,
     })([this.headerNode]);
+
+    this.state.cards
+      .map(
+        (cardParam) =>
+          new Card({
+            cardId: cardParam.id,
+            handleDragCardCountsChange: this.state.handleDragCardCountsChange,
+            contents: cardParam.title,
+            isLoading: false,
+            tableType: this.state.tableName,
+            tableNode: this.tableNode as Element,
+            tableId: this.state.tableId,
+            decreaseCardCount: this.decreaseCardCount,
+          })
+      )
+      .map((cardObject) => cardObject.render())
+      .forEach((cardElement) => this.tableNode!.appendChild(cardElement));
     return this.tableNode;
   }
 }

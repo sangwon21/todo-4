@@ -5,16 +5,16 @@ import {
   ISpacingStyleParameter,
 } from "../../styled-component/Spacing";
 import { LogColumn } from "./LogColumn";
-
 import store from "../../store";
+import { ILogColumnCardState } from "./LogColumn/LogColumnCard";
 
 import "./Header.scss";
 
 export class Header {
   private logColumn: LogColumn;
-  constructor() {
+  constructor(param: ILogColumnCardState[]) {
     this.handleMenuClick = this.handleMenuClick.bind(this);
-    this.logColumn = new LogColumn();
+    this.logColumn = new LogColumn({ logs: param });
     store.subscribe(this.logColumn.update);
   }
 

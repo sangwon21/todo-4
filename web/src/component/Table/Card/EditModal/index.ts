@@ -40,8 +40,8 @@ export class EditModal {
     if (value === "") {
       return;
     }
-    this.state.editContent(value);
     this.close();
+    this.state.editContent(value);
   }
 
   handleInput(e: InputEvent) {

@@ -15,7 +15,7 @@ const refineSizeStyle = (size: SpinnerSize) => {
 
 const makeSpinner = (style: string) =>
   div({
-    id: "loading",
+    class: "loading",
     style,
   })([]);
 

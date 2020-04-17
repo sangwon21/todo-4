@@ -5,12 +5,14 @@ interface ILogHistoryAction extends Action {
   userAction: string;
   contents: string;
   suffix?: string;
+  historyCreatedTime: string;
 }
 
 interface ILogHistoryType {
   userAction: string;
   contents: string;
   suffix?: string;
+  historyCreatedTime: string;
 }
 
 interface ILogHistoryState {
@@ -34,6 +36,7 @@ const logHistoryManagement = (
             userAction: action.userAction,
             contents: action.contents,
             suffix: action.suffix,
+            historyCreatedTime: action.historyCreatedTime,
           },
         ],
       };
