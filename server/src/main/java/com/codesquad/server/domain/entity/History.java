@@ -14,14 +14,20 @@ public class History {
     @Id
     private Long id;
 
+    private String userAction;
+
     @NotBlank
     private String contents;
 
+    private String suffix;
+
     private LocalDateTime historyCreatedTime;
 
-    public History(Long id, String contents, LocalDateTime historyCreatedTime) {
+    public History(Long id, String userAction, @NotBlank String contents, String suffix, LocalDateTime historyCreatedTime) {
         this.id = id;
+        this.userAction = userAction;
         this.contents = contents;
+        this.suffix = suffix;
         this.historyCreatedTime = LocalDateTime.now();
     }
 }

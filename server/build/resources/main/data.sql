@@ -29,16 +29,16 @@ VALUES ('iOS', '제목9', '9번 내용', 3, 1);
 INSERT INTO card (author, title, note, columns, columns_key)
 VALUES ('iOS', '제목10', '10번 내용', 3, 2);
 
-INSERT INTO history (contents, history_created_time)
-VALUES ('히스토리 내용1', NOW());
-INSERT INTO history (contents, history_created_time)
-VALUES ('히스토리 내용2', NOW());
-INSERT INTO history (contents, history_created_time)
-VALUES ('히스토리 내용3', NOW());
-INSERT INTO history (contents, history_created_time)
-VALUES ('히스토리 내용4', NOW());
-INSERT INTO history (contents, history_created_time)
-VALUES ('히스토리 내용5', NOW());
-INSERT INTO history (contents, history_created_time)
-VALUES ('히스토리 내용6', NOW());
+INSERT INTO history (user_action, contents, suffix, history_created_time)
+VALUES ('moved', '히스토리 내용1', 'from 해야할 일 to 하는 중', NOW());
+INSERT INTO history (user_action, contents, suffix, history_created_time)
+VALUES ('archived', '히스토리 내용2', 'from 해야할 일', NOW());
+INSERT INTO history (user_action, contents, suffix, history_created_time)
+VALUES ('updated', '히스토리 내용3', '', NOW());
+INSERT INTO history (user_action, contents, suffix, history_created_time)
+VALUES ('added', '히스토리 내용4', 'to 다했어', NOW());
+INSERT INTO history (user_action, contents, suffix, history_created_time)
+VALUES ('added', '히스토리 내용5', 'to 다했어', NOW());
+INSERT INTO history (user_action, contents, suffix, history_created_time)
+VALUES ('added', '히스토리 내용6', 'to 다했어', NOW());
 
