@@ -37,6 +37,7 @@
 		C2B8CF2724480F2F0076F34D /* DragDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B8CF2624480F2F0076F34D /* DragDrop.swift */; };
 		C2B8CF2924484DE50076F34D /* FloatingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B8CF2824484DE50076F34D /* FloatingCard.swift */; };
 		C2B8CF2B2448E6260076F34D /* CardRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B8CF2A2448E6260076F34D /* CardRequest.swift */; };
+		C2FCC03124496B220051530D /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FCC03024496B220051530D /* ActivitiesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		C2B8CF2624480F2F0076F34D /* DragDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragDrop.swift; sourceTree = "<group>"; };
 		C2B8CF2824484DE50076F34D /* FloatingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingCard.swift; sourceTree = "<group>"; };
 		C2B8CF2A2448E6260076F34D /* CardRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardRequest.swift; sourceTree = "<group>"; };
+		C2FCC03024496B220051530D /* ActivitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +179,7 @@
 				C27B287E243B5A33005785AB /* BoardViewController.swift */,
 				C26472CB243C7551006D87EB /* CardListViewController.swift */,
 				C24C8DC7243F5D0300825031 /* FormViewController.swift */,
+				C2FCC03024496B220051530D /* ActivitiesViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				C26472CF243C7677006D87EB /* ReusableView.swift in Sources */,
 				C26472E2243DEBC7006D87EB /* URLProtocolMock.swift in Sources */,
 				C24C8DCA2440472C00825031 /* FirstResponder.swift in Sources */,
+				C2FCC03124496B220051530D /* ActivitiesViewController.swift in Sources */,
 				C27B287D243B5A33005785AB /* SceneDelegate.swift in Sources */,
 				C24C8DCC24405CD400825031 /* CardIDResponse.swift in Sources */,
 				C2884956243E37B900D4B603 /* CardListViewModel.swift in Sources */,
