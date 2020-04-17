@@ -5,9 +5,7 @@ import org.springframework.data.annotation.Id;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class Card {
 
     @Id
