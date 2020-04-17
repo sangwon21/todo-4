@@ -1,6 +1,5 @@
 package com.codesquad.server.presentation.controllers;
 
-import com.codesquad.server.domain.entity.Columns;
 import com.codesquad.server.domain.service.ColumnsService;
 import com.codesquad.server.domain.value.RequestColumnsDTO;
 import com.codesquad.server.domain.value.ResponseColumnsAndHistoriesDTO;

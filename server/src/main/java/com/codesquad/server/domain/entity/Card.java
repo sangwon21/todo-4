@@ -3,8 +3,6 @@ package com.codesquad.server.domain.entity;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 
-import javax.validation.constraints.NotBlank;
-
 @Getter
 @Setter
 @NoArgsConstructor

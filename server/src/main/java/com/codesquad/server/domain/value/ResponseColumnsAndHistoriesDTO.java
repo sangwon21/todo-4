@@ -8,6 +8,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class ResponseColumnsAndHistoriesDTO {
-    private Iterable<Columns> columns;
-    private Iterable<History> history;
+    private final Iterable<Columns> columns;
+    private final Iterable<History> history;
 }

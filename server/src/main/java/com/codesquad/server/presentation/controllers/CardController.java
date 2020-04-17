@@ -23,7 +23,6 @@ public class CardController {
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping("")
     public ResponseDTO create(@PathVariable Long columnId, @RequestBody @Valid RequestCardDTO requestCardDTO) {
-        log.info("card : {}", requestCardDTO.getCard());
         return cardService.save(requestCardDTO, columnId);
     }
 

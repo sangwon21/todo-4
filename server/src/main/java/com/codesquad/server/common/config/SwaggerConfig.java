@@ -26,7 +26,7 @@ public class SwaggerConfig {
     // SWAGGER UI 페이지에 노출할 내용 커스텀
     @SuppressWarnings("deprecation")
     private ApiInfo apiInfo() {
-        ApiInfo apiInfo = new ApiInfo (
+        ApiInfo apiInfo = new ApiInfo(
                 "TODO APP SERVICE",
                 "Description",
                 "Version",

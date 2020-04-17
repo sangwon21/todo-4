@@ -40,6 +40,8 @@ public class CardServiceImpl implements CardService {
         Long id = card.getId();
         LocalDateTime createdTime = history.getHistoryCreatedTime();
 
+        log.info("카드 생성 성공했습니다!");
+
         return new ResponseDTO(id, createdTime);
     }
 
@@ -50,6 +52,8 @@ public class CardServiceImpl implements CardService {
 
         History history = requestCardDTO.getHistory();
         historyRepository.save(history);
+
+        log.info("카드 수정 성공했습니다!");
 
         return history.getHistoryCreatedTime();
     }
@@ -67,6 +71,8 @@ public class CardServiceImpl implements CardService {
         History history = requestLocationDTO.getHistory();
         historyRepository.save(history);
 
+        log.info("카드 이동 성공했습니다!");
+
         return history.getHistoryCreatedTime();
     }
 
@@ -77,6 +83,9 @@ public class CardServiceImpl implements CardService {
 
         History history = requestCardDTO.getHistory();
         historyRepository.save(history);
+
+        log.info("카드 삭제 성공했습니다!");
+
         return history.getHistoryCreatedTime();
     }
 }

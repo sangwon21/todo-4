@@ -1,7 +1,7 @@
 package com.codesquad.server.domain.service;
 
 public interface JwtUtil {
-    public String createToken();
+    String createToken();
 
-    public void verifyToken(String token);
+    void verifyToken(String token);
 }
