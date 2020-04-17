@@ -7,6 +7,7 @@ import com.codesquad.server.domain.repository.BoardRepository;
 import com.codesquad.server.domain.repository.ColumnsRepository;
 import com.codesquad.server.domain.repository.HistoryRepository;
 import com.codesquad.server.domain.value.RequestColumnsDTO;
+import com.codesquad.server.domain.value.ResponseColumnsAndHistoriesDTO;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -30,8 +31,8 @@ public class ColumnsServiceImpl implements ColumnsService {
     }
 
     @Override
-    public Iterable<Columns> list() {
-        return columnsRepository.findAll();
+    public ResponseColumnsAndHistoriesDTO list() {
+        return new ResponseColumnsAndHistoriesDTO(columnsRepository.findAll(), historyRepository.findAll());
     }
 
     @Override

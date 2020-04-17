@@ -3,6 +3,7 @@ package com.codesquad.server.presentation.controllers;
 import com.codesquad.server.domain.entity.Columns;
 import com.codesquad.server.domain.service.ColumnsService;
 import com.codesquad.server.domain.value.RequestColumnsDTO;
+import com.codesquad.server.domain.value.ResponseColumnsAndHistoriesDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -19,9 +20,9 @@ public class ColumnsController {
 
     private final ColumnsService columnsService;
 
-    @ResponseStatus(value = HttpStatus.CREATED)
+    @ResponseStatus(value = HttpStatus.OK)
     @GetMapping("")
-    public Iterable<Columns> list() {
+    public ResponseColumnsAndHistoriesDTO list() {
         return columnsService.list();
     }
 

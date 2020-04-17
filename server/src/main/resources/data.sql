@@ -28,3 +28,17 @@ INSERT INTO card (author, title, note, columns, columns_key)
 VALUES ('iOS', '제목9', '9번 내용', 3, 1);
 INSERT INTO card (author, title, note, columns, columns_key)
 VALUES ('iOS', '제목10', '10번 내용', 3, 2);
+
+INSERT INTO history (contents, history_created_time)
+VALUES ('히스토리 내용1', NOW());
+INSERT INTO history (contents, history_created_time)
+VALUES ('히스토리 내용2', NOW());
+INSERT INTO history (contents, history_created_time)
+VALUES ('히스토리 내용3', NOW());
+INSERT INTO history (contents, history_created_time)
+VALUES ('히스토리 내용4', NOW());
+INSERT INTO history (contents, history_created_time)
+VALUES ('히스토리 내용5', NOW());
+INSERT INTO history (contents, history_created_time)
+VALUES ('히스토리 내용6', NOW());
+
