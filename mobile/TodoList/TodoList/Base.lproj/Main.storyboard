@@ -34,7 +34,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="tYg-BO-9Ab" detailTextLabel="c6C-0A-5VW" imageView="bVM-Y5-KdC" style="IBUITableViewCellStyleSubtitle" id="9KR-zS-ZPB">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ActivityCell" textLabel="tYg-BO-9Ab" detailTextLabel="c6C-0A-5VW" imageView="bVM-Y5-KdC" style="IBUITableViewCellStyleSubtitle" id="9KR-zS-ZPB">
                                 <rect key="frame" x="0.0" y="72" width="400" height="55.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9KR-zS-ZPB" id="eUZ-0t-CLt">

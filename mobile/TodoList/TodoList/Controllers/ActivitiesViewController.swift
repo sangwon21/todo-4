@@ -14,22 +14,23 @@ class ActivitiesViewController: UITableViewController {
     
     let reuseIdentifier = "ActivityCell"
     
+    private var activities = [Activity]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         requestActivities()
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
-    }
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return activities.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+        let activity = activities[indexPath.row]
+        cell.textLabel?.text = "\(activity.action) \(activity.description) \(activity.suffix ?? "")"
+        cell.detailTextLabel?.text = "\(activity.time)"
         return cell
     }
 }
@@ -39,7 +40,9 @@ extension ActivitiesViewController {
         networkManager?.requestActivities { [weak self] result in
             switch result {
             case .failure: return
-            case .success: DispatchQueue.main.async { self?.tableView.reloadData() }
+            case let .success(activities):
+                self?.activities = activities
+                DispatchQueue.main.async { self?.tableView.reloadData() }
             }
         }
     }
