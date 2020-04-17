@@ -19,6 +19,8 @@ class ActivitiesViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.allowsSelection = false
+        
         requestActivities()
     }
     
