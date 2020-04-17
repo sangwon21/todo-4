@@ -33,7 +33,7 @@ export const dateDiff = (from: Date, to: Date) => {
       : `${diffMins} ${DateUnit.MINUTES}`;
   }
 
-  const seconds = Math.floor(diffMs / 1000);
+  const seconds = Math.floor(diffMs / 1000) < 0 ? 0 : Math.floor(diffMs / 1000);
   return seconds === 1 || seconds === 0
     ? `${seconds} ${DateUnit.SECOND}`
     : `${seconds} ${DateUnit.SECONDS}`;
