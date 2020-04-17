@@ -1,4 +1,4 @@
-#loading {
+.loading {
   display: inline-block;
   margin-left: 1rem;
   width: 20px;
@@ -8,6 +8,10 @@
   border-top-color: #8af26a;
   animation: spin 1s ease-in-out infinite;
   -webkit-animation: spin 1s ease-in-out infinite;
+  position: absolute;
+  padding: 0;
+  left: 42%;
+  top: 37%;
 }
 
 @keyframes spin {
