@@ -58,7 +58,7 @@ public class CardServiceImpl implements CardService {
 
         History history = requestCardDTO.getHistory();
         history.setHistoryCreatedTime();
-        if (!history.getContents().equals(null)) {
+        if (!history.getContents().equals("null")) {
             historyRepository.save(history);
         }
 
@@ -80,7 +80,7 @@ public class CardServiceImpl implements CardService {
 
         History history = requestLocationDTO.getHistory();
         history.setHistoryCreatedTime();
-        if (!history.getContents().equals(null)) {
+        if (!history.getContents().equals("null")) {
             historyRepository.save(history);
         }
 
@@ -97,7 +97,7 @@ public class CardServiceImpl implements CardService {
 
         History history = requestCardDTO.getHistory();
         history.setHistoryCreatedTime();
-        if (!history.getContents().equals(null)) {
+        if (!history.getContents().equals("null")) {
             historyRepository.save(history);
         }
 
