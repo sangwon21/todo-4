@@ -38,7 +38,7 @@ public class CardServiceImpl implements CardService {
 
         History history = requestCardDTO.getHistory();
         history.setHistoryCreatedTime();
-        if (!history.getContents().equals(null)) {
+        if (!history.getContents().equals("null")) {
             historyRepository.save(history);
         }
 

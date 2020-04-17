@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Getter
@@ -15,6 +16,7 @@ public class History {
 
     private String userAction;
 
+    @NotBlank
     private String contents;
 
     private String suffix;
