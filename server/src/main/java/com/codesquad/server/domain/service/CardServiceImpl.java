@@ -38,7 +38,9 @@ public class CardServiceImpl implements CardService {
 
         History history = requestCardDTO.getHistory();
         history.setHistoryCreatedTime();
-        historyRepository.save(history);
+        if (!history.getContents().equals(null)) {
+            historyRepository.save(history);
+        }
 
         Long id = card.getId();
         LocalDateTime createdTime = history.getHistoryCreatedTime();
@@ -56,7 +58,9 @@ public class CardServiceImpl implements CardService {
 
         History history = requestCardDTO.getHistory();
         history.setHistoryCreatedTime();
-        historyRepository.save(history);
+        if (!history.getContents().equals(null)) {
+            historyRepository.save(history);
+        }
 
         log.info("카드 수정 성공했습니다!");
 
@@ -76,7 +80,9 @@ public class CardServiceImpl implements CardService {
 
         History history = requestLocationDTO.getHistory();
         history.setHistoryCreatedTime();
-        historyRepository.save(history);
+        if (!history.getContents().equals(null)) {
+            historyRepository.save(history);
+        }
 
         log.info("카드 이동 성공했습니다!");
 
@@ -91,7 +97,9 @@ public class CardServiceImpl implements CardService {
 
         History history = requestCardDTO.getHistory();
         history.setHistoryCreatedTime();
-        historyRepository.save(history);
+        if (!history.getContents().equals(null)) {
+            historyRepository.save(history);
+        }
 
         log.info("카드 삭제 성공했습니다!");
 
