@@ -9,6 +9,7 @@ import com.codesquad.server.domain.repository.HistoryRepository;
 import com.codesquad.server.domain.value.RequestColumnsDTO;
 import com.codesquad.server.domain.value.ResponseColumnsAndHistoriesDTO;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -35,6 +36,7 @@ public class ColumnsServiceImpl implements ColumnsService {
         return new ResponseColumnsAndHistoriesDTO(columnsRepository.findAll(), historyRepository.findAll());
     }
 
+    @Transactional
     @Override
     public LocalDateTime update(RequestColumnsDTO requestColumnsDTO) {
         Columns columns = columnsRepository.findById(requestColumnsDTO.getColumns().getId()).orElseThrow(() -> new IllegalArgumentException("칼럼이 존재하지 않습니다!"));

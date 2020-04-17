@@ -13,6 +13,7 @@ import com.codesquad.server.domain.value.ResponseDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -27,6 +28,7 @@ public class CardServiceImpl implements CardService {
 
     private final HistoryRepository historyRepository;
 
+    @Transactional
     @Override
     public ResponseDTO save(RequestCardDTO requestCardDTO, Long columnId) {
         Columns columns = columnsRepository.findById(columnId).orElseThrow(() -> new IllegalArgumentException("컬럼이 존재하지 않습니다!"));
@@ -45,6 +47,7 @@ public class CardServiceImpl implements CardService {
         return new ResponseDTO(id, createdTime);
     }
 
+    @Transactional
     @Override
     public LocalDateTime update(RequestCardDTO requestCardDTO) {
         Card card = requestCardDTO.getCard();
@@ -58,6 +61,7 @@ public class CardServiceImpl implements CardService {
         return history.getHistoryCreatedTime();
     }
 
+    @Transactional
     @Override
     public LocalDateTime move(RequestLocationDTO requestLocationDTO) {
         Location location = requestLocationDTO.getLocation();
@@ -76,6 +80,7 @@ public class CardServiceImpl implements CardService {
         return history.getHistoryCreatedTime();
     }
 
+    @Transactional
     @Override
     public LocalDateTime delete(RequestCardDTO requestCardDTO) {
         Card card = cardRepository.findById(requestCardDTO.getCard().getId()).orElseThrow(() -> new IllegalArgumentException("카드가 존재하지 않습니다!"));
