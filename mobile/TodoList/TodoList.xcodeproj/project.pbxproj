@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C21C6789243C401B00FA661F /* CardCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21C6788243C401B00FA661F /* CardCountView.swift */; };
+		C2251B752449788200A6C245 /* ActivitiesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2251B742449788200A6C245 /* ActivitiesResponse.swift */; };
 		C24C8DC8243F5D0300825031 /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24C8DC7243F5D0300825031 /* FormViewController.swift */; };
 		C24C8DCA2440472C00825031 /* FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24C8DC92440472C00825031 /* FirstResponder.swift */; };
 		C24C8DCC24405CD400825031 /* CardIDResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24C8DCB24405CD400825031 /* CardIDResponse.swift */; };
@@ -52,6 +53,7 @@
 
 /* Begin PBXFileReference section */
 		C21C6788243C401B00FA661F /* CardCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCountView.swift; sourceTree = "<group>"; };
+		C2251B742449788200A6C245 /* ActivitiesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesResponse.swift; sourceTree = "<group>"; };
 		C24C8DC7243F5D0300825031 /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
 		C24C8DC92440472C00825031 /* FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstResponder.swift; sourceTree = "<group>"; };
 		C24C8DCB24405CD400825031 /* CardIDResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardIDResponse.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				C2884957243E41E100D4B603 /* Observers.swift */,
 				C2B8CF2824484DE50076F34D /* FloatingCard.swift */,
 				C2B8CF2A2448E6260076F34D /* CardRequest.swift */,
+				C2251B742449788200A6C245 /* ActivitiesResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 				C2B8CF252446D5F80076F34D /* CardListDelegate.swift in Sources */,
 				C2884958243E41E100D4B603 /* Observers.swift in Sources */,
 				C26472D6243C808C006D87EB /* NetworkManager.swift in Sources */,
+				C2251B752449788200A6C245 /* ActivitiesResponse.swift in Sources */,
 				C26472E9243E05DF006D87EB /* CardListDataSource.swift in Sources */,
 				C26472CF243C7677006D87EB /* ReusableView.swift in Sources */,
 				C26472E2243DEBC7006D87EB /* URLProtocolMock.swift in Sources */,
