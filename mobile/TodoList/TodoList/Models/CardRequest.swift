@@ -16,7 +16,7 @@ struct CardRequest: Encodable {
 extension CardRequest {
     init(card: Card) {
         self.card = card
-        self.history = History(contents: "")
+        self.history = History(contents: "null")
     }
 }
 
