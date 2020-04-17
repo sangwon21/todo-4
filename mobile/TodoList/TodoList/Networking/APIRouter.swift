@@ -55,18 +55,20 @@ enum APIBuilder: APIRouter {
     case board
     case newCard(listID: Int, card: Card)
     case deleteCard(listID: Int, card: Card)
+    case activities
     
     var path: String {
         switch self {
         case .board: return Endpoints.boardURL
         case let .newCard(id, _): return Endpoints.boardURL + "/\(id)" + Endpoints.listPath
         case let .deleteCard(id, _): return Endpoints.boardURL + "/\(id)" + Endpoints.listPath
+        case .activities: return Endpoints.activitiesURL
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .board: return .get
+        case .board, .activities: return .get
         case .newCard: return .post
         case .deleteCard: return .delete
         }
