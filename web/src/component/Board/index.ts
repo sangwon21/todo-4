@@ -5,15 +5,30 @@ interface IBoardState {
   tables: Table[];
 }
 
+export interface IBoardCardParam {
+  id: number;
+  author: string;
+  title: string;
+  note?: string;
+}
+
+interface IBoardParam {
+  id: number;
+  title: string;
+  cards: IBoardCardParam[];
+}
+
 export class Board {
   private state: IBoardState;
-  constructor() {
+  private param: IBoardParam[];
+  constructor(boardParam: IBoardParam[]) {
     this.handleDragCardCountsChange = this.handleDragCardCountsChange.bind(
       this
     );
     this.state = {
       tables: [],
     };
+    this.param = boardParam;
   }
 
   pushToTables(table: Table) {
@@ -23,7 +38,7 @@ export class Board {
   handleDragCardCountsChange(cardElement: Element, tableElement: Element) {
     let returnTableElement = tableElement;
     let targetTableName = "";
-
+    let tableId = 1;
     this.state.tables.forEach((table) => {
       const tableNode = table.getTableNode()!;
       if (tableNode.contains(cardElement)) {
@@ -32,6 +47,7 @@ export class Board {
         }
         table.increaseCardCount();
         targetTableName = table.getTableName();
+        tableId = table.getTableId();
         returnTableElement = tableNode as Element;
         return;
       }
@@ -40,33 +56,26 @@ export class Board {
         return;
       }
     });
-    return { returnTableElement, targetTableName };
+    return { returnTableElement, targetTableName, tableId };
   }
 
   render() {
-    const todo = new Table({
-      cardCounts: 0,
-      tableName: "할 일",
-      handleDragCardCountsChange: this.handleDragCardCountsChange,
-    });
-    const doing = new Table({
-      cardCounts: 0,
-      tableName: "하는 중",
-      handleDragCardCountsChange: this.handleDragCardCountsChange,
-    });
-    const done = new Table({
-      cardCounts: 0,
-      tableName: "한 일",
-      handleDragCardCountsChange: this.handleDragCardCountsChange,
-    });
+    const tables = this.param.map(
+      (param) =>
+        new Table({
+          tableId: param.id,
+          cardCounts: param.cards.length,
+          tableName: param.title,
+          handleDragCardCountsChange: this.handleDragCardCountsChange,
+          cards: param.cards,
+        })
+    );
 
-    this.pushToTables(todo);
-    this.pushToTables(doing);
-    this.pushToTables(done);
-
+    tables.forEach((table) => this.pushToTables(table));
+    const renderedTables = tables.map((table) => table.render());
     return InlineList({
       className: InlineListClass.SPACE_AROUND,
       width: "100%",
-    })([todo.render(), doing.render(), done.render()]);
+    })(renderedTables);
   }
 }
