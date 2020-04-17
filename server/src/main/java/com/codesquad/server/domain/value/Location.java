@@ -1,12 +1,12 @@
 package com.codesquad.server.domain.value;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.ToString;
 
 @Getter
-@ToString
+@AllArgsConstructor
 public class Location {
-    Long cardId;
-    Long columnId;
-    int afterMoveCardIndex;
+    private Long cardId;
+    private Long columnId;
+    private int afterMoveCardIndex;
 }

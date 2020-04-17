@@ -11,10 +11,10 @@ CREATE TABLE board
 
 CREATE TABLE columns
 (
-    id           BIGINT PRIMARY KEY AUTO_INCREMENT,
-    title        VARCHAR(64),
-    board        INT REFERENCES board (id),
-    board_key    INT
+    id        BIGINT PRIMARY KEY AUTO_INCREMENT,
+    title     VARCHAR(64),
+    board     INT REFERENCES board (id),
+    board_key INT
 );
 
 CREATE TABLE card
@@ -30,7 +30,9 @@ CREATE TABLE card
 CREATE TABLE history
 (
     id                   BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_action          VARCHAR(64),
     contents             VARCHAR(64),
+    suffix               VARCHAR(64),
     history_created_time DATETIME
 );
 

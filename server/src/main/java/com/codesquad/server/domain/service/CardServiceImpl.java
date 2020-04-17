@@ -13,6 +13,7 @@ import com.codesquad.server.domain.value.ResponseDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -27,6 +28,7 @@ public class CardServiceImpl implements CardService {
 
     private final HistoryRepository historyRepository;
 
+    @Transactional
     @Override
     public ResponseDTO save(RequestCardDTO requestCardDTO, Long columnId) {
         Columns columns = columnsRepository.findById(columnId).orElseThrow(() -> new IllegalArgumentException("컬럼이 존재하지 않습니다!"));
@@ -35,25 +37,37 @@ public class CardServiceImpl implements CardService {
         columnsRepository.save(columns);
 
         History history = requestCardDTO.getHistory();
-        historyRepository.save(history);
+        history.setHistoryCreatedTime();
+        if (!history.getContents().equals("null")) {
+            historyRepository.save(history);
+        }
 
         Long id = card.getId();
         LocalDateTime createdTime = history.getHistoryCreatedTime();
 
+        log.info("카드 생성 성공했습니다!");
+
         return new ResponseDTO(id, createdTime);
     }
 
+    @Transactional
     @Override
     public LocalDateTime update(RequestCardDTO requestCardDTO) {
         Card card = requestCardDTO.getCard();
         cardRepository.save(card);
 
         History history = requestCardDTO.getHistory();
-        historyRepository.save(history);
+        history.setHistoryCreatedTime();
+        if (!history.getContents().equals("null")) {
+            historyRepository.save(history);
+        }
+
+        log.info("카드 수정 성공했습니다!");
 
         return history.getHistoryCreatedTime();
     }
 
+    @Transactional
     @Override
     public LocalDateTime move(RequestLocationDTO requestLocationDTO) {
         Location location = requestLocationDTO.getLocation();
@@ -65,18 +79,30 @@ public class CardServiceImpl implements CardService {
         columnsRepository.save(columns);
 
         History history = requestLocationDTO.getHistory();
-        historyRepository.save(history);
+        history.setHistoryCreatedTime();
+        if (!history.getContents().equals("null")) {
+            historyRepository.save(history);
+        }
+
+        log.info("카드 이동 성공했습니다!");
 
         return history.getHistoryCreatedTime();
     }
 
+    @Transactional
     @Override
     public LocalDateTime delete(RequestCardDTO requestCardDTO) {
         Card card = cardRepository.findById(requestCardDTO.getCard().getId()).orElseThrow(() -> new IllegalArgumentException("카드가 존재하지 않습니다!"));
         cardRepository.delete(card);
 
         History history = requestCardDTO.getHistory();
-        historyRepository.save(history);
+        history.setHistoryCreatedTime();
+        if (!history.getContents().equals("null")) {
+            historyRepository.save(history);
+        }
+
+        log.info("카드 삭제 성공했습니다!");
+
         return history.getHistoryCreatedTime();
     }
 }

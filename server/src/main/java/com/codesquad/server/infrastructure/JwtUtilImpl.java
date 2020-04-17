@@ -12,21 +12,18 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class JwtUtilImpl implements JwtUtil {
 
-    @Value("${jwt.signKey}")
+    private final String issuer = "code-squad.com";
+
+    @Value("${jwt.signKey)")
     private String signKey;
 
-    @Value("${jwt.userId}")
+    @Value("${jwt.userId)")
     private String userId;
 
-    private String issuer = "code-squad.com";
-
     public String createToken() {
-        log.info("userId : {}", userId);
-        log.info("signKey : {}", signKey);
-
-         return JWT.create()
+        return JWT.create()
                 .withIssuer(issuer)
-                 .withClaim("userId", userId)
+                .withClaim("userId", userId)
                 .sign(Algorithm.HMAC256(signKey));
     }
 

@@ -1,27 +1,29 @@
 package com.codesquad.server.domain.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
+@AllArgsConstructor
 public class History {
 
     @Id
     private Long id;
 
+    private String userAction;
+
     @NotBlank
     private String contents;
 
+    private String suffix;
+
     private LocalDateTime historyCreatedTime;
 
-    public History(Long id, String contents, LocalDateTime historyCreatedTime) {
-        this.id = id;
-        this.contents = contents;
+    public void setHistoryCreatedTime() {
         this.historyCreatedTime = LocalDateTime.now();
     }
 }

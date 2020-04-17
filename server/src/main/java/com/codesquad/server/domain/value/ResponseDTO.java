@@ -8,6 +8,6 @@ import java.time.LocalDateTime;
 @Getter
 @AllArgsConstructor
 public class ResponseDTO {
-    private final Long id;
-    private final LocalDateTime historyCreatedTime;
+    private Long id;
+    private LocalDateTime historyCreatedTime;
 }
