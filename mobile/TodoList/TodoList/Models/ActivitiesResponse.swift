@@ -12,9 +12,9 @@ typealias ActivitiesResponse = [Activity]
 
 struct Activity: Decodable {
     let id: Int
-    let action: String
-    let description: String
-    let suffix: String
+    let action: String?
+    let description: String?
+    let suffix: String?
     let time: String
     
     enum CodingKeys : String, CodingKey {

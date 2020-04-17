@@ -23,6 +23,13 @@ class BoardViewController: UIViewController {
         requestBoard()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowActivities",
+            let destinationVC = segue.destination as? ActivitiesViewController {
+            destinationVC.networkManager = networkManager
+        }
+    }
+    
     private func configureSession() {
         networkManager = NetworkManager(session: URLSession(configuration: .default))
     }

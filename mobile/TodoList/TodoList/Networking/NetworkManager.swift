@@ -86,6 +86,21 @@ extension NetworkManager {
             }
         }
     }
+    
+    func requestActivities(completion: @escaping (Result<ActivitiesResponse, Error>) -> Void) {
+        request(with: APIBuilder.activities.urlRequest()) { result in
+            switch result {
+            case let .failure(error): completion(.failure(error))
+            case let .success(data):
+                do {
+                    let response = try JSONDecoder().decode(ActivitiesResponse.self, from: data)
+                    completion(.success(response))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
 }
 
 private extension HTTPURLResponse {
