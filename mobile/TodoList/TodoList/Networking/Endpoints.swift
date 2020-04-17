@@ -9,8 +9,10 @@
 import Foundation
 
 class Endpoints {
-    static let baseURL = "https://lucas.codesquad.kr"
+    static let baseURL = "http://3.34.24.75:8080/api"
     
-    static let boardRequestURL = "\(baseURL)/columns"
-    static let newCardRequestURL = "\(boardRequestURL)/columnId/cards"
+    static let boardURL = "\(baseURL)/columns"
+    static let activitiesURL = "\(baseURL)/histories"
+    
+    static let listPath = "/cards"
 }

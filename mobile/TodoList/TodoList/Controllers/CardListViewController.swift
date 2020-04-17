@@ -10,11 +10,19 @@ import UIKit
 
 protocol CardListViewControllerDelegate: class {
     func addNewCardDidTouch(viewController: CardListViewController)
+    func deleteCards(viewController: CardListViewController, cards: [FloatingCard]) -> Bool
 }
 
 protocol CardListUpdater {
     func update(list: List)
-    func insert(card: Card)
+    func insert(cards: [Card], at row: Int?)
+    func delete(cardsAt rows: [Int])
+}
+
+extension CardListUpdater {
+    func insert(cards: [Card], at row: Int? = nil) {
+        insert(cards: cards, at: row)
+    }
 }
 
 class CardListViewController: UIViewController {
@@ -24,7 +32,9 @@ class CardListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var viewModel: CardListViewModel?
-    var dataSource: CardListDataSource?
+    var tableViewDataSource: CardListDataSource?
+    var tableViewDelegate: CardListDelegate?
+    var networkManager: NetworkManager?
     var listID: Int?
     
     weak var delegate: CardListViewControllerDelegate?
@@ -33,12 +43,19 @@ class CardListViewController: UIViewController {
         super.viewDidLoad()
         
         setupDataSource()
+        
+        setupDelegates()
+        
+        tableView.dragInteractionEnabled = true
     }
     
     private func updateList(with listChange: ListChangeDetails?) {
-        if let insertedRow = listChange?.insertedRow {
-            let indexPath = IndexPath(row: insertedRow, section: 0)
-            tableView.insertRows(at: [indexPath], with: .automatic)
+        if let deletedRows = listChange?.deletedRows {
+            let indexPaths = deletedRows.map { IndexPath(row: $0, section: 0) }
+            tableView.deleteRows(at: indexPaths, with: .automatic)
+        } else if let insertedRows = listChange?.insertedRows {
+            let indexPaths = insertedRows.map { IndexPath(row: $0, section: 0) }
+            tableView.insertRows(at: indexPaths, with: .automatic)
         } else {
             titleLabel.text = listChange?.list.title
             tableView.reloadData()
@@ -47,13 +64,37 @@ class CardListViewController: UIViewController {
     }
     
     private func setupDataSource() {
-        dataSource?.rowCount = { [weak self] in
+        tableViewDataSource?.rowCount = { [weak self] in
             return self?.viewModel?.cardCount ?? 0
         }
-        dataSource?.cardAtRow = { [weak self] in
+        tableViewDataSource?.cardAtRow = { [weak self] in
             return self?.viewModel?.card(at: $0) ?? Card()
         }
-        tableView.dataSource = dataSource
+        tableViewDataSource?.moveCard = { [weak self] source, destination in
+            self?.viewModel?.move(at: source, to: destination)
+        }
+        tableView.dataSource = tableViewDataSource
+    }
+    
+    private func setupDelegates() {
+        tableViewDelegate?.deleteAction = { [weak self] in
+            guard let self = self, let card = self.viewModel?.card(at: $0) else { return }
+            self.requestDelete(card: card, cardIndex: $0)
+        }
+        tableViewDelegate?.dragItem = { [weak self] in
+            guard let self = self, let card = self.viewModel?.card(at: $0) else { return nil }
+            return Drag.item(from: FloatingCard(sourceListID: self.listID, sourceIndex: $0, card: card))
+        }
+        tableViewDelegate?.dropItem = { [weak self] coordinator, index in
+            guard let self = self else { return }
+            let cards = Drop.objects(from: coordinator) as [FloatingCard]
+            if let result = self.delegate?.deleteCards(viewController: self, cards: cards), result {
+                self.viewModel?.insert(cards: cards.map { $0.card }, at: index)
+            }
+        }
+        tableView.delegate = tableViewDelegate
+        tableView.dragDelegate = tableViewDelegate
+        tableView.dropDelegate = tableViewDelegate
     }
     
     @IBAction func addNewCard(_ sender: Any) {
@@ -68,7 +109,24 @@ extension CardListViewController: CardListUpdater {
         }
     }
     
-    func insert(card: Card) {
-        viewModel?.insert(card: card)
+    func insert(cards: [Card], at row: Int?) {
+        viewModel?.insert(cards: cards, at: row)
+    }
+    
+    func delete(cardsAt rows: [Int]) {
+        guard rows.count > 0 else { return }
+        viewModel?.remove(cardsAt: rows)
+    }
+}
+
+extension CardListViewController {
+    private func requestDelete(card: Card, cardIndex: Int) {
+        guard let id = listID else { return }
+        networkManager?.requestDelete(listID: id, card: card) { [weak self] result in
+            switch result {
+            case .failure: return
+            case .success: self?.viewModel?.remove(cardsAt: [cardIndex])
+            }
+        }
     }
 }

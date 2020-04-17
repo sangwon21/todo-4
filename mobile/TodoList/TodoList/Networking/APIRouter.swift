@@ -11,12 +11,14 @@ import Foundation
 enum HTTPMethod: String {
     case get = "GET"
     case post = "POST"
+    case delete = "DELETE"
 }
 
 protocol APIRouter {
     var path: String { get }
     var method: HTTPMethod { get }
     var query: String? { get }
+    var header: [String: String] { get }
     var body: Data? { get }
     func url() -> URL?
     func urlRequest() -> URLRequest?
@@ -33,6 +35,7 @@ extension APIRouter {
         guard let url = url() else { return nil }
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
+        header.forEach { request.setValue($1, forHTTPHeaderField: $0) }
         request.httpBody = body
         return request
     }
@@ -50,19 +53,24 @@ extension APIRouter {
 
 enum APIBuilder: APIRouter {
     case board
-    case newCard(card: Card)
+    case newCard(listID: Int, card: Card)
+    case deleteCard(listID: Int, card: Card)
+    case activities
     
     var path: String {
         switch self {
-        case .board: return Endpoints.boardRequestURL
-        case .newCard: return Endpoints.newCardRequestURL
+        case .board: return Endpoints.boardURL
+        case let .newCard(id, _): return Endpoints.boardURL + "/\(id)" + Endpoints.listPath
+        case let .deleteCard(id, _): return Endpoints.boardURL + "/\(id)" + Endpoints.listPath
+        case .activities: return Endpoints.activitiesURL
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .board: return .get
+        case .board, .activities: return .get
         case .newCard: return .post
+        case .deleteCard: return .delete
         }
     }
     
@@ -72,9 +80,17 @@ enum APIBuilder: APIRouter {
         }
     }
     
+    var header: [String: String] {
+        switch self {
+        case .newCard, .deleteCard: return ["Content-Type": "application/json"]
+        default: return [:]
+        }
+    }
+    
     var body: Data? {
         switch self {
-        case let .newCard(card): return encode(card)
+        case let .newCard(_, card): return encode(CardRequest(card: card))
+        case let .deleteCard(_, card): return encode(CardRequest(card: card))
         default: return nil
         }
     }

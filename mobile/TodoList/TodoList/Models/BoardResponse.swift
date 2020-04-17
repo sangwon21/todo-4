@@ -8,28 +8,41 @@
 
 import Foundation
 
-struct BoardResponse: Decodable {
-    let board: Board
-}
-
 struct Board: Decodable {
     let lists: [List]
+    
+    enum CodingKeys : String, CodingKey {
+        case lists = "columns"
+    }
 }
 
 struct List: Decodable {
+    let id: Int
     let title: String
     var cards: [Card]
 }
 
 struct Card: Codable, Equatable {
-    var id: String
-    let title, detail, author: String
+    var id: Int
+    let title: String
+    let detail: String?
+    let author: Author?
+    
+    enum CodingKeys : String, CodingKey {
+        case id, author, title
+        case detail = "note"
+    }
+}
+
+enum Author: String, Codable {
+    case iOS = "iOS"
+    case web = "nigayo"
 }
 
 extension Board {
     var listPackage: Dictionary<Int, List> {
-        return lists.enumerated().reduce(into: [:]) { package, list in
-            package[list.0] = list.1
+        return lists.reduce(into: [:]) { package, list in
+            package[list.id] = list
         }
     }
 }
@@ -40,12 +53,24 @@ extension List {
     }
     
     init(with number: Int) {
+        id = 0
         title = ""
         cards = (0..<number).map { _ in Card() }
     }
     
-    mutating func insert(card: Card) {
-        cards.insert(card, at: 0)
+    mutating func insert(cards: [Card], at row: Int) {
+        self.cards.insert(contentsOf: cards, at: row)
+    }
+    
+    mutating func remove(cardsAt rows: [Int]) {
+        rows.reversed().forEach { cards.remove(at: $0) }
+    }
+    
+    mutating func move(at sourceRow: Int, to destinationRow: Int) {
+        guard sourceRow != destinationRow else { return }
+        let card = cards[sourceRow]
+        cards.remove(at: sourceRow)
+        cards.insert(card, at: destinationRow)
     }
     
     subscript(index: Int) -> Card {
@@ -55,9 +80,18 @@ extension List {
 
 extension Card {
     init() {
-        id = ""
+        id = 0
         title = ""
         detail = ""
-        author = ""
+        author = .iOS
+    }
+}
+
+extension Author: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .iOS: return "iOS"
+        case .web: return "Web"
+        }
     }
 }

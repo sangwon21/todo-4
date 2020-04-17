@@ -20,39 +20,51 @@ class BoardViewController: UIViewController {
         
         configureSession()
         
-        setupTodoLists(for: 3)
-        
         requestBoard()
     }
     
-    private func configureSession() {
-        let config = URLSessionConfiguration.ephemeral
-        config.protocolClasses = [URLProtocolMock.self]
-        networkManager = NetworkManager(session: URLSession(configuration: config))
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowActivities",
+            let destinationVC = segue.destination as? ActivitiesViewController {
+            destinationVC.networkManager = networkManager
+        }
     }
     
-    private func setupTodoLists(for number: Int) {
-        listViewControllers = (0..<number).reduce(into: [:]) { [unowned self] viewControllers, number in
+    private func configureSession() {
+        networkManager = NetworkManager(session: URLSession(configuration: .default))
+    }
+    
+    private func setupLists(with listIDs: [Int]) {
+        listViewControllers = listIDs.reduce(into: [:]) { [unowned self] viewControllers, listID in
             guard let vc = UILoader.load(viewControllerType: CardListViewController.self,
                                          from: storyboard) else { return }
-            vc.listID = number
-            vc.dataSource = CardListDataSource()
+            vc.listID = listID
+            vc.tableViewDataSource = CardListDataSource()
+            vc.tableViewDelegate = CardListDelegate()
+            vc.networkManager = networkManager
             vc.delegate = self
             self.boardStackView.addArrangedSubview(vc.view)
-            viewControllers[number] = vc
+            viewControllers[listID] = vc
+        }
+    }
+    
+    private func setupBoard(with board: Board) {
+        let listPackage = board.listPackage
+        setupLists(with: listPackage.keys.sorted())
+        listPackage.forEach { id, list in
+            listViewControllers[id]?.update(list: list)
         }
     }
 }
 
 extension BoardViewController {
     private func requestBoard() {
-        networkManager?.requestBoard { result in
+        networkManager?.requestBoard { [weak self] result in
             switch result {
             case .failure: return
             case let .success(board):
-                let listPackage = board.listPackage
-                (0..<listPackage.count).forEach { [weak self] in
-                    self?.listViewControllers[$0]?.update(list: listPackage[$0] ?? List(with: 0))
+                DispatchQueue.main.async {
+                    self?.setupBoard(with: board)
                 }
             }
         }
@@ -60,12 +72,12 @@ extension BoardViewController {
     
     private func requestNewCard(listID id: Int, card: Card) {
         var card = card
-        networkManager?.requestNewCard(card: card) { [weak self] result in
+        networkManager?.requestNewCard(listID: id, card: card) { [weak self] result in
             switch result {
             case .failure: return
             case let .success(response):
                 card.id = response.cardID
-                self?.listViewControllers[id]?.insert(card: card)
+                self?.listViewControllers[id]?.insert(cards: [card])
             }
         }
     }
@@ -77,6 +89,20 @@ extension BoardViewController: CardListViewControllerDelegate {
         vc.listID = viewController.listID
         vc.delegate = self
         present(vc, animated: true)
+    }
+    
+    func deleteCards(viewController: CardListViewController, cards: [FloatingCard]) -> Bool {
+        var cardsToDelete = [Int: [Int]]()
+        (0..<listViewControllers.count).forEach { number in
+            cardsToDelete[number] = cards
+                .filter { $0.sourceListID == number }
+                .map { $0.sourceIndex }
+                .sorted()
+        }
+        cardsToDelete.forEach { [weak self] listID, indices in
+            self?.listViewControllers[listID]?.delete(cardsAt: indices)
+        }
+        return true
     }
 }
 

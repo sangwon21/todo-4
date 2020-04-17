@@ -25,26 +25,9 @@ class NetworkManager {
         self.session = session
     }
     
-    func requestBoard(completion: @escaping (Result<Board, Error>) -> Void) {
-        guard let request = APIBuilder.board.urlRequest() else { return }
-        
-        session.dataTask(with: request) { data, _, error in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            guard let data = data else { return }
-            do {
-                let response = try JSONDecoder().decode(BoardResponse.self, from: data)
-                completion(.success(response.board))
-            } catch {
-                completion(.failure(error))
-            }
-        }.resume()
-    }
-    
-    func requestNewCard(card: Card, completion: @escaping (Result<CardIDResponse, Error>) -> Void) {
-        guard let request = APIBuilder.newCard(card: card).urlRequest() else { return }
+    private func request(with request: URLRequest?,
+                         completion: @escaping (Result<Data, Error>) -> Void) {
+        guard let request = request else { return }
         
         session.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -52,14 +35,73 @@ class NetworkManager {
                 return
             }
             guard let data = data, let httpResponse = response as? HTTPURLResponse else { return }
-            if !httpResponse.isValid() { completion(.failure(HTTPError.notFound)) }
-            do {
-                let response = try JSONDecoder().decode(CardIDResponse.self, from: data)
-                completion(.success(response))
-            } catch {
-                completion(.failure(error))
+            if httpResponse.isValid() {
+                completion(.success(data))
+            } else {
+                completion(.failure(HTTPError.notFound))
             }
         }.resume()
+    }
+}
+
+extension NetworkManager {
+    
+    func requestBoard(completion: @escaping (Result<Board, Error>) -> Void) {
+        request(with: APIBuilder.board.urlRequest()) { result in
+            switch result {
+            case let .failure(error): completion(.failure(error))
+            case let .success(data):
+                do {
+                    let response = try JSONDecoder().decode(Board.self, from: data)
+                    completion(.success(response))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+    
+    func requestNewCard(listID: Int,
+                        card: Card,
+                        completion: @escaping (Result<CardIDResponse, Error>) -> Void) {
+        request(with: APIBuilder.newCard(listID: listID, card: card).urlRequest()) { result in
+            switch result {
+            case let .failure(error): completion(.failure(error))
+            case let .success(data):
+                do {
+                    let response = try JSONDecoder().decode(CardIDResponse.self, from: data)
+                    completion(.success(response))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+    
+    func requestDelete(listID: Int, card: Card, completion: @escaping (Result<Bool, Error>) -> Void) {
+        request(with: APIBuilder.deleteCard(listID: listID, card: card).urlRequest()) { result in
+            switch result {
+            case let .failure(error): completion(.failure(error))
+            case .success: completion(.success(true))
+            }
+        }
+    }
+    
+    func requestActivities(completion: @escaping (Result<ActivitiesResponse, Error>) -> Void) {
+        request(with: APIBuilder.activities.urlRequest()) { result in
+            switch result {
+            case let .failure(error): completion(.failure(error))
+            case let .success(data):
+                do {
+                    let decoder = JSONDecoder()
+                    decoder.dateDecodingStrategy = .formatted(.activityTimeDecodingFormatter)
+                    let response = try decoder.decode(ActivitiesResponse.self, from: data)
+                    completion(.success(response))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+        }
     }
 }
 
