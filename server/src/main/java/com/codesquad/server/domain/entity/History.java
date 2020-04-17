@@ -15,8 +15,7 @@ public class History {
     private Long id;
 
     private String userAction;
-
-    @NotBlank
+    
     private String contents;
 
     private String suffix;
