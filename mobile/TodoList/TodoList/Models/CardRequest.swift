@@ -1,5 +1,5 @@
 //
-//  NewCardRequest.swift
+//  CardRequest.swift
 //  TodoList
 //
 //  Created by Chaewan Park on 2020/04/17.
@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct NewCardRequest: Encodable {
+struct CardRequest: Encodable {
     let card: Card
     let history: History
 }
 
-extension NewCardRequest {
+extension CardRequest {
     init(card: Card) {
         self.card = card
         self.history = History(contents: "")

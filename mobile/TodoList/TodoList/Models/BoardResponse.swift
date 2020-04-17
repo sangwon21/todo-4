@@ -8,10 +8,12 @@
 
 import Foundation
 
-typealias BoardResponse = [List]
-
 struct Board: Decodable {
     let lists: [List]
+    
+    enum CodingKeys : String, CodingKey {
+        case lists = "columns"
+    }
 }
 
 struct List: Decodable {
@@ -24,7 +26,7 @@ struct Card: Codable, Equatable {
     var id: Int
     let title: String
     let detail: String?
-    let author: Author
+    let author: Author?
     
     enum CodingKeys : String, CodingKey {
         case id, author, title

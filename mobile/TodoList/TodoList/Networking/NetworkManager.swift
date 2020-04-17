@@ -52,8 +52,8 @@ extension NetworkManager {
             case let .failure(error): completion(.failure(error))
             case let .success(data):
                 do {
-                    let response = try JSONDecoder().decode(BoardResponse.self, from: data)
-                    completion(.success(Board(lists: response)))
+                    let response = try JSONDecoder().decode(Board.self, from: data)
+                    completion(.success(response))
                 } catch {
                     completion(.failure(error))
                 }
@@ -78,8 +78,8 @@ extension NetworkManager {
         }
     }
     
-    func requestDelete(card: Card, completion: @escaping (Result<Bool, Error>) -> Void) {
-        request(with: APIBuilder.deleteCard(card: card).urlRequest()) { result in
+    func requestDelete(listID: Int, card: Card, completion: @escaping (Result<Bool, Error>) -> Void) {
+        request(with: APIBuilder.deleteCard(listID: listID, card: card).urlRequest()) { result in
             switch result {
             case let .failure(error): completion(.failure(error))
             case .success: completion(.success(true))

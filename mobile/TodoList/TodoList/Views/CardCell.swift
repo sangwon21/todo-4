@@ -19,7 +19,8 @@ class CardCell: UITableViewCell {
             guard let card = card else { return }
             titleLabel.text = card.title
             detailLabel.text = card.detail
-            authorLabel.text = "Author by \(card.author)"
+            guard let author = card.author else { return }
+            authorLabel.text = "Author by \(author)"
         }
     }
 }

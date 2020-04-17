@@ -54,13 +54,13 @@ extension APIRouter {
 enum APIBuilder: APIRouter {
     case board
     case newCard(listID: Int, card: Card)
-    case deleteCard(card: Card)
+    case deleteCard(listID: Int, card: Card)
     
     var path: String {
         switch self {
         case .board: return Endpoints.boardURL
         case let .newCard(id, _): return Endpoints.boardURL + "/\(id)" + Endpoints.listPath
-        case .deleteCard: return Endpoints.cardRequestURL
+        case let .deleteCard(id, _): return Endpoints.boardURL + "/\(id)" + Endpoints.listPath
         }
     }
     
@@ -80,15 +80,15 @@ enum APIBuilder: APIRouter {
     
     var header: [String: String] {
         switch self {
-        case .newCard: return ["Content-Type": "application/json"]
+        case .newCard, .deleteCard: return ["Content-Type": "application/json"]
         default: return [:]
         }
     }
     
     var body: Data? {
         switch self {
-        case let .newCard(_, card): return encode(NewCardRequest(card: card))
-        case let .deleteCard(card): return encode(card)
+        case let .newCard(_, card): return encode(CardRequest(card: card))
+        case let .deleteCard(_, card): return encode(CardRequest(card: card))
         default: return nil
         }
     }

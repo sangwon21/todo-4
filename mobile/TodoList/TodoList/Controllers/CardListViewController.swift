@@ -121,7 +121,8 @@ extension CardListViewController: CardListUpdater {
 
 extension CardListViewController {
     private func requestDelete(card: Card, cardIndex: Int) {
-        networkManager?.requestDelete(card: card) { [weak self] result in
+        guard let id = listID else { return }
+        networkManager?.requestDelete(listID: id, card: card) { [weak self] result in
             switch result {
             case .failure: return
             case .success: self?.viewModel?.remove(cardsAt: [cardIndex])
