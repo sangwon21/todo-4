@@ -8,16 +8,25 @@ import { FailModal } from "./FailModal";
 import { Spinner, SpinnerSize } from "../../Spinner";
 import store from "../../../store";
 import { ADD_LOG_HISTORY } from "../../../store/action/logHistory";
+import API from "../../../util/api";
 import axios from "axios";
+axios.defaults.headers.common = {
+  token:
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjb2RlLXNxdWFkLmNvbSIsInVzZXJJZCI6ImV2ZXIifQ.d4ou2_dOSFipKXodcNubJDnyqu48XZp6FiH_pZJhgc4",
+};
 
 import "./card.scss";
 
 export interface ICardState {
+  cardId: number;
+  tableId: number;
   contents: string;
   isLoading: boolean;
   tableType: string;
   tableNode?: Element | null;
+  cardOrder?: number;
   handleDragCardCountsChange: Function;
+  decreaseCardCount: Function;
 }
 
 export class Card {
@@ -25,19 +34,26 @@ export class Card {
   private contentNode: Element | Text | null = null;
   private spinnerNode: Element | Text | null = null;
   private state: ICardState = {
+    cardId: 1,
+    tableId: 1,
     contents: "",
     isLoading: false,
     tableType: "",
     tableNode: null,
     handleDragCardCountsChange: () => {},
+    decreaseCardCount: () => {},
   };
 
   constructor(cardParam: ICardState) {
+    this.state.cardId = cardParam.cardId;
+    this.state.tableId = cardParam.tableId;
     this.state.contents = cardParam.contents;
     this.state.tableType = cardParam.tableType;
     this.state.tableNode = cardParam.tableNode;
+    this.state.cardOrder = cardParam.cardOrder;
     this.state.handleDragCardCountsChange =
       cardParam.handleDragCardCountsChange;
+    this.state.decreaseCardCount = cardParam.decreaseCardCount;
     this.spinnerNode = Spinner(SpinnerSize.SMALL);
     this.closeButtonHandler = this.closeButtonHandler.bind(this);
     this.editTask = this.editTask.bind(this);
@@ -52,23 +68,38 @@ export class Card {
     this.state.isLoading = true;
     this.handleLoading();
     try {
-      const statusCode = await axios.delete(
-        "http://52.207.159.215:8080/columns/1/cards/1",
-        {}
-      );
+      const { data } = await axios({
+        method: "DELETE",
+        url: API.REMOVE_CARD(this.state.tableId),
+        data: {
+          card: { id: this.state.cardId },
+          history: {
+            userAction: "removed",
+            contents: this.state.contents,
+            suffix: `from ${this.state.tableType}`,
+          },
+        },
+      });
+
       store.dispatch({
         type: ADD_LOG_HISTORY,
         userAction: "removed",
         contents: this.state.contents,
         suffix: `from ${this.state.tableType}`,
+        historyCreatedTime: data,
       });
       this.cardNode && this.cardNode.remove();
+      this.state.decreaseCardCount();
     } catch (error) {
       this.cardNode!.appendChild(new FailModal().render());
     } finally {
       this.state.isLoading = false;
       this.handleLoading();
     }
+  }
+
+  setCardOrder(cardOrder: number) {
+    this.state.cardOrder = cardOrder;
   }
 
   handleDragStart(e: DragEvent) {
@@ -80,23 +111,54 @@ export class Card {
     this.state.tableNode = table;
   }
 
-  handleDragEnd(e: DragEvent) {
+  async handleDragEnd(e: DragEvent) {
     const target = e.target! as Element;
-    const { returnTableElement, targetTableName } = this.state
+
+    const { returnTableElement, targetTableName, tableId } = this.state
       .handleDragCardCountsChange!(target, this.state.tableNode);
     this.setTableNode(returnTableElement);
+    const array = [
+      ...(returnTableElement as Element).querySelectorAll(".card"),
+    ];
+
+    const number = array.indexOf(this.cardNode as Element);
+
     target.classList.remove("dragging");
     const previousTableName = this.state.tableType;
-    if (targetTableName !== "") {
-      this.state.tableType = targetTableName;
-    }
+    try {
+      if (targetTableName !== "") {
+        this.state.tableType = targetTableName;
+        this.state.tableId = tableId;
+      }
+      const { data } = await axios.put(
+        API.UPDATE_DRAGGED_CARD(this.state.tableId),
+        {
+          location: {
+            cardId: this.state.cardId,
+            columnId: this.state.tableId,
+            afterMoveCardIndex: number,
+          },
+          history: {
+            userAction: "moved",
+            contents: this.state.contents,
+            suffix: `from ${previousTableName} to ${this.state.tableType}`,
+          },
+        }
+      );
 
-    store.dispatch({
-      type: ADD_LOG_HISTORY,
-      userAction: "moved",
-      contents: this.state.contents,
-      suffix: `from ${previousTableName} to ${this.state.tableType}`,
-    });
+      store.dispatch({
+        type: ADD_LOG_HISTORY,
+        userAction: "moved",
+        contents: this.state.contents,
+        suffix: `from ${previousTableName} to ${this.state.tableType}`,
+        historyCreatedTime: data,
+      });
+    } catch {
+      this.cardNode!.appendChild(new FailModal().render());
+    } finally {
+      this.state.isLoading = false;
+      this.handleLoading();
+    }
   }
 
   handleTaskEditClick() {
@@ -108,22 +170,47 @@ export class Card {
     );
   }
 
-  editTask(task: string) {
+  async editTask(task: string) {
     (this.contentNode! as Element).innerHTML = task;
     this.state.contents = task;
+    try {
+      const { data } = await axios.put(API.UPDATE_CARD(this.state.tableId), {
+        card: {
+          id: this.state.cardId,
+          title: this.state.contents,
+          note: "ios 힘들겠다",
+          author: "nigayo",
+        },
+        history: {
+          userAction: "updated",
+          contents: this.state.contents,
+        },
+      });
 
-    store.dispatch({
-      type: ADD_LOG_HISTORY,
-      userAction: "updated",
-      contents: this.state.contents,
-    });
+      store.dispatch({
+        type: ADD_LOG_HISTORY,
+        userAction: "updated",
+        contents: this.state.contents,
+        historyCreatedTime: data,
+      });
+    } catch {
+      this.cardNode!.appendChild(new FailModal().render());
+    } finally {
+      this.state.isLoading = false;
+      this.handleLoading();
+    }
   }
 
   handleLoading() {
+    const cardNode = this.cardNode! as Element;
     if (this.state.isLoading) {
-      this.contentNode!.appendChild(this.spinnerNode! as Element);
+      cardNode.classList.add("invalid");
+      cardNode.setAttribute("draggable", "false");
+      cardNode.appendChild(this.spinnerNode! as Element);
       return;
     }
+    cardNode.classList.remove("invalid");
+    cardNode.setAttribute("draggable", "true");
     this.spinnerNode!.remove();
   }
 
