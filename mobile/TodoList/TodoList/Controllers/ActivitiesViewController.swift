@@ -30,7 +30,7 @@ class ActivitiesViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
         let activity = activities[indexPath.row]
         cell.textLabel?.text = "\(activity.action) \(activity.description) \(activity.suffix ?? "")"
-        cell.detailTextLabel?.text = "\(activity.time)"
+        cell.detailTextLabel?.text = DateFormatter.activityTimeDisplayingFormatter.localizedString(for: activity.time, relativeTo: Date())
         return cell
     }
 }

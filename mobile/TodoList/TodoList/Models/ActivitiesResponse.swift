@@ -15,7 +15,7 @@ struct Activity: Decodable {
     let action: String
     let description: String
     let suffix: String?
-    let time: String
+    let time: Date
     
     enum CodingKeys : String, CodingKey {
         case id, suffix

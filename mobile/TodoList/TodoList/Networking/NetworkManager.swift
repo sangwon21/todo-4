@@ -93,7 +93,9 @@ extension NetworkManager {
             case let .failure(error): completion(.failure(error))
             case let .success(data):
                 do {
-                    let response = try JSONDecoder().decode(ActivitiesResponse.self, from: data)
+                    let decoder = JSONDecoder()
+                    decoder.dateDecodingStrategy = .formatted(.activityTimeDecodingFormatter)
+                    let response = try decoder.decode(ActivitiesResponse.self, from: data)
                     completion(.success(response))
                 } catch {
                     completion(.failure(error))
